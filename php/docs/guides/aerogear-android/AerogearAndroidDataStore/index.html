@@ -1,0 +1,314 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+      <title>AeroGear - AeroGear Android Data Store</title>
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+
+      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="alternate" type="application/atom+xml" title="feed" href="/feed.atom"/>
+      <link rel="stylesheet" href="/css/font-awesome.min.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:600,300,300italic,600italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+      <script src="/js/libs/modernizr-2.6.2.min.js"></script>
+		  <script type="text/javascript">
+
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-28733717-2']);
+			  _gaq.push(['_setDomainName', 'aerogear.org']);
+			  _gaq.push(['_trackPageview']);
+
+			  (function() {
+				  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+
+		  </script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+      <script>window.jQuery || document.write( '<script src="/js/libs/jquery-1.7.2.min.js"><\/script>' )</script>
+  </head>
+  <body>
+      <header>
+          <div class="wrapper">
+              <a href="/"><div id="logo"></div></a>
+              <a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html" class="news fixed">Hey listen!<br class="title-break"> AeroGear 1.0.0 is out!</a>
+          </div>
+      </header>
+         
+      <nav>
+          <div class="wrapper">
+            <div class="links">
+                <a href="/" class="fixed">Home</a>
+                <a href="/download" class="">Get started</a>
+                <a href="/docs" class="">Documentation</a>
+                <a href="/news" class="fixed ">News</a>
+                <a href="/community" class="">Community</a>        
+            </div>
+            <a href="https://www.facebook.com/AeroGearProject"><div class="social facebook"></div></a>
+            <a href="https://plus.google.com/106588661437153585722/posts"><div class="social google-plus"></div></a>
+            <a href="https://www.twitter.com/aerogears"><div class="social twitter"></div></a>
+          </div>    
+          <div class="clearfix"></div>
+      </nav>
+
+      <div class="wrapper inner-container">
+
+          <div class="basic">
+    
+<div class="sect1">
+  <h2 id="_data_store_api">Data Store API</h2>
+  
+  <div class="sectionbody">
+<div class="paragraph">
+    
+  <p>AeroGear Android provides a simple data storage API.  This API is useful for caching responses, sharing data among different systems, or providing some form of limited offline support.</p>
+</div>
+
+<div class="sect2">
+  <h3 id="_api_overview">API Overview</h3>
+  
+<div class="paragraph">
+    
+  <p><a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/DataManager.html"><strong>DataManager</strong></a>
+ : A factory and provider of <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/datamanager/Store.html"><strong>Store</strong></a> implementations.  It behaves similarly to <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/Pipeline.html"><strong>Pipeline</strong></a> and <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/authentication/impl/Authenticator.html"><strong>Authenticator</strong></a>. Since <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/datamanager/Store.html"><strong>Store</strong></a> implementations are synchronous, it does not have nor provide Loader wrappers.</p>
+</div>
+<div class="paragraph">
+    
+  <p><a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/datamanager/Store.html"><strong>Store</strong></a>
+ : An interface which different store implementations implement.</p>
+</div>
+<div class="paragraph">
+    
+  <p><a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/impl/datamanager/StoreTypes.html"><strong>StoreTypes</strong></a>
+: An enum class with values <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/impl/datamanager/StoreTypes.html#MEMORY"><strong>MEMORY</strong></a> and <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/impl/datamanager/StoreTypes.html#SQL"><strong>SQL</strong></a>.</p>
+</div>
+<div class="paragraph">
+    
+  <p><a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/impl/datamanager/SQLStore.html"><strong>SQLStore</strong></a>
+: A Store implementation which writes to a backing SQLLite database.</p>
+</div>
+<div class="paragraph">
+    
+  <p><a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/impl/datamanager/MemoryStorage.html"><strong>MemoryStore</strong></a>
+: A Store implementation which is backed by a HashMap in memory.</p>
+</div>
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_examples">Examples</h3>
+  
+
+<div class="sect3">
+  <h4 id="_creating_a_memory_store">Creating a Memory Store</h4>
+  
+<div class="paragraph">
+    
+  <p>To create a <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/impl/datamanager/MemoryStorage.html"><strong>MemoryStore</strong></a> we can use a <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/impl/datamanager/StoreConfig.html"><strong>StoreConfig</strong></a> bean and <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/DataManager.html"><strong>DataManager</strong></a>. A Memory store will go away when the application is removed from memory and is best used for short term caching.</p>
+</div>
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="java">    StoreConfig memoryStoreConfig = new StoreConfig();
+    memoryStoreConfig.setContext(getApplicationContext());
+    memoryStoreConfig.setType(MEMORY);
+    memoryStoreConfig.setKlass(Data.class);
+    Store store = dataManager.store("memoryStore", memoryStoreConfig);</code></pre>
+    
+  </div>
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_creating_a_sqlstore">Creating a SQLStore</h4>
+  
+<div class="paragraph">
+    
+  <p>To create a <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/impl/datamanager/SQLStore.html"><strong>SQLStore</strong></a> we can use a <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/impl/datamanager/StoreConfig.html"><strong>StoreConfig</strong></a> bean and <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/DataManager.html"><strong>DataManager</strong></a>. A SQL store needs to be opened using the <tt>open</tt> method. <tt>Open</tt> takes a <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/Callback.html"><strong>Callback</strong></a> which is called after the database is ready for writing.</p>
+</div>
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="java">    StoreConfig sqlStoreConfig = new StoreConfig();
+    sqlStoreConfig.setContext(getApplicationContext());
+    sqlStoreConfig.setType(SQL);
+    sqlStoreConfig.setKlass(Data.class);
+    Store store = dataManager.store("sqlStore", sqlStoreConfig);
+    ((SQLStore))store).open(/*callback*/);</code></pre>
+    
+  </div>
+</div>
+
+  
+</div>
+
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_using_stores">Using Stores</h3>
+  
+<div class="paragraph">
+    
+  <p>Both Store types implement the same interface.  In the case of a <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/impl/datamanager/SQLStore.html"><strong>SQLStore</strong></a> you will need to make sure open has been called before you use any of these methods however.</p>
+</div>
+
+<div class="sect3">
+  <h4 id="_saving_data">Saving Data</h4>
+  
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="java">    Data data = new Data(10, "name", "description");//Id, name, description
+    store.save(data);
+    Data readData = store.read(10);</code></pre>
+    
+  </div>
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_clearing_the_data_store">Clearing the data store</h4>
+  
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="java">    store.reset();
+    Data readData = store.read(10);</code></pre>
+    
+  </div>
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_reading_all_data">Reading All Data</h4>
+  
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="java">    store.save(new Data((1, "name", "description"));
+    store.save(new Data((2, "name", "description"));
+    store.save(new Data((3, "name", "description"));
+    store.save(new Data((4, "name", "description"));
+    store.save(new Data((5, "name", "description"));
+    store.save(new Data((6, "name", "description"));
+
+    List&lt;Data&gt; allData = new ArrayList&lt;Data&gt;(store.readAll());
+    Collections.sort(allData);</code></pre>
+    
+  </div>
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_deleting_data">Deleting Data</h4>
+  
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="java">    loadBulkData(); //Loads 6 "Data" Elements
+    store.remove(1); //Deletes the element with ID 1</code></pre>
+    
+  </div>
+</div>
+
+  
+</div>
+
+
+  
+</div>
+
+
+  </div>
+  
+</div>
+
+
+
+</div>
+
+            <div class="clearfix"></div>
+      </div>
+      <footer>
+          <div class="wrapper">
+              <div class="column">
+                  <h3>News</h3>
+                  
+                  <p><a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html">AeroGear 1.0.0 is out!</a></p>
+                  
+                  <p><a href="/news/2013/03/04/aerogear-1.0.0.CR1-is-out/index.html">AeroGear 1.0.0.CR1 is out!</a></p>
+                  
+                  <p><a href="/news/2013/01/30/aerogear-1.0.0.M8-is-out/index.html">AeroGear 1.0.0.M8 is out!</a></p>
+                  
+                  <p><a href="/news/2012/12/20/aerogear-1.0.0.M7-is-out/index.html">AeroGear 1.0.0.M7 is out!</a></p>
+                  
+                  <p><a href="/news/2012/10/24/aerogear-1.0.0.M6-is-out/index.html">AeroGear 1.0.0.M6 is out!</a></p>
+                  
+              </div>
+              <div class="column">
+                  <h3>Get help</h3>
+                  <p><a href="/docs">Documentation</a></p>
+                  <p><a href="/examples">Examples</a></p>
+              </div>
+              <div class="column">
+                  <h3>Contribute</h3>
+                  <p><a href="http://github.com/aerogear" target="_blank">Source code</a></p>
+                  <p><a href="http://issues.jboss.org/browse/AEROGEAR" target="_blank">Issue tracker</a></p>
+                  <p><a href="https://lists.jboss.org/mailman/listinfo/aerogear-dev" target="_blank">Mailing list</a></p>
+                  <p><a href="irc://irc.freenode.net/aerogear" target="_blank">IRC channel</a></p>
+              </div>
+              <div class="column responsive">
+                  <h3>Social</h3>
+                  <p><a href="">Twitter</a></p>
+                  <p><a href="">Google Plus</a></p>
+                  <p><a href="">Facebook</a></p>
+              </div>
+              <div class="column">
+                  <h3><a href="http://twitter.com/AeroGears" target="_blank">@AeroGears</a></h3>
+                  <div id="aerogear-twitter">Loading tweets...</div>
+              </div>
+              <div class="logos">
+                  <p>AeroGear is a <a href="http://www.jboss.org/">JBoss Community</a> project<br class="title-break"> and its development is sponsored<br class="title-break"> by <a href="http://www.redhat.com/">Red Hat, Inc</a>.<br class="title-break"><br>Project code is released under <br class="title-break">the <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache License, v2.0</a>.</p>
+                  <p><a href="http://www.jboss.org/"><img src="/img/jboss_community.png" alt="JBoss Community"></a> <a href="http://www.redhat.com/"><img src="/img/red_hat.png" alt="Red Hat"></a></p>
+                  <p>Copyright &copy; 2012, Red Hat, Inc.</p>
+  <div class="clearfix"></div>
+              </div>
+          </div>
+      </footer>
+      <script src="/js/libs/repo-modified.js"></script>
+      <script src="/js/libs/ba-linkify.min.js"></script>
+      <script src="/js/libs/jquery.twitter.min.js"></script>
+      <script src="/js/libs/jquery.smartresize.js"></script>
+      <script src="/js/script.js"></script>
+  </body>
+</html>

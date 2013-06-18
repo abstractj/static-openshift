@@ -1,0 +1,531 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+      <title>AeroGear - AeroGear Android Customizing Pipes</title>
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+
+      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="alternate" type="application/atom+xml" title="feed" href="/feed.atom"/>
+      <link rel="stylesheet" href="/css/font-awesome.min.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:600,300,300italic,600italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+      <script src="/js/libs/modernizr-2.6.2.min.js"></script>
+		  <script type="text/javascript">
+
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-28733717-2']);
+			  _gaq.push(['_setDomainName', 'aerogear.org']);
+			  _gaq.push(['_trackPageview']);
+
+			  (function() {
+				  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+
+		  </script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+      <script>window.jQuery || document.write( '<script src="/js/libs/jquery-1.7.2.min.js"><\/script>' )</script>
+  </head>
+  <body>
+      <header>
+          <div class="wrapper">
+              <a href="/"><div id="logo"></div></a>
+              <a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html" class="news fixed">Hey listen!<br class="title-break"> AeroGear 1.0.0 is out!</a>
+          </div>
+      </header>
+         
+      <nav>
+          <div class="wrapper">
+            <div class="links">
+                <a href="/" class="fixed">Home</a>
+                <a href="/download" class="">Get started</a>
+                <a href="/docs" class="">Documentation</a>
+                <a href="/news" class="fixed ">News</a>
+                <a href="/community" class="">Community</a>        
+            </div>
+            <a href="https://www.facebook.com/AeroGearProject"><div class="social facebook"></div></a>
+            <a href="https://plus.google.com/106588661437153585722/posts"><div class="social google-plus"></div></a>
+            <a href="https://www.twitter.com/aerogears"><div class="social twitter"></div></a>
+          </div>    
+          <div class="clearfix"></div>
+      </nav>
+
+      <div class="wrapper inner-container">
+
+          <div class="basic">
+    
+<div class="sect1">
+  <h2 id="_introduction_to_the_pipe_architecture">Introduction to the Pipe architecture</h2>
+  
+  <div class="sectionbody">
+<div class="paragraph">
+    
+  <p>AeroGear on Android uses a class called <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/pipeline/Pipe.html"><strong>Pipe</strong></a> to retrieve data from a source asynchronously.  A <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/pipeline/Pipe.html"><strong>Pipe</strong></a> has the methods <tt>read</tt>, <tt>readWithFilter</tt>, <tt>remove</tt>, and <tt>save</tt>.  A <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/pipeline/Pipe.html"><strong>Pipe</strong></a> implementation is responsible for managing <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/pipeline/PipeHandler.html"><strong>PipeHandler</strong></a> instances, processing their results and returning the results to the user via callbacks provided by the <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/pipeline/Pipe.html"><strong>Pipe</strong></a> CRUD methods.  AG Android has three <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/pipeline/Pipe.html"><strong>Pipe</strong></a> implementations: <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/impl/pipeline/RestAdapter.html"><strong>RestAdapter</strong></a>, <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/impl/pipeline/LoaderAdapter.html"><strong>LoaderAdapter</strong></a>, and <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/impl/pipeline/SupportLoaderAdapter.html"><strong>SupportLoaderAdapter</strong></a>.</p>
+</div>
+<div class="paragraph">
+    
+  <p><a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/pipeline/PipeHandler.html"><strong>PipeHandler</strong></a> instances are responsible for connecting to a remote source, sending a request, fetching the response, and returning a deserialized instance of that result to the Pipe which requested it.  <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/pipeline/PipeHandler.html"><strong>PipeHandlers</strong></a> do not need to worry about threading, this is the responsibility of the <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/pipeline/Pipe.html"><strong>Pipe</strong></a>.</p>
+</div>
+<div class="paragraph">
+    
+  <p>For many of the cases, writing an adapter to a remote source which AG can not support is as simple as implementing a <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/pipeline/PipeHandler.html"><strong>PipeHandler</strong></a> and passing it to a <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/Pipeline.html"><strong>Pipeline</strong></a> via <tt>PipeConfig.setHandler</tt>.</p>
+</div>
+
+  </div>
+  
+</div>
+
+
+<div class="sect1">
+  <h2 id="_a_practical_example_http_pipes">A practical example, HTTP Pipes</h2>
+  
+  <div class="sectionbody">
+<div class="paragraph">
+    
+  <p>To demonstrate how <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/pipeline/Pipe.html"><strong>Pipe</strong></a> and <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/pipeline/PipeHandler.html"><strong>PipeHandler</strong></a> interact, let&#8217;s look at the methods <tt>RestAdapter.readWithFilter</tt> and <tt>RestRunner.onReadWithFilter</tt>. <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/impl/pipeline/RestAdapter.html"><strong>RestAdapter</strong></a> is the default implementation of a <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/pipeline/Pipe.html"><strong>Pipe</strong></a> in AeroGear on Android.</p>
+</div>
+<div class="listingblock">
+  <div class="title">RestAdapter.java</div>
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="java">public final class RestAdapter&lt;T&gt; implements Pipe&lt;T&gt; {
+
+    /* snip */
+
+    @Override
+    public void readWithFilter(ReadFilter filter, final Callback&lt;List&lt;T&gt;&gt; callback) {
+        if (filter == null) {
+            filter = new ReadFilter();
+        }
+        final ReadFilter innerFilter = filter;
+
+        /* Remember, Android doesn't allow network access on the main thread so
+           we have to be very careful here.  But this is how the asynchronous
+           magic happens.
+        */
+        THREAD_POOL_EXECUTOR.execute(new Runnable() {
+            List&lt;T&gt; result = null;
+            Exception exception = null;
+
+            @Override
+            public void run() {
+                try {
+                    this.result = restRunner.onReadWithFilter(innerFilter, RestAdapter.this);
+                } catch (Exception e) {
+                    Log.e(TAG, e.getMessage(), e);
+                    this.exception = e;
+                }
+                if (exception == null) {
+                    callback.onSuccess(this.result);
+                } else {
+                    callback.onFailure(exception);
+                }
+            }
+        });
+
+    }
+}
+</code></pre>
+    
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>In AeroGear on Android, <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/impl/pipeline/RestRunner.html"><strong>RestRunner</strong></a> is the default implementation of a <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/pipeline/PipeHandler.html"><strong>PipeHandler</strong></a>.</p>
+</div>
+<div class="listingblock">
+  <div class="title">RestRunner.java</div>
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="java">public class RestRunner&lt;T&gt; implements PipeHandler&lt;T&gt; {
+
+    /*
+    *
+    * For clarity, some parts of the method have been removed.  The full source can
+    * be found at https://github.com/aerogear/aerogear-android/blob/CR1/src/org/jboss/aerogear/android/impl/pipeline/RestRunner.java#L169
+    * This method
+    *    1) extracts information relevant to the query from the filter param
+    *    2) builds a request
+    *    3) performs a http GET with that request
+    *    4) deserializes the response using a GSON field
+    *    5) returns it
+    */
+    @Override
+    public List&lt;T&gt; onReadWithFilter(ReadFilter filter, Pipe&lt;T&gt; requestingPipe) {
+        List&lt;T&gt; result;
+        HttpProvider httpProvider;
+        httpProvider = getHttpProvider(filter.getLinkUri());
+
+        /* Run the request and fetch the response */
+        HeaderAndBody httpResponse = httpProvider.get();
+        byte[] responseBody = httpResponse.getBody();
+        String responseAsString = new String(responseBody, encoding);
+
+        /*Turn the response into a useful JSON object */
+        JsonParser parser = new JsonParser();
+        JsonElement httpJsonResult = parser.parse(responseAsString);
+        httpJsonResult = getResultElement(httpJsonResult, dataRoot);
+
+        /* turn the JSONObject result our typed Collection */
+        if (httpJsonResult.isJsonArray()) {
+            T[] resultArray = gson.fromJson(httpJsonResult, arrayKlass);
+            result = Arrays.asList(resultArray);
+        } else {
+            T resultObject = gson.fromJson(httpJsonResult, klass);
+            List&lt;T&gt; resultList = new ArrayList&lt;T&gt;(1);
+            resultList.add(resultObject);
+            result = resultList;
+        }
+        return result;
+
+    }
+}
+</code></pre>
+    
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>So why separate <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/pipeline/Pipe.html"><strong>Pipe</strong></a> and <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/pipeline/PipeHandler.html"><strong>PipeHandler</strong></a>?  The logic of threading is troublesome and often leads to bugs. The patterns and trade offs are usually specific to Android and not your application. Since AeroGear provides this logic along with methods for selecting the most appropriate mechanisms for handling threads, there is no reason to burden a developer with it. The methods for connecting to remote services are much more specific to the use case (IE the app). If our default implementations do not fit your needs, it is much simpler to implement a PipeHandler and allow a RestAdapter to manage the threading for you.</p>
+</div>
+
+  </div>
+  
+</div>
+
+
+<div class="sect1">
+  <h2 id="_an_impractical_but_custom_pipehandler">An Impractical but custom PipeHandler</h2>
+  
+  <div class="sectionbody">
+
+<div class="sect2">
+  <h3 id="_aka_contrived_example_is_contrived">Aka: Contrived example is contrived</h3>
+  
+<div class="paragraph">
+    
+  <p>So let&#8217;s say all of the data we want isn&#8217;t stored in a remote server but a local file.  We can easily write a <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/pipeline/PipeHandler.html"><strong>PipeHandler</strong></a> to read from this file.  For purposes of this example, let&#8217;s pretend the file is read only.</p>
+</div>
+<div class="paragraph">
+    
+  <p>First, our file :</p>
+</div>
+<div class="listingblock">
+  <div class="title">cars.json</div>
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="javascript">{
+  "data": [
+    {
+      "manufacturer": "Porsche",
+      "model": "911",
+      "price": "135000"
+    },
+    {
+      "manufacturer": "Nissan",
+      "model": "GT-R",
+      "price": "80000"
+    },
+    {
+      "manufacturer": "BMW",
+      "model": "M3",
+      "price": "60500"
+    },
+    {
+      "manufacturer": "Audi",
+      "model": "S5",
+      "price": "53000"
+    },
+    {
+      "manufacturer": "Audi",
+      "model": "TT",
+      "price": "40000"
+    }
+  ]
+}</code></pre>
+    
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>And our <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/pipeline/PipeHandler.html"><strong>PipeHandler</strong></a></p>
+</div>
+<div class="listingblock">
+  <div class="title">PipeHandler</div>
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="java">/*Imports and exceptions have been snipped for brevity*/
+public class FileHandler implements PipeHandler&lt;Car&gt; {
+
+	private static final String FILE_NAME = "cars.json";
+	private static final Gson GSON = new Gson();
+	private final Context applicationContext;
+
+	public FileHandler(Context applicationContext) {
+		super();
+		this.applicationContext = applicationContext;
+	}
+
+	@Override
+	public List&lt;Car&gt; onRead(Pipe&lt;Car&gt; requestingPipe) {
+		JsonParser parser = new JsonParser();
+		BufferedReader carsReader;
+		try {
+			carsReader = new BufferedReader(new InputStreamReader(applicationContext.getAssets().open(FILE_NAME)));
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		JsonArray carsJson = parser.parse(carsReader).getAsJsonObject().getAsJsonArray("data");
+		Car[] cars = GSON.fromJson(carsJson, Car[].class);
+        return Arrays.asList(cars);
+	}
+
+	@Override
+	public List&lt;Car&gt; onReadWithFilter(ReadFilter filter,
+			Pipe&lt;Car&gt; requestingPipe) {
+		return onRead(requestingPipe);
+	}
+
+	@Override
+	public Car onSave(Car item) {
+		throw new IllegalAccessError("Not Supported");
+	}
+
+	@Override
+	public void onRemove(String id) {
+		throw new IllegalAccessError("Not Supported");
+	}
+
+}</code></pre>
+    
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>And to create a pipe that uses our new handler all we need is to use <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/impl/pipeline/PipeConfig.html"><strong>PipeConfig</strong></a> and <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/Pipeline.html"><strong>Pipeline</strong></a>.</p>
+</div>
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="java">public class GuideApplication extends Application {
+    private Pipeline pipelineForCustomPipeGuide;
+
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		URL fileURL;
+
+		try {
+			fileURL = getFilesDir().toURI().toURL();
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+
+		pipelineForCustomPipeGuide = new Pipeline(fileURL);
+		PipeConfig fileReaderConfig = new PipeConfig(fileURL, Car.class);
+		fileReaderConfig.setHandler(new FileHandler(this));
+		pipelineForCustomPipeGuide.pipe(Car.class, fileReaderConfig);
+	}
+
+	public LoaderPipe&lt;Car&gt; getCarPipe(Activity activity) {
+		return (LoaderPipe&lt;Car&gt;)pipelineForCustomPipeGuide.get("car", activity);
+	}
+}
+</code></pre>
+    
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>And then we can use it from an Activity as follows:</p>
+</div>
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="java">public class HowToUseCustomPipe extends ListActivity {
+
+    Pipe&lt;Car&gt; carsPipe;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		carsPipe = ((GuideApplication) getApplication()).getCarPipe(this);
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		carsPipe.read(new FileCallback());
+	}
+
+	private static final class FileCallback extends
+			AbstractActivityCallback&lt;List&lt;Car&gt;&gt; {
+
+		private static final long serialVersionUID = 1L;
+
+		public FileCallback() {
+			super("hashableValue");
+		}
+
+		@Override
+		public void onSuccess(List&lt;Car&gt; data) {
+			ListActivity activity = (ListActivity) getActivity();
+            activity.setListAdapter(new ArrayAdapter(activity, android.R.layout.simple_list_item_1, data));
+		}
+
+		@Override
+		public void onFailure(Exception e) {
+			Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+		}
+
+	}
+
+}</code></pre>
+    
+  </div>
+</div>
+
+  
+</div>
+
+
+  </div>
+  
+</div>
+
+
+<div class="sect1">
+  <h2 id="_more_notes_and_tidbits">More notes and tidbits</h2>
+  
+  <div class="sectionbody">
+
+<div class="sect2">
+  <h3 id="_gson">GSON</h3>
+  
+<div class="paragraph">
+    
+  <p>Behind the scenes, AeroGear uses Google's GSON for JSON object serialization and deserialization.  <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/impl/pipeline/PipeConfig.html"><strong>PipeConfig</strong></a> can consume a <strong>GSONBuilder</strong> and pass it to <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/pipeline/Pipe.html"><strong>Pipe</strong></a> instances.  This <strong>GSONBuilder</strong> will be used to create <strong>GSON</strong> objects which are used to marshall and unmarshall objects. If you have nested, typed collections you can configure a GSONBuilder which supports your data model and pass it to the PipeConfig object.</p>
+</div>
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_nested_data_in_result">Nested Data in Result</h3>
+  
+<div class="paragraph">
+    
+  <p>Sometimes you will have a simple result format, but your data will be surrounded by metadata.  Take this JSON snippit for example:</p>
+</div>
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="json">{
+    "data": {
+        "after": "t3_17i1lt",
+        "before": null,
+        "children": [
+                {"data":"data1"},
+                {"data":"data2"},
+                {"data":"data3"},
+                {"data":"data4"}
+        ]
+    }
+}</code></pre>
+    
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>In this example you are interested in the data object's "children" collection.  Instead of writing code using GSON to fetch it, you can instead use <strong>PipeConfig.setDataRoot</strong>.</p>
+</div>
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="java">PageConfig pageConfig = new PageConfig();
+config.setDataRoot("data.children")</code></pre>
+    
+  </div>
+</div>
+
+  
+</div>
+
+
+  </div>
+  
+</div>
+
+
+
+</div>
+
+            <div class="clearfix"></div>
+      </div>
+      <footer>
+          <div class="wrapper">
+              <div class="column">
+                  <h3>News</h3>
+                  
+                  <p><a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html">AeroGear 1.0.0 is out!</a></p>
+                  
+                  <p><a href="/news/2013/03/04/aerogear-1.0.0.CR1-is-out/index.html">AeroGear 1.0.0.CR1 is out!</a></p>
+                  
+                  <p><a href="/news/2013/01/30/aerogear-1.0.0.M8-is-out/index.html">AeroGear 1.0.0.M8 is out!</a></p>
+                  
+                  <p><a href="/news/2012/12/20/aerogear-1.0.0.M7-is-out/index.html">AeroGear 1.0.0.M7 is out!</a></p>
+                  
+                  <p><a href="/news/2012/10/24/aerogear-1.0.0.M6-is-out/index.html">AeroGear 1.0.0.M6 is out!</a></p>
+                  
+              </div>
+              <div class="column">
+                  <h3>Get help</h3>
+                  <p><a href="/docs">Documentation</a></p>
+                  <p><a href="/examples">Examples</a></p>
+              </div>
+              <div class="column">
+                  <h3>Contribute</h3>
+                  <p><a href="http://github.com/aerogear" target="_blank">Source code</a></p>
+                  <p><a href="http://issues.jboss.org/browse/AEROGEAR" target="_blank">Issue tracker</a></p>
+                  <p><a href="https://lists.jboss.org/mailman/listinfo/aerogear-dev" target="_blank">Mailing list</a></p>
+                  <p><a href="irc://irc.freenode.net/aerogear" target="_blank">IRC channel</a></p>
+              </div>
+              <div class="column responsive">
+                  <h3>Social</h3>
+                  <p><a href="">Twitter</a></p>
+                  <p><a href="">Google Plus</a></p>
+                  <p><a href="">Facebook</a></p>
+              </div>
+              <div class="column">
+                  <h3><a href="http://twitter.com/AeroGears" target="_blank">@AeroGears</a></h3>
+                  <div id="aerogear-twitter">Loading tweets...</div>
+              </div>
+              <div class="logos">
+                  <p>AeroGear is a <a href="http://www.jboss.org/">JBoss Community</a> project<br class="title-break"> and its development is sponsored<br class="title-break"> by <a href="http://www.redhat.com/">Red Hat, Inc</a>.<br class="title-break"><br>Project code is released under <br class="title-break">the <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache License, v2.0</a>.</p>
+                  <p><a href="http://www.jboss.org/"><img src="/img/jboss_community.png" alt="JBoss Community"></a> <a href="http://www.redhat.com/"><img src="/img/red_hat.png" alt="Red Hat"></a></p>
+                  <p>Copyright &copy; 2012, Red Hat, Inc.</p>
+  <div class="clearfix"></div>
+              </div>
+          </div>
+      </footer>
+      <script src="/js/libs/repo-modified.js"></script>
+      <script src="/js/libs/ba-linkify.min.js"></script>
+      <script src="/js/libs/jquery.twitter.min.js"></script>
+      <script src="/js/libs/jquery.smartresize.js"></script>
+      <script src="/js/script.js"></script>
+  </body>
+</html>

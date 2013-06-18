@@ -1,0 +1,700 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+      <title>AeroGear - Get Started on With AeroGear Android on NetBeans</title>
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+
+      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="alternate" type="application/atom+xml" title="feed" href="/feed.atom"/>
+      <link rel="stylesheet" href="/css/font-awesome.min.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:600,300,300italic,600italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+      <script src="/js/libs/modernizr-2.6.2.min.js"></script>
+		  <script type="text/javascript">
+
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-28733717-2']);
+			  _gaq.push(['_setDomainName', 'aerogear.org']);
+			  _gaq.push(['_trackPageview']);
+
+			  (function() {
+				  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+
+		  </script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+      <script>window.jQuery || document.write( '<script src="/js/libs/jquery-1.7.2.min.js"><\/script>' )</script>
+  </head>
+  <body>
+      <header>
+          <div class="wrapper">
+              <a href="/"><div id="logo"></div></a>
+              <a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html" class="news fixed">Hey listen!<br class="title-break"> AeroGear 1.0.0 is out!</a>
+          </div>
+      </header>
+         
+      <nav>
+          <div class="wrapper">
+            <div class="links">
+                <a href="/" class="fixed">Home</a>
+                <a href="/download" class="">Get started</a>
+                <a href="/docs" class="">Documentation</a>
+                <a href="/news" class="fixed ">News</a>
+                <a href="/community" class="">Community</a>        
+            </div>
+            <a href="https://www.facebook.com/AeroGearProject"><div class="social facebook"></div></a>
+            <a href="https://plus.google.com/106588661437153585722/posts"><div class="social google-plus"></div></a>
+            <a href="https://www.twitter.com/aerogears"><div class="social twitter"></div></a>
+          </div>    
+          <div class="clearfix"></div>
+      </nav>
+
+      <div class="wrapper inner-container">
+
+          <div class="basic">
+    
+<div class="sect1">
+  <h2 id="_get_started_on_with_aerogear_android_on_netbeans">Get Started on With AeroGear Android on NetBeans</h2>
+  
+  <div class="sectionbody">
+<div class="paragraph">
+    
+  <p>This guide will walk you through configuring your build environment to support AeroGear on Android as well as importing the project into NetBeans.  If you have already completed the <a href="../GetStartedAndroid/">command line getting started guide</a> then you can just open your project in NetBeans.</p>
+</div>
+<div class="paragraph">
+    
+  <p>After the library has been built, we will clone and run the <a href="https://github.com/aerogear/aerogear-android-todo">TODO sample application</a> to confirm it is working.</p>
+</div>
+
+<div class="sect2">
+  <h3 id="_requirements">Requirements</h3>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Java 6.0 (Java SDK 1.6)+</p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">The latest Java version can be found on Oracle&#8217;s site</a></p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+    <li>
+      <p>Maven 3+</p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p><a href="http://maven.apache.org/download.html">The latest Maven version can be found on Apaches&#8217;s site</a></p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+    <li>
+      <p>Git</p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p><a href="http://git-scm.com/downloads">The latest Git version can be found at http://git-scm.com</a></p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+    <li>
+      <p>Android SDK</p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Need to have an AVD image running 4.1 (API level 16)</p>
+      
+    </li>
+  
+    <li>
+      <p><a href="http://developer.android.com/sdk/index.html">The latest Android SDK and instructions to install</a></p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+    <li>
+      <p>NetBeans 7.2+</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_setup_library">Setup Library</h3>
+  
+
+<div class="sect3">
+  <h4 id="_setup_maven_android_sdk_deployer">Setup Maven Android SDK Deployer</h4>
+  
+<div class="paragraph">
+    
+  <p>We need to have the <a href="https://github.com/mosabua/maven-android-sdk-deployer">Android Maven SDK Deployer</a> installed and configured.  These are only quickstart instructions, the Android Maven SDK Deployer GitHub has a much more in depth install guide.</p>
+</div>
+<div class="paragraph">
+    
+  <p>You must have the version of the platform installed through the Android SDK as you are using for your profile.  In this example, make sure Android 4.1 is installed.</p>
+</div>
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="bash">git clone https://github.com/mosabua/maven-android-sdk-deployer.git
+cd maven-android-sdk-deployer
+export ANDROID_HOME=YOUR_ANDROID_SDK_DIRECTORY
+mvn install -P 4.1</code></pre>
+    
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>Now Maven will be able to include Android 4.1 as a dependency.  There are also profiles for other version of Android.</p>
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_downloading_and_opening_the_project">Downloading and Opening the Project</h4>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>From the "Team" menu select "Git" and then "Clone"</p>
+      
+    </li>
+  
+  </ul>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <a class="image" href="../img/GettingStartedNetBeans/clone.png"><img src="../img/GettingStartedNetBeans/clone_thumbnail.png" alt="Clone Dropdown Menu" width="250"></a>
+</span></p>
+</div>
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Enter "https://github.com/aerogear/aerogear-android.git" As your "Repository URL" and click "Next"</p>
+      
+    </li>
+  
+  </ul>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <a class="image" href="../img/GettingStartedNetBeans/clone2.png"><img src="../img/GettingStartedNetBeans/clone2_thumbnail.png" alt="Clone set URL" width="250"></a>
+</span></p>
+</div>
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Select the "master" branch and click "Next"</p>
+      
+    </li>
+  
+  </ul>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <a class="image" href="../img/GettingStartedNetBeans/clone3.png"><img src="../img/GettingStartedNetBeans/clone3_thumbnail.png" alt="Clone celect branch" width="250"></a>
+</span></p>
+</div>
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Configure your "Parent Directory", "Clone Name" etc. and select "Finish" when done.</p>
+      
+    </li>
+  
+  </ul>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <a class="image" href="../img/GettingStartedNetBeans/clone4.png"><img src="../img/GettingStartedNetBeans/clone4_thumbnail.png" alt="Clone name project and finish" width="250"></a>
+</span></p>
+</div>
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Open the project</p>
+      
+    </li>
+  
+  </ul>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <a class="image" href="../img/GettingStartedNetBeans/open_project.png"><img src="../img/GettingStartedNetBeans/open_project_thumbnail.png" alt="Open Project Window" width="250"></a>
+</span></p>
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_building_the_project">Building the Project</h4>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Right click on the Project and select "Clean and Build"</p>
+      
+    </li>
+  
+  </ul>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <a class="image" href="../img/GettingStartedNetBeans/clean_and_build.png"><img src="../img/GettingStartedNetBeans/clean_and_build_thumbnail.png" alt="Selecting Clean and Build from Context Menu" width="250"></a>
+</span></p>
+</div>
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>This will fire off the Maven Build.  You should see "BUILD SUCCESS" if everything went right.</p>
+      
+    </li>
+  
+  </ul>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <a class="image" href="../img/GettingStartedNetBeans/build_success.png"><img src="../img/GettingStartedNetBeans/build_success_thumbnail.png" alt="Highlighting Build Success in NetBeans" width="250"></a>
+</span></p>
+</div>
+
+  
+</div>
+
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_setup_sample_todo_project">Setup Sample TODO Project</h3>
+  
+
+<div class="sect3">
+  <h4 id="_downloading_and_opening_the_project_2">Downloading and Opening the Project</h4>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Follow the same steps as you did to download the library, but use "https://github.com/aerogear/aerogear-android-todo.git" As your "Repository URL"</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_running">Running</h4>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>You should update your settings.xml file to include information about the AVD image you wish to use.  In this example we are loading an image named "JB", but you can use any AVD (running Android of at least version 2.3) you wish.
+.settings.xml</p>
+      
+    </li>
+  
+  </ul>
+</div>
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre>&lt;settings&gt;
+    &lt;activeProfiles&gt;
+        &lt;activeProfile&gt;local&lt;/activeProfile&gt;
+    &lt;/activeProfiles&gt;
+    &lt;profiles&gt;
+        &lt;profile&gt;
+            &lt;id&gt;local&lt;/id&gt;
+            &lt;properties&gt;
+                &lt;android.avd&gt;JB&lt;/android.avd&gt;
+                &lt;android.device&gt;JB&lt;/android.device&gt;
+            &lt;/properties&gt;
+        &lt;/profile&gt;
+    &lt;/profiles&gt;
+&lt;/settings&gt;</pre>
+    
+  </div>
+</div>
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Your AVD Name can be found in the AVD Manager</p>
+      
+    </li>
+  
+  </ul>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <a class="image" href="../img/GettingStartedNetBeans/avd_name.png"><img src="../img/GettingStartedNetBeans/avd_name_thumbnail.png" alt="AVD Manager with JB selected" width="250"></a>
+</span></p>
+</div>
+
+<div class="sect4">
+  <h5 id="_edit_the_run_action">Edit the Run Action</h5>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Right click on the project and select "Properties"</p>
+      
+    </li>
+  
+  </ul>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <a class="image" href="../img/GettingStartedNetBeans/select_properties.png"><img src="../img/GettingStartedNetBeans/select_properties_thumbnail.png" alt="Select the Properties Item" width="250"></a>
+</span></p>
+</div>
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>In the window which appears select "Actions"</p>
+      
+    </li>
+  
+    <li>
+      <p>Scroll through the "Actions" list until you see "Run project".  Select it</p>
+      
+    </li>
+  
+  </ul>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <a class="image" href="../img/GettingStartedNetBeans/edit_run.png"><img src="../img/GettingStartedNetBeans/edit_run_thumbnail.png" alt="Edit the Run Action" width="250"></a>
+</span></p>
+</div>
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Set "Execute Goals" to "android:deploy android:run"</p>
+      
+    </li>
+  
+    <li>
+      <p>Add to "Set Properties" "undeployBeforeDeploy=true"</p>
+      
+    </li>
+  
+    <li>
+      <p>You can now run the application.</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_debugging">Debugging</h4>
+  
+
+<div class="sect4">
+  <h5 id="_edit_the_debug_action">Edit the Debug Action</h5>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Right click on the project and select "Properties"</p>
+      
+    </li>
+  
+  </ul>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <a class="image" href="../img/GettingStartedNetBeans/select_properties.png"><img src="../img/GettingStartedNetBeans/select_properties_thumbnail.png" alt="Select the Properties Item" width="250"></a>
+</span></p>
+</div>
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>In the window which appears select "Actions"</p>
+      
+    </li>
+  
+    <li>
+      <p>Scroll through the "Actions" list until you see "Debug project".  Select it</p>
+      
+    </li>
+  
+  </ul>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <a class="image" href="../img/GettingStartedNetBeans/edit_debug.png"><img src="../img/GettingStartedNetBeans/edit_debug_thumbnail.png" alt="Edit the Debug Action" width="250"></a>
+</span></p>
+</div>
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Set "Execute Goals" to "android:deploy android:run"</p>
+      
+    </li>
+  
+    <li>
+      <p>Add to "Set Properties" the following:</p>
+      
+    </li>
+  
+  </ul>
+</div>
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre>undeployBeforeDeploy=true
+runDebug=true
+debug=true</pre>
+    
+  </div>
+</div>
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Start Android Monitor
+$ANDROID_HOME/tools/monitor</p>
+      
+    </li>
+  
+    <li>
+      <p>Launch the application in debug mode from NetBeans</p>
+      
+    </li>
+  
+    <li>
+      <p>Note the port shown in the monitor</p>
+      
+    </li>
+  
+  </ul>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <a class="image" href="../img/GettingStartedNetBeans/debug_port.png"><img src="../img/GettingStartedNetBeans/debug_port_thumbnail.png" alt="AVD Monitor Showing TODO App Port" width="250"></a>
+</span></p>
+</div>
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>In NetBeans from "Debug" select "Attach Debugger" and enter into port the port number from the monitor.</p>
+      
+    </li>
+  
+  </ul>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <a class="image" href="../img/GettingStartedNetBeans/attach_debug.png"><img src="../img/GettingStartedNetBeans/attach_debug_thumbnail.png" alt="The Attach to Debugger window" width="250"></a>
+</span></p>
+</div>
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Your application should now be running in debug mode and breakpoints in NetBeans should work</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+  
+</div>
+
+
+  
+</div>
+
+
+  </div>
+  
+</div>
+
+
+
+</div>
+
+            <div class="clearfix"></div>
+      </div>
+      <footer>
+          <div class="wrapper">
+              <div class="column">
+                  <h3>News</h3>
+                  
+                  <p><a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html">AeroGear 1.0.0 is out!</a></p>
+                  
+                  <p><a href="/news/2013/03/04/aerogear-1.0.0.CR1-is-out/index.html">AeroGear 1.0.0.CR1 is out!</a></p>
+                  
+                  <p><a href="/news/2013/01/30/aerogear-1.0.0.M8-is-out/index.html">AeroGear 1.0.0.M8 is out!</a></p>
+                  
+                  <p><a href="/news/2012/12/20/aerogear-1.0.0.M7-is-out/index.html">AeroGear 1.0.0.M7 is out!</a></p>
+                  
+                  <p><a href="/news/2012/10/24/aerogear-1.0.0.M6-is-out/index.html">AeroGear 1.0.0.M6 is out!</a></p>
+                  
+              </div>
+              <div class="column">
+                  <h3>Get help</h3>
+                  <p><a href="/docs">Documentation</a></p>
+                  <p><a href="/examples">Examples</a></p>
+              </div>
+              <div class="column">
+                  <h3>Contribute</h3>
+                  <p><a href="http://github.com/aerogear" target="_blank">Source code</a></p>
+                  <p><a href="http://issues.jboss.org/browse/AEROGEAR" target="_blank">Issue tracker</a></p>
+                  <p><a href="https://lists.jboss.org/mailman/listinfo/aerogear-dev" target="_blank">Mailing list</a></p>
+                  <p><a href="irc://irc.freenode.net/aerogear" target="_blank">IRC channel</a></p>
+              </div>
+              <div class="column responsive">
+                  <h3>Social</h3>
+                  <p><a href="">Twitter</a></p>
+                  <p><a href="">Google Plus</a></p>
+                  <p><a href="">Facebook</a></p>
+              </div>
+              <div class="column">
+                  <h3><a href="http://twitter.com/AeroGears" target="_blank">@AeroGears</a></h3>
+                  <div id="aerogear-twitter">Loading tweets...</div>
+              </div>
+              <div class="logos">
+                  <p>AeroGear is a <a href="http://www.jboss.org/">JBoss Community</a> project<br class="title-break"> and its development is sponsored<br class="title-break"> by <a href="http://www.redhat.com/">Red Hat, Inc</a>.<br class="title-break"><br>Project code is released under <br class="title-break">the <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache License, v2.0</a>.</p>
+                  <p><a href="http://www.jboss.org/"><img src="/img/jboss_community.png" alt="JBoss Community"></a> <a href="http://www.redhat.com/"><img src="/img/red_hat.png" alt="Red Hat"></a></p>
+                  <p>Copyright &copy; 2012, Red Hat, Inc.</p>
+  <div class="clearfix"></div>
+              </div>
+          </div>
+      </footer>
+      <script src="/js/libs/repo-modified.js"></script>
+      <script src="/js/libs/ba-linkify.min.js"></script>
+      <script src="/js/libs/jquery.twitter.min.js"></script>
+      <script src="/js/libs/jquery.smartresize.js"></script>
+      <script src="/js/script.js"></script>
+  </body>
+</html>

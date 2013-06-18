@@ -1,0 +1,269 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+      <title>AeroGear - AeroGear 1.0.0 is out!</title>
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+
+      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="alternate" type="application/atom+xml" title="feed" href="/feed.atom"/>
+      <link rel="stylesheet" href="/css/font-awesome.min.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:600,300,300italic,600italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+      <script src="/js/libs/modernizr-2.6.2.min.js"></script>
+		  <script type="text/javascript">
+
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-28733717-2']);
+			  _gaq.push(['_setDomainName', 'aerogear.org']);
+			  _gaq.push(['_trackPageview']);
+
+			  (function() {
+				  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+
+		  </script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+      <script>window.jQuery || document.write( '<script src="/js/libs/jquery-1.7.2.min.js"><\/script>' )</script>
+  </head>
+  <body>
+      <header>
+          <div class="wrapper">
+              <a href="/"><div id="logo"></div></a>
+              <a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html" class="news fixed">Hey listen!<br class="title-break"> AeroGear 1.0.0 is out!</a>
+          </div>
+      </header>
+         
+      <nav>
+          <div class="wrapper">
+            <div class="links">
+                <a href="/" class="fixed">Home</a>
+                <a href="/download" class="">Get started</a>
+                <a href="/docs" class="">Documentation</a>
+                <a href="/news" class="fixed ">News</a>
+                <a href="/community" class="">Community</a>        
+            </div>
+            <a href="https://www.facebook.com/AeroGearProject"><div class="social facebook"></div></a>
+            <a href="https://plus.google.com/106588661437153585722/posts"><div class="social google-plus"></div></a>
+            <a href="https://www.twitter.com/aerogears"><div class="social twitter"></div></a>
+          </div>    
+          <div class="clearfix"></div>
+      </nav>
+
+      <div class="wrapper inner-container">
+
+          <div class="wrapper basic">
+	<h1>AeroGear 1.0.0 is out!</h1>
+	<p>We’re happy to announce the immediate availability of <strong>AeroGear 1.0.0</strong></p>
+
+<p><img src="/img/news/potomac_consolidated_tracon.jpg" alt="" /></p>
+
+<p>A huge thank you to the AeroGear team and the open source community!</p>
+
+<h2 id="recap">Recap</h2>
+
+<p>For quite a while, we have been busy in implementing our ideas for a 1.0.0 release. As you know, the library offers three overall components</p>
+
+<ul>
+  <li>Mobile Client SDKs (for Android, JavaScript and iOS)</li>
+  <li>Server Side Framework (the Controller)</li>
+  <li>Security accross all the layers (server and client)</li>
+</ul>
+
+<h2 id="highlights">Highlights</h2>
+
+<h3 id="android">Android</h3>
+
+<p>AeroGear for Android is available for versions 2.3.3 and greater.  In addition to the base AeroGear functionality we have provided utilities to integrate with the Android Activity lifecycle.  This allows your applications to be more stable, require less memory, and run faster.  We have also put together many guides on getting started, written tutorials covering simple and advanced use cases, gathered several sample applications, and much much more all covered in our <a href="/android">Android section</a>.</p>
+
+<h3 id="ios">iOS</h3>
+
+<p>Besides two iOS libraries, we also deliver a Xcode Template for an easy development experience! For more details on this release, checkout this <a href="http://matthiaswessendorf.wordpress.com/2013/03/28/aerogear-ios-1-0-0/">blog post</a>!</p>
+
+<h3 id="javascript">JavaScript</h3>
+
+<p>The JavaScript library provides pluggable, easy to use APIs for authentication, data management and persistence. Check out this <a href="http://blog.krisborchers.com/2013/03/28/aerogear-js-1-0-0-has-landed/">blog post</a> for details.</p>
+
+<h3 id="controller">Controller</h3>
+<p>The AeroGear Controller provides you with a server-side lightweight mvc controller. Check out this <a href="http://dbevenius.org/">blog post</a> for details.</p>
+
+<h3 id="security">Security</h3>
+
+<p>On AeroGear we’ve been working towards security provider integration and mitigating risks on mobile web (as you know, security is hard). During this release we spent some time improving AeroGear OTP, AeroGear Security and mitigating risks. A quick overview can be seen <a href="/docs/guides/aerogear-security/">here</a>.</p>
+
+<h2 id="release-notes---aerogear---version-100">Release Notes - AeroGear - Version 1.0.0</h2>
+
+<h3 id="bug">Bug</h3>
+
+<ul>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-451">AEROGEAR-451</a>] - Learn more links need to link some where </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-558">AEROGEAR-558</a>] - after update the entity Project todo-server retrieve outdated information </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-920">AEROGEAR-920</a>] - Hosted AG Quickstart not displayed on </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-999">AEROGEAR-999</a>] - aerogear.org site empty placeholders on images in the guides </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1005">AEROGEAR-1005</a>] - Aerogear-Controller-Demo The login procedure for registered users does not work properly after deleting the admin user </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1017">AEROGEAR-1017</a>] - Logout does not work for show.jsp and remove.jsp </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1023">AEROGEAR-1023</a>] - Fix quickstart license and white space issues exposed by qstool report </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1033">AEROGEAR-1033</a>] - Cars table is no longer populated. </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1041">AEROGEAR-1041</a>] - Quickstarts HTML5 Server unable to service requests </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1052">AEROGEAR-1052</a>] - TODO app will raise exceptions during the startup </li>
+</ul>
+
+<h3 id="enhancement">Enhancement</h3>
+
+<ul>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-580">AEROGEAR-580</a>] - Upgrade Cordova to latest </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-609">AEROGEAR-609</a>] - Update Cordova Setup Guide </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1032">AEROGEAR-1032</a>] - Update Controller User Guide </li>
+</ul>
+
+<h3 id="epic">Epic</h3>
+
+<ul>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1056">AEROGEAR-1056</a>] - There are a round of final updates needed before we launch 1.0.0 </li>
+</ul>
+
+<h3 id="feature-request">Feature Request</h3>
+
+<ul>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-545">AEROGEAR-545</a>] - Update FAQ to include “clickable” snippets of code for the platforms we support </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-632">AEROGEAR-632</a>] - iOS: Xcode project template for AeroGear-iOS </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-873">AEROGEAR-873</a>] - Refactor RestAdapterConstructor </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-889">AEROGEAR-889</a>] - Add a link to the full download zip below the build button </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-894">AEROGEAR-894</a>] - RestAdapter has undocumented interactions with UI thread </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-896">AEROGEAR-896</a>] - Document how RestAdapter behaves in relation to the Android Activity lifecycle </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-923">AEROGEAR-923</a>] - Move Aerogear.js dist to it’s own repo </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-952">AEROGEAR-952</a>] - Android: SqlStoreTest is broken </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-957">AEROGEAR-957</a>] - JS: doc: cleanup, example writing and completeness </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-959">AEROGEAR-959</a>] - android: Eclipse guide outdated </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-962">AEROGEAR-962</a>] - Killed activity doesn’t callback to the user </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-964">AEROGEAR-964</a>] - Create a listing of conferences and CFP </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-982">AEROGEAR-982</a>] - Use +tearDown to reset AGMockURLProtocol parameters </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-983">AEROGEAR-983</a>] - Enhance TODO app to use “cancel” when it goes in background/terminates </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-984">AEROGEAR-984</a>] - Android: TODO-App not working </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-986">AEROGEAR-986</a>] - Update aerogear-ios API.md file with usage examples </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-987">AEROGEAR-987</a>] - AeroGear controller demo will throw NPE on OTP workflow </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-993">AEROGEAR-993</a>] - add a buildScript.sh to automate otp-ios library and doc building </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-998">AEROGEAR-998</a>] - Multiple args on routes return HTTP 404 </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1007">AEROGEAR-1007</a>] - Create a iOS page that describes the wealth of options available </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1009">AEROGEAR-1009</a>] - OTP images are badly broken on aerogear.org </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1020">AEROGEAR-1020</a>] - create a new repo ‘aerogear-ios-xcode-template’ </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1021">AEROGEAR-1021</a>] - Fix asciidoc warnings </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1025">AEROGEAR-1025</a>] - AeroGear Security will fail when deployed in non JBoss environments </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1045">AEROGEAR-1045</a>] - Inclusion of our AG versioning policy into aerogear.org </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1049">AEROGEAR-1049</a>] - PageResultExtractor and PageConfig.setPageHeaderParser are poorly named </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1065">AEROGEAR-1065</a>] - Investigate why our OpenShift instances are always down </li>
+</ul>
+
+<h3 id="task">Task</h3>
+
+<ul>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-597">AEROGEAR-597</a>] - ios: improve API doc </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-725">AEROGEAR-725</a>] - ios: filter and query: evaluate usage of NSPredicate </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-754">AEROGEAR-754</a>] - Homepage: download site update </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-790">AEROGEAR-790</a>] - Site / Documentation Review </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-811">AEROGEAR-811</a>] - Move aerogearjsbuilder to AeroGear account </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-891">AEROGEAR-891</a>] - switch asciidoc rendering to use asciidoctor </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-992">AEROGEAR-992</a>] - Update Hosted kitchensinks to latest version </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-994">AEROGEAR-994</a>] - Custom JS builder Loading Indicator </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1003">AEROGEAR-1003</a>] - Update Browser Targets Page </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1008">AEROGEAR-1008</a>] - Review Controller docs </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1013">AEROGEAR-1013</a>] - Rename LoggerMessages to ExceptionBundle </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1014">AEROGEAR-1014</a>] - Minor code clean up </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1022">AEROGEAR-1022</a>] - Add a Getting started guide for iOS using the template </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1024">AEROGEAR-1024</a>] - Deploy new version of aergoear-controller-demo to openshift </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1028">AEROGEAR-1028</a>] - Move beans.xml to WEB-INF </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1029">AEROGEAR-1029</a>] - If no routes are defined AeroGear Controller should fail upon deployment </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1053">AEROGEAR-1053</a>] - Update Controller version to 1.0.0 </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1055">AEROGEAR-1055</a>] - Update docs to remove old quickstart/archetype repo info </li>
+</ul>
+
+<h3 id="sub-task">Sub-task</h3>
+
+<ul>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-745">AEROGEAR-745</a>] - Add Learn More link to Home Page and create some sort of article so people can “Learn More” about each lib </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-747">AEROGEAR-747</a>] - Add Learn More link to Home Page and create some sort of article so people can “Learn More” about each lib </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-748">AEROGEAR-748</a>] - Add Learn More link to Home Page and create some sort of article so people can “Learn More” about each lib </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-749">AEROGEAR-749</a>] - Add Learn More link to Home Page and create some sort of article so people can “Learn More” about each lib </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-761">AEROGEAR-761</a>] - ios: otp: improve AppleDoc API doc </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-791">AEROGEAR-791</a>] - Getting Started Guide Revamp </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-906">AEROGEAR-906</a>] - Update the quickstart pom files to match changes made in the jboss-jdf repository </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-913">AEROGEAR-913</a>] - Fix Up Quickstarts and Archetypes </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-914">AEROGEAR-914</a>] - Remove Aerogear Refs </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-915">AEROGEAR-915</a>] - Sync with JDF on the Move </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1010">AEROGEAR-1010</a>] - Review AeroGear Controller docs </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1011">AEROGEAR-1011</a>] - Review AeroGear Controller Demo docs </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1012">AEROGEAR-1012</a>] - Review Controller docs on site </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1048">AEROGEAR-1048</a>] - Make old aerogear quickstart and archetype repo private </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1057">AEROGEAR-1057</a>] - Create Value Add Statement for home page </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1058">AEROGEAR-1058</a>] - Wording for controller and security call out in bottom section of home page </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1059">AEROGEAR-1059</a>] - Update/Add Content to library specific landing page </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1060">AEROGEAR-1060</a>] - Update/Add Content to library specific landing page </li>
+  <li>[<a href="https://issues.jboss.org/browse/AEROGEAR-1061">AEROGEAR-1061</a>] - Update/Add Content to library specific landing page</li>
+</ul>
+
+
+</div>
+
+            <div class="clearfix"></div>
+      </div>
+      <footer>
+          <div class="wrapper">
+              <div class="column">
+                  <h3>News</h3>
+                  
+                  <p><a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html">AeroGear 1.0.0 is out!</a></p>
+                  
+                  <p><a href="/news/2013/03/04/aerogear-1.0.0.CR1-is-out/index.html">AeroGear 1.0.0.CR1 is out!</a></p>
+                  
+                  <p><a href="/news/2013/01/30/aerogear-1.0.0.M8-is-out/index.html">AeroGear 1.0.0.M8 is out!</a></p>
+                  
+                  <p><a href="/news/2012/12/20/aerogear-1.0.0.M7-is-out/index.html">AeroGear 1.0.0.M7 is out!</a></p>
+                  
+                  <p><a href="/news/2012/10/24/aerogear-1.0.0.M6-is-out/index.html">AeroGear 1.0.0.M6 is out!</a></p>
+                  
+              </div>
+              <div class="column">
+                  <h3>Get help</h3>
+                  <p><a href="/docs">Documentation</a></p>
+                  <p><a href="/examples">Examples</a></p>
+              </div>
+              <div class="column">
+                  <h3>Contribute</h3>
+                  <p><a href="http://github.com/aerogear" target="_blank">Source code</a></p>
+                  <p><a href="http://issues.jboss.org/browse/AEROGEAR" target="_blank">Issue tracker</a></p>
+                  <p><a href="https://lists.jboss.org/mailman/listinfo/aerogear-dev" target="_blank">Mailing list</a></p>
+                  <p><a href="irc://irc.freenode.net/aerogear" target="_blank">IRC channel</a></p>
+              </div>
+              <div class="column responsive">
+                  <h3>Social</h3>
+                  <p><a href="">Twitter</a></p>
+                  <p><a href="">Google Plus</a></p>
+                  <p><a href="">Facebook</a></p>
+              </div>
+              <div class="column">
+                  <h3><a href="http://twitter.com/AeroGears" target="_blank">@AeroGears</a></h3>
+                  <div id="aerogear-twitter">Loading tweets...</div>
+              </div>
+              <div class="logos">
+                  <p>AeroGear is a <a href="http://www.jboss.org/">JBoss Community</a> project<br class="title-break"> and its development is sponsored<br class="title-break"> by <a href="http://www.redhat.com/">Red Hat, Inc</a>.<br class="title-break"><br>Project code is released under <br class="title-break">the <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache License, v2.0</a>.</p>
+                  <p><a href="http://www.jboss.org/"><img src="/img/jboss_community.png" alt="JBoss Community"></a> <a href="http://www.redhat.com/"><img src="/img/red_hat.png" alt="Red Hat"></a></p>
+                  <p>Copyright &copy; 2012, Red Hat, Inc.</p>
+  <div class="clearfix"></div>
+              </div>
+          </div>
+      </footer>
+      <script src="/js/libs/repo-modified.js"></script>
+      <script src="/js/libs/ba-linkify.min.js"></script>
+      <script src="/js/libs/jquery.twitter.min.js"></script>
+      <script src="/js/libs/jquery.smartresize.js"></script>
+      <script src="/js/script.js"></script>
+  </body>
+</html>

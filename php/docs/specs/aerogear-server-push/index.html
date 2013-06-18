@@ -1,0 +1,518 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+      <title>AeroGear - AeroGear Unified Push Server</title>
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+
+      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="alternate" type="application/atom+xml" title="feed" href="/feed.atom"/>
+      <link rel="stylesheet" href="/css/font-awesome.min.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:600,300,300italic,600italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+      <script src="/js/libs/modernizr-2.6.2.min.js"></script>
+		  <script type="text/javascript">
+
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-28733717-2']);
+			  _gaq.push(['_setDomainName', 'aerogear.org']);
+			  _gaq.push(['_trackPageview']);
+
+			  (function() {
+				  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+
+		  </script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+      <script>window.jQuery || document.write( '<script src="/js/libs/jquery-1.7.2.min.js"><\/script>' )</script>
+  </head>
+  <body>
+      <header>
+          <div class="wrapper">
+              <a href="/"><div id="logo"></div></a>
+              <a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html" class="news fixed">Hey listen!<br class="title-break"> AeroGear 1.0.0 is out!</a>
+          </div>
+      </header>
+         
+      <nav>
+          <div class="wrapper">
+            <div class="links">
+                <a href="/" class="fixed">Home</a>
+                <a href="/download" class="">Get started</a>
+                <a href="/docs" class="">Documentation</a>
+                <a href="/news" class="fixed ">News</a>
+                <a href="/community" class="">Community</a>        
+            </div>
+            <a href="https://www.facebook.com/AeroGearProject"><div class="social facebook"></div></a>
+            <a href="https://plus.google.com/106588661437153585722/posts"><div class="social google-plus"></div></a>
+            <a href="https://www.twitter.com/aerogears"><div class="social twitter"></div></a>
+          </div>    
+          <div class="clearfix"></div>
+      </nav>
+
+      <div class="wrapper inner-container">
+
+          <div class="basic">
+    <h1 id="aerogear-unified-push-server-draft-003">AeroGear Unified Push Server (Draft 0.0.3)</h1>
+
+<p>The <em>AeroGear Unified Push Server</em> is a server that allows sending native push messages to different mobile operation systems. The initial version of the server supports <a href="http://developer.apple.com/library/mac/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html#//apple_ref/doc/uid/TP40008194-CH100-SW9">Apple’s APNs</a>, <a href="http://developer.android.com/google/gcm/index.html">Google Cloud Messaging</a> and <a href="https://wiki.mozilla.org/WebAPI/SimplePush">Mozilla’s Simple Push</a>.</p>
+
+<h2 id="motivation--purpose">Motivation / Purpose</h2>
+<p>The <em>AeroGear Native Push Server</em> offers a <em>Notification Service API</em> to different backend applications. This gives a server the ability to send <em>Push Notifications</em> to mobile applications. The Notification Service API is a signaling mechanismn, like Apple APNs, Google Cloud Messaging or Mozilla SimplePush for sending messages. It’s not suitable to be used as a data carrying system (e.g. use in a chat application).</p>
+
+<h3 id="some-usage-scenarios">Some Usage Scenarios</h3>
+<ul>
+  <li>MyWarehouseInc-backend can send “notification messages” to different “customer” groups (e.g. discounts for only iOS (or only Android) users).</li>
+  <li>MyInsuranceCorp-backend can send “notification messages” to different variants of its mobile Applications:</li>
+  <li>App for the Customers</li>
+  <li>App for the employed Sales Agents</li>
+  <li>Publishing Company</li>
+  <li>MyPublishing-Company-backend sends <em>update</em> “notification messages” to all of its apps (free and premium - regardless of the mobile OS).</li>
+  <li>The arrival of “advanced content” is only notified to the paying customers (e.g. those that run the <em>premium</em> app).</li>
+  <li>A company has different backends (small/simple apps for different tasks) - and these different backends could be able to reach all (or some) of the company’s mobile apps.</li>
+</ul>
+
+<p><strong>Goal</strong>: To make any (JBoss/AeroGear powered) mobile application, that is backed by JBoss technology (e.g. admin console, Errai, drools, etc.), work easily with mobile push messages. For a JBoss “backend application” it should be as simple as possible to send messages to its different mobile clients.</p>
+
+<h2 id="definitions">Definitions</h2>
+
+<p>Before we get into details, it’s important that we have a good lexicon.</p>
+
+<h4 id="push-application">Push Application</h4>
+
+<p>A logical construct that represents an overall mobile application (e.g. <code>Mobile HR</code>).</p>
+
+<h4 id="mobile-variant">Mobile Variant</h4>
+
+<p>A mobile variant of the <em>Push Application</em>. There can be multiple variants for a <em>Push Application</em> (e.g. <code>HR Android</code>, <code>HR iPad</code>, <code>HR iPhone free</code>,  <code>HR iPhone premium</code> or <code>HR Mobile Web</code>). A <em>Mobile Variant</em> contains platform specific properties, such as a <em>Google API key</em> (<code>Android</code>) or a PushNetwork URL (<code>SimplePush</code>).</p>
+
+<h4 id="mobile-variant-instance">Mobile Variant Instance</h4>
+
+<p>Represents an actual installation on a mobile device (e.g. <em>User1 connected via MobileWeb</em> or <em>User2 runs <strong>HR iPhone premium</strong> on his phone</em>)</p>
+
+<h4 id="push-notification-message">(Push) Notification Message</h4>
+
+<p>A simple message to be send to a mobile application, to notify it of a data change.</p>
+
+<h4 id="sender-api">Sender API</h4>
+
+<p>Is a component that sends <em>Push Notification Messages</em> to a <code>Push Application</code> or a <code>Mobile Variants</code>. The message is then delivered to all (valid) <code>Mobile Variant Instance</code>. It’s also possible to use a <em>selected send</em>, for notifying a selected group of users (aka <code>Mobile Variant Instance</code>). </p>
+
+<h4 id="developer">Developer</h4>
+
+<p>A <em>Developer</em> is in charge of enabling Push Notifications for his different backend systems. For that he has to create a <code>Push Application</code> and one or more <code>Mobile Variants</code> on the <em>AeroGear Unified Push Server</em>.</p>
+
+<p>A <em>Developer</em> will use the <em>Sender API</em> to send “notification messages” to different <code>Mobile Variant Instances</code>.</p>
+
+<h4 id="user">User</h4>
+
+<p>A user of an AeroGear <code>Mobile Variant Instance</code>, which may consume notification messages.</p>
+
+<h2 id="overview">Overview</h2>
+
+<p>The <em>AeroGear Unified Push Server</em> contains three different components:
+* Registration: <em>Registry for <code>Push Applications</code>, <code>Mobile Variants</code> and  <code>Mobile Variant Instances</code></em>
+* Storage: <em>A database, storing the registered applications and instances</em>
+* Sender: <em>Receives messages and sends them to different <code>Mobile Variant Instances</code></em></p>
+
+<p>The graphic below gives a little overview:</p>
+
+<p><img src="./aerogear_unified_push_server.png" alt="components" /></p>
+
+<h2 id="functionality">Functionality</h2>
+
+<h3 id="registration">Registration</h3>
+
+<p>Three different registration types are provided by the <em>AeroGear Unified Push Server</em>.</p>
+
+<h4 id="push-application-registration">Push Application Registration</h4>
+
+<p>Adds a logical construct, that represents an overall mobile application (e.g. Mobile HR). The <em>Push Application</em> contains the following properties:</p>
+
+<ul>
+  <li>Name</li>
+  <li>Description</li>
+  <li>A collection of <code>Mobile Variant</code>s</li>
+</ul>
+
+<p>The server offers an HTTP interfaces to apply a <em>Push Application</em> registration:</p>
+
+<pre><code>curl -v -H "Accept: application/json" -H "Content-type: application/json"
+    -X POST
+    -d '{"name" : "MyApp", "description" :  "awesome app" }'
+
+http://SERVER/applications
+</code></pre>
+
+<p><em>The response returns an ID for the Push Application.</em></p>
+
+<h4 id="mobile-variant-registration">Mobile Variant Registration</h4>
+
+<p>Adds a <em>mobile variant</em> for an <strong>existing</strong> <em>Push Application</em>. There can be multiple variants for a <em>Push Application</em> (e.g. HR Android, HR iPad, HR iPhone free, HR iPhone premium or HR Mobile Web).</p>
+
+<p>The server supports the following variant types:
+* iOS
+* Android
+* SimplePush</p>
+
+<h5 id="ios-variant">iOS Variant</h5>
+
+<p>An iOS variant represents a logical construct for one iOS application (e.g. <code>HR for iPhone</code> <em>or</em> <code>HR for iPad</code> ). The iOS variant requires some APNs specific values:</p>
+
+<ul>
+  <li>APNs Push Certificate file</li>
+  <li>Passphrase</li>
+</ul>
+
+<p>The server offers an HTTP interfaces to register an <em>iOS variant</em>:</p>
+
+<pre><code>curl -i -H "Accept: application/json" -H "Content-type: multipart/form-data" 
+
+-F "certificate=@/Users/matzew/Desktop/MyCert.p12"
+-F "passphrase=TopSecret"
+
+-X POST http://SERVER/applications/{PUSH_ID}/iOS
+</code></pre>
+
+<p><strong>NOTE:</strong> The above is a <em>multipart/form-data</em>, since it is required to upload the “Apple Push certificate”!</p>
+
+<p><em>The response returns an ID for the iOS variant.</em></p>
+
+<h5 id="android-variant">Android Variant</h5>
+
+<p>An Android variant represents a logical construct for one Android application (e.g. <code>HR for Android</code>). The Android variant requires some Google specific values:</p>
+
+<ul>
+  <li>Google API Key</li>
+</ul>
+
+<p>The server offers an HTTP interfaces to register an <em>Android variant</em>:</p>
+
+<pre><code>curl -v -H "Accept: application/json" -H "Content-type: application/json"
+ -X POST
+ -d '{"googleKey" : "IDDASDASDSA"}'
+  
+ http://SERVER/applications/{PUSH_ID}/android 
+</code></pre>
+
+<p>_The response returns an ID for the Android variant.</p>
+
+<h5 id="simplepush-variant">SimplePush Variant</h5>
+
+<p>An SimplePush variant represents a logical construct for one SimplePush application (e.g. <code>HR mobile Web</code>). The SimplePush variant requires some <em>Simple Push Network</em> specific values:</p>
+
+<ul>
+  <li>URL of the PushNetwork server</li>
+</ul>
+
+<p>The server offers an HTTP interfaces to register an <em>SimplePush variant</em>:</p>
+
+<pre><code>curl -v -H "Accept: application/json" -H "Content-type: application/json"
+  -X POST
+  -d '{"pushNetworkURL" : "http://localhost:7777/endpoint/"}'
+
+  http://SERVER/applications/{PUSH_ID}/simplePush 
+</code></pre>
+
+<p><em>The response returns an ID for the SimplePush variant.</em></p>
+
+<h4 id="mobile-variant-instance-registration">Mobile Variant Instance Registration</h4>
+
+<p>Adds a <em>mobile variant instance</em> to an existing <em>mobile variant</em> (e.g. User1 runs HR-iPad on his device). It is possible that one user can have multiple devices. A <em>mobile variant instance</em> contains the following properties:</p>
+
+<h6 id="required-data">Required Data</h6>
+
+<ul>
+  <li><strong>token</strong></li>
+</ul>
+
+<p><em>The platform specific token, that identifies the device/application with the used push network, in order to deliver messages.</em></p>
+
+<ul>
+  <li><strong>operatingSystem</strong></li>
+</ul>
+
+<p><em>It is required for the device to submit it’s exact name of the underlying OS.</em></p>
+
+<ul>
+  <li><strong>osVersion</strong></li>
+</ul>
+
+<p><em>It is required for the device to submit it’s exact version of the underlying OS.</em></p>
+
+<ul>
+  <li><strong>Mobile Variation ID</strong></li>
+</ul>
+
+<p><em>ID received when registering a <code>Mobile Variant</code>. This ID needs to be submitted as a request header (<code>ag-mobile-variant</code>). <strong>NOTE:</strong> It is possible that this ID goes away, in favor for a digital signature in a future release</em></p>
+
+<h6 id="optional-data">Optional Data</h6>
+
+<ul>
+  <li><strong>deviceType</strong></li>
+</ul>
+
+<p><em>It is recommended to store the (exact) device type (e.g. <code>phone</code> vs <code>tablet</code>).</em></p>
+
+<ul>
+  <li><strong>alias</strong></li>
+</ul>
+
+<p><em>If the business application requires the conecpt of a user, the registration must submit an unique identifier (like a username), to identify the user. It is possible that one user has multiple devices.</em></p>
+
+<ul>
+  <li><strong>category</strong></li>
+</ul>
+
+<p><em>A logical group, useful when sending broadcast message to a certain “category”.</em></p>
+
+<h6 id="business-data">Business Data</h6>
+
+<p>The above are technical information bits that are required to get a message to the device. This the app wants to send notification based on a criteria, the relevant data has to be stored in the business backend. This way the backend app is very flexible on the criterias (e.g. max salary, geolocation, number of children, etc). All this data is NOT directly related to the technical functionality of sending data. The usage of the AeroGear Pipe is <strong>highly recommended</strong> to store business data on the business backend.</p>
+
+<p>The server offers an HTTP interfaces to register an <em>mobile variant instance</em>:</p>
+
+<pre><code>curl -v -H "Accept: application/json" -H "Content-type: application/json" 
+  -H "ag-mobile-variant: {id}"
+  -X POST
+  -d '{
+     "alias" : "user@company.com", 
+     "token" : "someTokenString", 
+     "deviceType" : "ANDROID", 
+     "mobileOperatingSystem" : "android", 
+     "osVersion" : "4.0.1"
+   }'
+
+http://SERVER/registry/device 
+</code></pre>
+
+<p><strong>NOTE</strong>: Platform specific Client SDKs will be provided to submit the require data to the <em>AeroGear Unified Push Server</em>.</p>
+
+<h3 id="storage">Storage</h3>
+
+<p>A (configurable) database that stores all registered applications and instances.</p>
+
+<h3 id="sender">Sender</h3>
+
+<p>HTTP interface that receives messages for a delivery to different Mobile Push Networks. A few different <em>Sender Types</em> are supported by the push server.</p>
+
+<h4 id="global-broadcast-sender">Global Broadcast Sender</h4>
+
+<p>Sends a push message to all <em>mobile variants</em> (and all of its <em>mobile variant intances</em>), of a given <em>Push Application</em>:</p>
+
+<pre><code>curl -v -H "Accept: application/json" -H "Content-type: application/json" 
+  -X POST
+
+  -d '{"key":"blah", "alert":"HELLO!"}'
+   
+http://SERVER/sender/broadcast/{PushApplicationID} 
+</code></pre>
+
+<p>Sends a JSON map to the server. If platform specific key words (e.g. alert for APNs) are used, they are honored for the specific platform. This transformation is done by the <em>AeroGear Unified Push Server</em>.</p>
+
+<h4 id="variant-specific-broadcast">Variant specific Broadcast</h4>
+
+<p>Sends a push message to only one <em>mobile variants</em> (and all of its <em>mobile variant intances</em>).:</p>
+
+<pre><code>curl -v -H "Accept: application/json" -H "Content-type: application/json" 
+   -X POST
+
+   -d '{"key":"blah", "alert":"HELLO!"}'
+   
+http://SERVER/sender/broadcast/variant/{MobileVariantID} 
+</code></pre>
+
+<p>Sends a JSON map to the server. If platform specific key words (e.g. alert for APNs) are used, they are honored for the specific platform. This transformation is done by the <em>AeroGear Unified Push Server</em>.</p>
+
+<h4 id="selected-sender">Selected Sender</h4>
+
+<p>Sends a push message to a selected list of identified users (regardless of their variant):</p>
+
+<pre><code>curl -v -H "Accept: application/json" -H "Content-type: application/json" 
+   -X POST
+
+   -d '{
+       alias: ["user@foo.com", "bar@moz.org", ....],
+       message: {"key":"blah", "alert":"HELLO!"}
+     }'
+   
+http://SERVER/sender/selected 
+</code></pre>
+
+<p>The <code>alias</code> value is used to identied the desired users. The payload (<code>messages</code>) is a standard JSON map. If platform specific key words (e.g. alert for APNs) are used, they are honored for the specific platform. This transformation is done by the <em>AeroGear Unified Push Server</em>.</p>
+
+<h2 id="use-cases">Use Cases</h2>
+
+<p>Below are the BASIC use-cases, that the <em>AeroGear Unified Push Server</em> needs to <em>initially</em> support. </p>
+
+<ul>
+  <li>Enroll <code>Developer</code></li>
+  <li>Remove <code>Developer</code></li>
+  <li>Developer can register a <code>Push Application</code></li>
+  <li>Developer can add a <code>Mobile Variant</code> for different operation systems</li>
+  <li>Developer can remove a <code>Mobile Variant</code></li>
+  <li>Developer can remove <code>Push Application</code></li>
+  <li><code>User</code> registers his <code>Mobile Variant Instance</code> (see <a href="https://gist.github.com/matzew/b918eb45d3f17de09b8f#mobile-variant-instance-registration">here</a>).</li>
+  <li><code>User</code> unregisters his <code>Mobile Variant Instance</code> (e.g. app got deinstalled, user deleted etc)</li>
+  <li><code>User</code> receives <em>Push Notification Messages</em> (handled by the native OS, once accepted to receive messages) </li>
+  <li><code>Developer</code> send <em>Push Notification Messages</em></li>
+  <li><code>Developer</code> can disable Push Notifications to selected <code>Mobile Variant Instance</code>s.</li>
+</ul>
+
+<h3 id="enroll">Enroll</h3>
+
+<h5 id="developer-1">Developer</h5>
+
+<p>The <strong>Developer</strong> role is always registered with the <em>AeroGear Unified Push Server</em> and a username/password combination is required.</p>
+
+<h5 id="user-1">User</h5>
+
+<p>Not all mobile applications know the concept of a user (e.g. Sport Broadcast apps), but others do (e.g. Twitter). The <code>User</code> is never registered with the <em>AeroGear Unified Push Server</em>. The <code>User</code> lives in the <code>Business Database</code>. In cases where the mobile app requires a <code>User</code>, it is highly recommend to register an <em>alias</em> with the <code>Mobile Variant Instance</code>. See <a href="https://gist.github.com/matzew/b918eb45d3f17de09b8f#optional-data">here</a> for more details.</p>
+
+<h3 id="remove">Remove</h3>
+
+<h5 id="developer-2">Developer</h5>
+
+<p>It should be possible to remove <code>Devlopers</code> from the Server.</p>
+
+<h5 id="user-2">User</h5>
+
+<p>It should be possible to remove a <code>Mobile Variant Instance</code>, so that it can no longer receive <em>Push Notification Messages</em>.</p>
+
+<h3 id="register-push-applications">Register Push Applications</h3>
+
+<p>A <code>Developer</code> can register multiple <code>Push Applications</code>. Each <code>Push Application</code> has a generated AeroGear-Application-Key (ID) to identify the “server side” representation of the Push-App. Each <code>Push Application</code> can have several <code>Mobile Variants</code>.</p>
+
+<h4 id="add-mobile-variant">Add Mobile Variant</h4>
+
+<p>A <code>Developer</code> can add a <code>Mobile Variant</code> to an existing <code>Push Application</code>.</p>
+
+<h3 id="remove-push-application">Remove Push Application</h3>
+
+<p>A <code>Developer</code>** should be able to remove a <code>Push Application</code> (including its <code>Mobile Variant</code>).</p>
+
+<h3 id="remove-mobile-variant">Remove Mobile Variant</h3>
+
+<p>A <code>Developer</code>** should be able to remove a <code>Mobile Variant</code>, of an existing <code>Push Application</code>.</p>
+
+<h3 id="mobile-variant-instance-registration-1">Mobile Variant Instance Registration</h3>
+
+<p>Once a <code>User</code> installs and launches the mobile application, the embedding OS generates a <em>Device-Token</em> (or <em>Registration ID</em>(Android) or <em>ChannelID</em> (SimplePush)). The application needs to send this <code>token</code> (and a few more pieces of information) to the <em>AeroGear Unified Push Server</em> (See <a href="https://gist.github.com/matzew/b918eb45d3f17de09b8f#mobile-variant-instance-registration">here</a>), in order to be able to receive Push Notification Messages.</p>
+
+<h3 id="remove-mobile-variant-instance">Remove Mobile Variant Instance</h3>
+
+<h4 id="uninstall">uninstall</h4>
+<p>If an app gets uninstalled, the phone is no longer able to receive push messages. Therefore inactive <code>Mobile Variant Instance</code> should be removed, on the server. However… there is no harm if invalid keys are used, on the server, when trying to send push messages…</p>
+
+<h4 id="access-removed">access removed</h4>
+<p>Admin can disable push notifications for a specific <code>Mobile Variant Instance</code>.</p>
+
+<h3 id="receives-push-notification-messages">Receives Push Notification Messages</h3>
+
+<p>Every installed app, is able to receive Push Notification Messages through the APIs, offered by the platforms (iOS, Android, SimplePush).</p>
+
+<p><em><strong>Note:</strong> On iOS the user as to agree to receive push messages</em></p>
+
+<h3 id="sending-push-notification-messages">Sending Push Notification Messages</h3>
+
+<h4 id="broadcast">Broadcast</h4>
+<p>The <em>AeroGear Unified Push Server</em> acts as a broker to deliver <em>Push Notification Messages</em> to several <code>Mobile Variant Instances</code>. A <code>developer</code> can send <em>Push Notification Messages</em> to a specific <code>Push Application</code> or <code>Mobile Variant</code>.</p>
+
+<h4 id="filteredselected-messaging">Filtered/Selected messaging</h4>
+
+<p>Sending message to a specific <code>Mobile Variant Instances</code>…. We need a DSL to filter users etc…. This will be done later…</p>
+
+<h4 id="in-app-messaging">In-APP messaging</h4>
+
+<p>Later, there will be an option to have the app (via client SDK) also submit <em>Push Notification Messages</em>, to broadcast to other <code>Mobile Variant Instances</code> of the app (or to a specific <code>Mobile Variant Instances</code>).  This will be done later…</p>
+
+<h2 id="api-access">API access</h2>
+
+<p><em>Initial</em> focus is that the above functionality is <em>ONLY</em> accessable via  RESTful/HTTP APIs! </p>
+
+<p>For interaction with the API endpoints (for <code>app registration</code> and <code>sending</code>) we need a proper sec/auth model/workflow. Perhaps something like OAuth…:</p>
+
+<p><img src="https://developers.google.com/accounts/images/nativeflow.png" alt="oauth" /></p>
+
+<p>(Image from Google’s developer network)</p>
+
+<p><em><strong>NOTE</strong>: The User in the image is a <strong>DEVELOPER</strong> in our wordings…</em></p>
+
+<h3 id="deviceinstallation-registration">Device/Installation Registration</h3>
+
+<p>TO DISCUSS </p>
+
+<h3 id="client-sdk--api">Client SDK / API</h3>
+
+<p>An abstract client spec is in the works.</p>
+
+<p>Later we will have a few more SDKs:
+* Client APIs (for Android, iOS, JS/SimplePush)
+* Server APIs (send a push message out of your JavaEE app, without submitting (manually) the HTTP calls)</p>
+
+
+</div>
+
+            <div class="clearfix"></div>
+      </div>
+      <footer>
+          <div class="wrapper">
+              <div class="column">
+                  <h3>News</h3>
+                  
+                  <p><a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html">AeroGear 1.0.0 is out!</a></p>
+                  
+                  <p><a href="/news/2013/03/04/aerogear-1.0.0.CR1-is-out/index.html">AeroGear 1.0.0.CR1 is out!</a></p>
+                  
+                  <p><a href="/news/2013/01/30/aerogear-1.0.0.M8-is-out/index.html">AeroGear 1.0.0.M8 is out!</a></p>
+                  
+                  <p><a href="/news/2012/12/20/aerogear-1.0.0.M7-is-out/index.html">AeroGear 1.0.0.M7 is out!</a></p>
+                  
+                  <p><a href="/news/2012/10/24/aerogear-1.0.0.M6-is-out/index.html">AeroGear 1.0.0.M6 is out!</a></p>
+                  
+              </div>
+              <div class="column">
+                  <h3>Get help</h3>
+                  <p><a href="/docs">Documentation</a></p>
+                  <p><a href="/examples">Examples</a></p>
+              </div>
+              <div class="column">
+                  <h3>Contribute</h3>
+                  <p><a href="http://github.com/aerogear" target="_blank">Source code</a></p>
+                  <p><a href="http://issues.jboss.org/browse/AEROGEAR" target="_blank">Issue tracker</a></p>
+                  <p><a href="https://lists.jboss.org/mailman/listinfo/aerogear-dev" target="_blank">Mailing list</a></p>
+                  <p><a href="irc://irc.freenode.net/aerogear" target="_blank">IRC channel</a></p>
+              </div>
+              <div class="column responsive">
+                  <h3>Social</h3>
+                  <p><a href="">Twitter</a></p>
+                  <p><a href="">Google Plus</a></p>
+                  <p><a href="">Facebook</a></p>
+              </div>
+              <div class="column">
+                  <h3><a href="http://twitter.com/AeroGears" target="_blank">@AeroGears</a></h3>
+                  <div id="aerogear-twitter">Loading tweets...</div>
+              </div>
+              <div class="logos">
+                  <p>AeroGear is a <a href="http://www.jboss.org/">JBoss Community</a> project<br class="title-break"> and its development is sponsored<br class="title-break"> by <a href="http://www.redhat.com/">Red Hat, Inc</a>.<br class="title-break"><br>Project code is released under <br class="title-break">the <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache License, v2.0</a>.</p>
+                  <p><a href="http://www.jboss.org/"><img src="/img/jboss_community.png" alt="JBoss Community"></a> <a href="http://www.redhat.com/"><img src="/img/red_hat.png" alt="Red Hat"></a></p>
+                  <p>Copyright &copy; 2012, Red Hat, Inc.</p>
+  <div class="clearfix"></div>
+              </div>
+          </div>
+      </footer>
+      <script src="/js/libs/repo-modified.js"></script>
+      <script src="/js/libs/ba-linkify.min.js"></script>
+      <script src="/js/libs/jquery.twitter.min.js"></script>
+      <script src="/js/libs/jquery.smartresize.js"></script>
+      <script src="/js/script.js"></script>
+  </body>
+</html>

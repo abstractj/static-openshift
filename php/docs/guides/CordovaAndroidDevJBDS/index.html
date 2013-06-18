@@ -1,0 +1,1630 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+      <title>AeroGear - Tutorial - Android Development w/ PhoneGap/Apache Cordova in JBoss Developer Studio 5</title>
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+
+      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="alternate" type="application/atom+xml" title="feed" href="/feed.atom"/>
+      <link rel="stylesheet" href="/css/font-awesome.min.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:600,300,300italic,600italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+      <script src="/js/libs/modernizr-2.6.2.min.js"></script>
+		  <script type="text/javascript">
+
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-28733717-2']);
+			  _gaq.push(['_setDomainName', 'aerogear.org']);
+			  _gaq.push(['_trackPageview']);
+
+			  (function() {
+				  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+
+		  </script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+      <script>window.jQuery || document.write( '<script src="/js/libs/jquery-1.7.2.min.js"><\/script>' )</script>
+  </head>
+  <body>
+      <header>
+          <div class="wrapper">
+              <a href="/"><div id="logo"></div></a>
+              <a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html" class="news fixed">Hey listen!<br class="title-break"> AeroGear 1.0.0 is out!</a>
+          </div>
+      </header>
+         
+      <nav>
+          <div class="wrapper">
+            <div class="links">
+                <a href="/" class="fixed">Home</a>
+                <a href="/download" class="">Get started</a>
+                <a href="/docs" class="">Documentation</a>
+                <a href="/news" class="fixed ">News</a>
+                <a href="/community" class="">Community</a>        
+            </div>
+            <a href="https://www.facebook.com/AeroGearProject"><div class="social facebook"></div></a>
+            <a href="https://plus.google.com/106588661437153585722/posts"><div class="social google-plus"></div></a>
+            <a href="https://www.twitter.com/aerogears"><div class="social twitter"></div></a>
+          </div>    
+          <div class="clearfix"></div>
+      </nav>
+
+      <div class="wrapper inner-container">
+
+          <div class="basic">
+    
+<div class="sect1">
+  <h2 id="_tutorial_android_development_w_phonegap_apache_cordova_in_jboss_developer_studio_5">Tutorial: Android Development w/ PhoneGap/Apache Cordova in JBoss Developer Studio 5</h2>
+  
+  <div class="sectionbody">
+<div class="admonitionblock">
+  <table>
+    <tr>
+      <td class="icon">
+        
+        <div class="title">Note</div>
+        
+      </td>
+      <td class="content">
+        
+        <div class="paragraph">
+    
+  <p>Android is not yet a tested plug-in in JBDS 5, it will be for JBDS 6</p>
+</div>
+
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="ulist">
+  <div class="title">By the end of this tutorial, you will have:</div>
+  <ul>
+  
+    <li>
+      <p>Setup your development environment</p>
+      
+    </li>
+  
+    <li>
+      <p>Created your first Phonegap/Apache Cordova-based Android Application</p>
+      
+    </li>
+  
+    <li>
+      <p>Run the app on the Android emulator</p>
+      
+    </li>
+  
+    <li>
+      <p>Run the app on a real Android device (if you have one handy)</p>
+      
+    </li>
+  
+    <li>
+      <p>Leverage the PhoneGap/Apache Cordova API for native device functionality</p>
+      
+    </li>
+  
+    <li>
+      <p>Connected your app “to the cloud” with a REST endpoint</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+<div class="sect2">
+  <h3 id="_system_setup">System Setup</h3>
+  
+<div class="paragraph">
+    
+  <p>First make sure that you have a JDK installed on your machine.  JDK 1.6+ is recommended.</p>
+</div>
+<div class="admonitionblock">
+  <table>
+    <tr>
+      <td class="icon">
+        
+        <div class="title">Tip</div>
+        
+      </td>
+      <td class="content">
+        
+        To find your JDK version run "java -version" from a command prompt
+
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="paragraph">
+    
+  <p>Download and Unzip PhoneGap/Apache Cordova 2.0.0.  <a href="http://phonegap.com/download">Download Here</a></p>
+</div>
+<div class="paragraph">
+    
+  <p><em>Make sure to remember where you unzipped it - you will be pulling several files into your Eclipse-based project throughout this tutorial.</em></p>
+</div>
+<div class="paragraph">
+    
+  <p>Download &amp; Install JBoss Developer Studio.  <a href="https://devstudio.jboss.com/earlyaccess/">Download Here</a></p>
+</div>
+<div class="paragraph">
+    
+  <p><em>Note: This link points to JBDS Early Access of JDBS 6.  The User experience should be the same</em></p>
+</div>
+<div class="paragraph">
+    
+  <p>Download and Unzip the Android SDK. <a href="http://developer.android.com/sdk/index.html">Download Here</a></p>
+</div>
+<div class="paragraph">
+    
+  <p><em>Again, make sure to remember where you unzipped it.</em></p>
+</div>
+<div class="paragraph">
+    
+  <p>Now install the Android (ADT) Plug-Ins into JBDS/Eclipse
+Click Help &gt; Install New Software</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_install_software.png" alt="ss_install_software">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>Next, Enter this url: <a href="https://dl-ssl.google.com/android/eclipse/">https://dl-ssl.google.com/android/eclipse/</a> in the "Work with" box and click enter</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_install_software_dt_0.png" alt="ss_install_software_dt_0">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>Then, Check Developer Tools</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_install_software_dt_1.png" alt="ss_install_software_dt_1">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>You will be prompted to restart Eclipse, please do so.</p>
+</div>
+<div class="paragraph">
+    
+  <p>When JBDS/Eclipse restarts you should notice at least two new icons in your toolbar - <span class="image">
+  <img src="../img/ss_install_software_dt_icon.png" alt="ss_install_software_dt_icon">
+</span>
+the leftmost one is the Android SDK Manager.  Click on the SDK Manager to see if it launches correctly, make sure that your Android OS version, for your real-world device is listed as “Installed”.  This will be covered again later in this tutorial.</p>
+</div>
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_project_setup_part_1">Project Setup - Part 1</h3>
+  
+<div class="paragraph">
+    
+  <p>Now that your system is setup, lets create a new Android Project by clicking File &#8594; New &#8594; Other  (or Cntrl/Command N).</p>
+</div>
+<div class="paragraph">
+    
+  <p>In the "Select a wizard" dialog, select "Android Application Project", then click "Next".</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_0.png" alt="ss_project_setup_0">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>Enter the "Application Name", "Project Name" and "Package Name".  We will use AndroidHelloWorld.  Your setup should look similar to the screen shot below</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_1.png" alt="ss_project_setup_1">
+</span></p>
+</div>
+<div class="admonitionblock">
+  <table>
+    <tr>
+      <td class="icon">
+        
+        <div class="title">Note</div>
+        
+      </td>
+      <td class="content">
+        
+        Build SDK and Minimum Required SDK should be set based on your actual Android phone - the physical device.  In addition, these drop boxes are populated based on the Android SDK Manager - “installed” options.   If your real-world device Android OS is not listed here, simply take the defaults for now.  It is possible to switch these settings back to your real target platform, however, it might be best for you to start your project over again - just for the learning experience.
+
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="paragraph">
+    
+  <p>Next, We Will keep the defaults on the "Configure Launcher Icon" dialog, so click "Next".</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_2.png" alt="ss_project_setup_2">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>Then, make sure that "Blank Activity" is selected on the "Create Activity" dialog, then click "Next".</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_3.png" alt="ss_project_setup_3">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>Lastly, we will keep the defaults on the "New Activity" dialog, so just click "Finish".</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_4.png" alt="ss_project_setup_4">
+</span></p>
+</div>
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_project_setup_part_2">Project Setup - Part 2</h3>
+  
+<div class="paragraph">
+    
+  <p>Now that we have our shell, we need to add a few more files and directories before we can get down to coding.  So hang in there.</p>
+</div>
+<div class="paragraph">
+    
+  <p>First, under the "assets" directory we need to create a new folder called "www".  The easiest way to do this is to "Right-Click" the "assets" directory and select "New Folder".  Then, in the dialog box type "www" and click "Finish".</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_5.png" alt="ss_project_setup_5">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_6.png" alt="ss_project_setup_6">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_7.png" alt="ss_project_setup_7">
+</span></p>
+</div>
+<div class="admonitionblock">
+  <table>
+    <tr>
+      <td class="icon">
+        
+        <div class="title">Tip</div>
+        
+      </td>
+      <td class="content">
+        
+        Think of "www" as the equivalent of "webapp" in a Maven project.
+
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="paragraph">
+    
+  <p>Next, we will need to add the cordova-2.0.0.jar to our libs directory.  This can be done by just dragging &amp; dropping the jar file (hope you didn&#8217;t forget where you downloaded it) into Eclipse/JBDS and when prompted, select copy files and click "Ok".</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_8.png" alt="ss_project_setup_8">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_9.png" alt="ss_project_setup_9">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_10.png" alt="ss_project_setup_10">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>Once the "cordova-2.0.0.jar" is in the "lib" directory, "Right-Click" it and select Build Path &#8594; Add to Build Path.</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_11.png" alt="ss_project_setup_11">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>Next, under "www" add a "js" folder then "libs" folder so we can add the "cordova-2.0.0.js" to libs by dragging &amp; dropping it the same way we did the .jar file.</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_12.png" alt="ss_project_setup_12">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>We also need to bring in the "XML" folder with its config.xml into the "res" directory, also by dragging &amp; dropping the same way we did for the previous to files.</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_13.png" alt="ss_project_setup_13">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_14.png" alt="ss_project_setup_14">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>Now that our folders and libraries and setup, it&#8217;s time to start creating our content.</p>
+</div>
+<div class="paragraph">
+    
+  <p>First we need to create an "index.html".  To do this, right-click the "www" folder, then choose New &#8594; Other</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_15.png" alt="ss_project_setup_15">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>Then, select "HTML File" and click "Next"</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_16.png" alt="ss_project_setup_16">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>Then, name it "index.html" and click "Next"</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_17.png" alt="ss_project_setup_17">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>Finally, select the HTML 5 Template and click "Finish"</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_18.png" alt="ss_project_setup_18">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>Open the new index.html file if isn&#8217;t already open.  We are going to add in a reference to cordova-2.0.0.js into the HEAD section of the HTML.</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>&lt;script type="text/javascript" charset="utf-8" src="js/libs/cordova-2.0.0.js"&gt;&lt;/script&gt;</pre>
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>and a hello message in the BODY</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>&lt;h1&gt;Hello Apache Cordova&lt;/h1&gt;</pre>
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>Your "index.html" file should look similar to this:
+<span class="image">
+  <img src="../img/ss_project_setup_19.png" alt="ss_project_setup_19">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>Next, we need to edit the "MainActivity.java".  We need to change "extends Activity" to be "extends DroidGap"</p>
+</div>
+<div class="paragraph">
+    
+  <p>This will initially give you a ton of red in the editor as DroidGap has not yet been imported.  To import it, click on the red X beside the public class MainActivity line and you will be prompted to import DroidGap.</p>
+</div>
+<div class="paragraph">
+    
+  <p>Then select "Import DroidGap (org.apache.cordova)"</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_21.png" alt="ss_project_setup_21">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>Comment out</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>setContentView(…</pre>
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>and enter the following line:</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>super.loadUrl("file:///android_asset/www/index.html");</pre>
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_23.png" alt="ss_project_setup_23">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>Now we need to edit the "AndroidManifest.xml"</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_24.png" alt="ss_project_setup_24">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>With the file open, we need to insert the following between the "uses-sdk" and "application" tags.</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>&lt;supports-screens
+  android:largeScreens="true"
+  android:normalScreens="true"
+  android:smallScreens="true"
+  android:resizeable="true"
+  android:anyDensity="true" /&gt;</pre>
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>And then the following:</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>&lt;uses-permission android:name="android.permission.VIBRATE" /&gt;
+&lt;uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /&gt;
+&lt;uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /&gt;
+&lt;uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /&gt;
+&lt;uses-permission android:name="android.permission.READ_PHONE_STATE" /&gt;
+&lt;uses-permission android:name="android.permission.INTERNET" /&gt;
+&lt;uses-permission android:name="android.permission.RECEIVE_SMS" /&gt;
+&lt;uses-permission android:name="android.permission.RECORD_AUDIO" /&gt;
+&lt;uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /&gt;
+&lt;uses-permission android:name="android.permission.READ_CONTACTS" /&gt;
+&lt;uses-permission android:name="android.permission.WRITE_CONTACTS" /&gt;
+&lt;uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /&gt;
+&lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /&gt;
+&lt;uses-permission android:name="android.permission.GET_ACCOUNTS" /&gt;
+&lt;uses-permission android:name="android.permission.BROADCAST_STICKY" /&gt;</pre>
+  </div>
+</div>
+<div class="admonitionblock">
+  <table>
+    <tr>
+      <td class="icon">
+        
+        <div class="title">Note</div>
+        
+      </td>
+      <td class="content">
+        
+        Your current “hello world” style application does not yet require any of these permissions but it may eventually.  In a production release, you should remove permissions that are not needed for security purposes.
+
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="paragraph">
+    
+  <p>The result should look like the following screenshot:</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_25.png" alt="ss_project_setup_25">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>Now, locate the &lt;activity&gt; tag and add the following attribute:</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>android:configChanges = "orientation|keyboardHidden"</pre>
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_26.png" alt="ss_project_setup_26">
+</span></p>
+</div>
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_run_configuration_setup">Run Configuration Setup</h3>
+  
+
+<div class="sect3">
+  <h4 id="_now_lets_setup_a_run_configuration">Now lets setup a run configuration.</h4>
+  
+<div class="paragraph">
+    
+  <p>Under the JBDS/Eclipse Run menu, select Run Configurations…</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_27.png" alt="ss_project_setup_27">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>Add a New Configuration for Android Application and name it "AndroidHelloWorld"</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_28.png" alt="ss_project_setup_28">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>Now, select the AndroidHelloWorld project using the Browse button</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_29.png" alt="ss_project_setup_29">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>And on the Target tab, select “Always prompt to pick device”</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_project_setup_30.png" alt="ss_project_setup_30">
+</span></p>
+</div>
+<div class="admonitionblock">
+  <table>
+    <tr>
+      <td class="icon">
+        
+        <div class="title">Tip</div>
+        
+      </td>
+      <td class="content">
+        
+        This setup will make it easier for you to switch back and forth between the Android Emulator (AVDs) and a real device plugged in via USB.
+
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="paragraph">
+    
+  <p>Then select Apply.</p>
+</div>
+<div class="paragraph">
+    
+  <p>You can now close the Run Configurations Dialog</p>
+</div>
+
+  
+</div>
+
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_android_sdk_manager">Android SDK Manager</h3>
+  
+<div class="paragraph">
+    
+  <p>The Android Developer site provides a <a href="http://developer.android.com/sdk/installing/index.html">step-by-step guide</a> to set up your environment.</p>
+</div>
+
+<div class="sect3">
+  <h4 id="_troubleshooting_fedora_red_hat_enterprise_linux">Troubleshooting Fedora/Red Hat Enterprise Linux</h4>
+  
+<div class="paragraph">
+    
+  <p>If you have 64-bit systems, you will need to install some 32bit packages, because Android SDK is 32bit</p>
+</div>
+<div class="paragraph">
+    
+  <p><tt># sudo yum install glibc.i686 glibc-devel.i686 libstdc++.i686 zlib-devel.i686 ncurses-devel.i686 libX11-devel.i686 libXrender.i686 libXrandr.i686</tt></p>
+</div>
+
+  
+</div>
+
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_setup_avd">Setup AVD</h3>
+  
+<div class="paragraph">
+    
+  <p>Once the SDK has been installed, lets head back over to JBDS and create an Android Virtual Device or AVD</p>
+</div>
+<div class="paragraph">
+    
+  <p>"Right-click" on the project and select "Run As &#8594; Android Application"</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_avd_setup_0.png" alt="ss_avd_setup_0">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>The "Android Device Chooser" dialog will appear.  This will allow you to select between any real world devices that are plugged into your laptop/machine OR AVD/emulators.</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/avd.png" alt="avd">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>If this is your first time, then most likely this dialog will be blank.  If you already have and AVD created, then you can skip the setup steps.</p>
+</div>
+<div class="paragraph">
+    
+  <p>Click on New&#8230;</p>
+</div>
+<div class="imageblock">
+  <div class="content">
+    
+    <img src="../img/avd_new.png" alt="New AVD">
+    
+  </div>
+  
+</div>
+<div class="paragraph">
+    
+  <p>And then create the new AVD, giving it a name of your choice. You should have installed an Android 2.x or 4.0 SDK through the SDK manager (as part of the step-by-step guide above).</p>
+</div>
+<div class="paragraph">
+    
+  <p>Once an AVD has been created, you can close the Android SDK Manager and return to Android Device Chooser.  Then, select "Refresh" to see the newly added AVD, make sure "Launch a new Android Virtual Device" is selected, highlight the AVD you wish to launch and select "Ok"</p>
+</div>
+
+<div class="sect3">
+  <h4 id="_launching_the_avd">Launching the AVD</h4>
+  
+<div class="paragraph">
+    
+  <p>The "default" end-user experience is typically displayed in the emulator.  <em>You will need to manually bypass the lock screen.</em></p>
+</div>
+<div class="paragraph">
+    
+  <p>Once the Android OS has fully loaded, it will then run your application.  <em>This takes a while, on a slower computer likely several minutes.</em></p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_avd_setup_1.png" alt="ss_avd_setup_1">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>The Android Developer site has a good tutorial about setting up your "Real Device" here: <a href="http://developer.androidcom/tools/device.html">http://developer.androidcom/tools/device.html</a></p>
+</div>
+<div class="paragraph">
+    
+  <p>Once your device is setup, and you run the Android Device Chooser (Run As Android Application), you should see your actual device listed.  Highlight it and select "OK".</p>
+</div>
+<div class="admonitionblock">
+  <table>
+    <tr>
+      <td class="icon">
+        
+        <div class="title">Tip</div>
+        
+      </td>
+      <td class="content">
+        
+        If you are prompted for something called “LogCat” do say yes.  It is a valuable tool for understanding what might be going wrong/right with your deployment to the real device.
+
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="paragraph">
+    
+  <p>And that’s Hello World</p>
+</div>
+<div class="admonitionblock">
+  <table>
+    <tr>
+      <td class="icon">
+        
+        <div class="title">Note</div>
+        
+      </td>
+      <td class="content">
+        
+        I have seen the run operation fail at times, simply try again.   In one case, the LogCat message indicated that I needed to restart Eclipse just to get things running and after a quick restart (File - Restart) it was back to normal.
+
+      </td>
+    </tr>
+  </table>
+</div>
+
+  
+</div>
+
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_building_an_app">Building An App</h3>
+  
+<div class="paragraph">
+    
+  <p>Now lets make it more interesting by adding some jQuery Mobile functionality.  Right-click on "www" and select "New Other", then select "HTML File".</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_build_0.png" alt="ss_build_0">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>Name it "mobile.html" and select "Next"</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_build_1.png" alt="ss_build_1">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>Select "HTML5 jQuery Mobile Page" and select "Finish"</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_build_2.png" alt="ss_build_2">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>This will be our new "landing" page, but first we need to open MainActivity.java and change the reference to index.html to mobile.html</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>super.loadUrl("file:///android_asset/www/mobile.html");</pre>
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>Once that is complete, Save and Run</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_build_3.png" alt="ss_build_3">
+</span></p>
+</div>
+<div class="admonitionblock">
+  <table>
+    <tr>
+      <td class="icon">
+        
+        <div class="title">Note</div>
+        
+      </td>
+      <td class="content">
+        
+        This file contains references to remotely located jQuery &amp; jQuery Mobile - it is recommended that you bring those files locally into the project for a Phonegap/Apache Cordova style application.
+
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="paragraph">
+    
+  <p>If you want to load the jQuery libraries remotely, you can skip to the next section.</p>
+</div>
+<div class="paragraph">
+    
+  <p>Otherwise, we will need to edit mobile.html by pulling in local copies of jQuery and jQuery Mobile</p>
+</div>
+<div class="paragraph">
+    
+  <p>Download jQuery Mobile from <a href="http://jquerymobile.com/download/">http://jquerymobile.com/download/</a> and unzip</p>
+</div>
+<div class="paragraph">
+    
+  <p>Download the uncompressed/development jQuery <a href="http://jquery.com/download/">http://jquery.com/download/</a></p>
+</div>
+<div class="paragraph">
+    
+  <p>Once downloaded and unzipped, copy both the jQuery and jQuery mobile JavaScript files into the project.  They should be copied to "js/libs".</p>
+</div>
+<div class="admonitionblock">
+  <table>
+    <tr>
+      <td class="icon">
+        
+        <div class="title">Note</div>
+        
+      </td>
+      <td class="content">
+        
+        For a mobile app, you want the majority of your resources, especially static ones bundled in the app.
+
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="paragraph">
+    
+  <p>Then, create a "css" directory underneath "www" and drag &amp; drop the "jquery.mobile-1.1.1.css" and the "images" into "css" as shown in the following screenshot. <em>note: your version of jQuery/jQuery Mobile might be different</em></p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_build_4.png" alt="ss_build_4">
+</span></p>
+</div>
+<div class="admonitionblock">
+  <table>
+    <tr>
+      <td class="icon">
+        
+        <div class="title">Note</div>
+        
+      </td>
+      <td class="content">
+        
+        It is normally recommended to use the .min versions of the JS libs, however, Eclipse often complains about those files as it cannot parse them.  This can even become a bigger problem when Eclipse refuses to let you deploy (Run As) your app.  Plus, these files are being bundled in your app for deployment the device so size is less important.
+
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="paragraph">
+    
+  <p>Now, change the references in the mobile.html file to point to the correct location and the correct file names.</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>&lt;link rel="stylesheet" href="css/jquery.mobile-1.1.1.css" /&gt;
+&lt;script type="text/javascript" src="js/libs/jquery-1.7.1.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="js/libs/jquery.mobile-1.1.1.js"&gt;&lt;/script&gt;</pre>
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>Also, change the alert(“Ready To Go”); to console.log</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>&lt;script type="text/javascript"&gt;
+	$(document).on("pageinit", "#page1", function(event){
+		console.log("Ready To Go");
+	});
+&lt;/script&gt;</pre>
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>And in the LogCat tab you should see the console.log output.</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_build_5.png" alt="ss_build_5">
+</span></p>
+</div>
+<div class="admonitionblock">
+  <table>
+    <tr>
+      <td class="icon">
+        
+        <div class="title">Tip</div>
+        
+      </td>
+      <td class="content">
+        
+        If you receive a “[ERROR] Error initializing Cordova: Class not found” message then it is likely you forgot to add the xml/config.xml directory &amp; file under “res” in the project.
+
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="admonitionblock">
+  <table>
+    <tr>
+      <td class="icon">
+        
+        <div class="title">Note</div>
+        
+      </td>
+      <td class="content">
+        
+        It is much easier to perform your JavaScript debugging via Chrome, Safari or FireFox than it is using console.log and LogCat here but you can at least see that your application attempted to load the JS/HTML files if nothing else works.
+
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="paragraph">
+    
+  <p>Also, make sure the device is awake and not locked, sitting on the home screen before attempting to Run As Android Application – it tends to work more often in that scenario.  In Developer options (on the device), there is an option to Stay awake.</p>
+</div>
+
+<div class="sect3">
+  <h4 id="_geolocation">Geolocation</h4>
+  
+<div class="paragraph">
+    
+  <p>Time to add in some Apache Cordova Magic. First up, we will add in some "Geolocation" (where is the device on the planet).</p>
+</div>
+<div class="paragraph">
+    
+  <p>First, add the reference to cordova.js before the script tag for on(“pageinit”…)</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>&lt;script type="text/javascript" charset="utf-8" src="js/libs/cordova-2.0.0.js"&gt;&lt;/script&gt;</pre>
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>Next, below the $(document).on(“pageinit”…) block add an eventlistener for "deviceready".</p>
+</div>
+<div class="admonitionblock">
+  <table>
+    <tr>
+      <td class="icon">
+        
+        <div class="title">Note</div>
+        
+      </td>
+      <td class="content">
+        
+        You only want your JS to begin running after Phonegap/Apache Cordova have established the environment.
+
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>document.addEventListener("deviceready", onDeviceReady, false);</pre>
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>Then add the "onDeviceReady" function that receives this event.</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>function onDeviceReady() {
+  console.log("Device Ready To Go");
+  console.log("Asking for geo location");
+  navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
+} // onDeviceReady</pre>
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>Notice that the getCurrentPosition() call above has two arguments.</p>
+</div>
+<div class="olist arabic">
+  
+  <ol class="arabic">
+  
+    <li>
+      <p>What function to call when things go well.</p>
+      
+    </li>
+  
+    <li>
+      <p>What function to call when things go poorly.</p>
+      
+    </li>
+  
+  </ol>
+</div>
+<div class="paragraph">
+    
+  <p>We will need to add those two functions into our overall &lt;script&gt; block.</p>
+</div>
+<div class="paragraph">
+    
+  <p>The onGeoSuccess function receives a position object that can be peeled apart and displayed on screen.</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>function onGeoSuccess(position) {
+   var element = document.getElementById('geolocation');
+   element.innerHTML =
+    'Latitude: '  + position.coords.latitude          + '&lt;br /&gt;' +
+    'Longitude: ' + position.coords.longitude         + '&lt;br /&gt;' +
+    'Altitude: '  + position.coords.altitude          + '&lt;br /&gt;' +
+    'Accuracy: '  + position.coords.accuracy          + '&lt;br /&gt;' +
+    'Alt Accuracy: ' + position.coords.altitudeAccuracy + '&lt;br /&gt;' +
+    'Heading: '   + position.coords.heading           + '&lt;br /&gt;' +
+    'Speed: '     + position.coords.speed             + '&lt;br /&gt;' +
+    'Timestamp: ' + position.timestamp                + '&lt;br /&gt;';
+ }</pre>
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>The onGeoError function receives the error message, if there is one.</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>function onGeoError(error) {
+       alert('code: '    + error.code    + '\n' +
+             'message: ' + error.message + '\n');
+}</pre>
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>Finally, add the HTML tag needed to display the results.  This will go in the data-role=”content” section.</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>&lt;div id="geolocation"&gt;Finding geolocation...&lt;/div&gt;&lt;p&gt;</pre>
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>The result:</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_build_7.png" alt="ss_build_7">
+</span></p>
+</div>
+<div class="admonitionblock">
+  <table>
+    <tr>
+      <td class="icon">
+        
+        <div class="title">Note</div>
+        
+      </td>
+      <td class="content">
+        
+        For more information on how Apache Cordova/Phonegap addresses Geolocation check out the API docs at:
+<a href="http://docs.phonegap.com/en/2.0.0/cordova_geolocation_geolocation.md.html#Geolocation">http://docs.phonegap.com/en/2.0.0/cordova_geolocation_geolocation.md.html#Geolocation</a>
+
+      </td>
+    </tr>
+  </table>
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_accelerometer">Accelerometer</h4>
+  
+<div class="paragraph">
+    
+  <p>The next bit of Apache Cordova Magic we will add is access to the "Accelerometer"</p>
+</div>
+<div class="paragraph">
+    
+  <p>Inside the onDeviceReady function, add the block of code that establishes the "watcher" for the device’s accelerometer.</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>var options = {};
+options.frequency = 1000;
+console.log("Hitting Accelerometer");
+var accelerationWatch =
+   navigator.accelerometer.watchAcceleration(
+     updateAccelerationUI, function(ex) {
+       console.log("accel fail (" + ex.name + ": " + ex.message + ")");
+   }, options);</pre>
+  </div>
+</div>
+<div class="admonitionblock">
+  <table>
+    <tr>
+      <td class="icon">
+        
+        <div class="title">Tip</div>
+        
+      </td>
+      <td class="content">
+        
+        The 1000 represents milliseconds, in this case, update my callback function every 1 second.
+
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="paragraph">
+    
+  <p>Next add the function for updateAccelertationUI</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>// called when Accelerometer detects a change
+   function updateAccelerationUI(a) {
+    	document.getElementById('my.x').innerHTML = a.x;
+    	document.getElementById('my.y').innerHTML = a.y;
+    	document.getElementById('my.z').innerHTML = a.z;
+   } // updateAccelerationUI</pre>
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>Now add the HTML elements to display the X, Y and Z in the content section</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>&lt;div&gt;X: &lt;b id="my.x"&gt;&lt;/b&gt; &lt;/div&gt;
+&lt;div&gt;Y: &lt;b id="my.y"&gt;&lt;/b&gt; &lt;/div&gt;
+&lt;div&gt;Z: &lt;b id="my.z"&gt;&lt;/b&gt; &lt;/div&gt;
+&lt;/p&gt;</pre>
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>Your code should now look like the following:</p>
+</div>
+<div class="paragraph">
+    
+  <p>Scripts:</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_accel_0.png" alt="ss_accel_0">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>HTML:</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_accel_1.png" alt="ss_accel_1">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>Finally, Run It</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_accel_2.png" alt="ss_accel_2">
+</span></p>
+</div>
+<div class="admonitionblock">
+  <table>
+    <tr>
+      <td class="icon">
+        
+        <div class="title">Note</div>
+        
+      </td>
+      <td class="content">
+        
+        For more information on how Apache Cordova/Phonegap addresses Accelerometer check out the API docs at:
+<a href="http://docs.phonegap.com/en/2.0.0/cordova_accelerometer_accelerometer.md.html#Accelerometer">http://docs.phonegap.com/en/2.0.0/cordova_accelerometer_accelerometer.md.html#Accelerometer</a>
+
+      </td>
+    </tr>
+  </table>
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_data_amp_rest">Data &amp; REST</h4>
+  
+<div class="paragraph">
+    
+  <p>Apps need data, and a good way to do that on a mobile device is with RESTful calls.</p>
+</div>
+<div class="paragraph">
+    
+  <p>In the on pageinit function add the block of jQuery code to retrieve data from a rest endpoint and load it into the UL called listOfItems.  <em>This UL was part of the original template so it should still be in your HTML body.</em></p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>$.getJSON("http://html5-aerogear.rhcloud.com/rest/members", function(members) {
+    // console.log("returned are " + members);
+    var listOfMembers = $("#listOfItems");
+    listOfMembers.empty();
+    $.each(members, function(index, member) {
+           // console.log(member.name);
+          listOfMembers.append(
+            "&lt;li&gt;&lt;a href='#'&gt;" + member.name + "&lt;/a&gt;");
+    });
+    listOfMembers.listview("refresh");
+});</pre>
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>Since the "getJSON" call is accessing the network, permission needs to be setup in AndroidMainfest.xml. <em>This was done during our Project Setup</em></p>
+</div>
+<div class="paragraph">
+    
+  <p>In addition, you must add the URL to the Apache Cordova whitelist.</p>
+</div>
+<div class="paragraph">
+    
+  <p>The easiest solution is as follows:
+Open res/xml/config.xml</p>
+</div>
+<div class="paragraph">
+    
+  <p>And update access origin to equal ”*”</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_rest_0.png" alt="ss_rest_0">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>Now, Run it.</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/ss_rest_1.png" alt="ss_rest_1">
+</span></p>
+</div>
+<div class="admonitionblock">
+  <table>
+    <tr>
+      <td class="icon">
+        
+        <div class="title">Note</div>
+        
+      </td>
+      <td class="content">
+        
+        This is primarily useful for development.  An app you are deploying to real end-users via the Google Play Store, you will wish to be more specific.
+
+      </td>
+    </tr>
+  </table>
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_extra_credit">Extra Credit</h4>
+  
+<div class="paragraph">
+    
+  <p>And if you wish to be more adventurous, wrap this logic in a check for Wifi vs 3G vs no connection and make a determination as to how to display a message to the end-user.</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>var networkState = navigator.network.connection.type;</pre>
+  </div>
+</div>
+<div class="admonitionblock">
+  <table>
+    <tr>
+      <td class="icon">
+        
+        <div class="title">Note</div>
+        
+      </td>
+      <td class="content">
+        
+        For more information on how Apache Cordova/Phonegap addresses Connectivity check out the API docs at:
+<a href="http://docs.phonegap.com/en/2.0.0/cordova_connection_connection.md.html#Connection">http://docs.phonegap.com/en/2.0.0/cordova_connection_connection.md.html#Connection</a>
+
+      </td>
+    </tr>
+  </table>
+</div>
+
+  
+</div>
+
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_tips_amp_tricks">Tips &amp; Tricks:</h3>
+  
+
+<div class="sect3">
+  <h4 id="_eclipse_complains_about_various_js_libs">Eclipse complains about various JS libs</h4>
+  
+<div class="paragraph">
+    
+  <p>In Some cases the your project won’t let you deploy the application.</p>
+</div>
+<div class="paragraph">
+    
+  <p>Workaround: Rename the libraries by removing their .js extensions</p>
+</div>
+<div class="paragraph">
+    
+  <p>Caution: This may mean that Eclipse will not recognize them as JavaScript files and not provide the correct editor.  Another option is to use the full or non-minified versions of the JavaScript library that you are interested in.  Since these files should be bundled in your Apache Cordova-based app’s distribution, there is no significant network download penalty to downloading the file at runtime.</p>
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_target_android_version">Target Android Version</h4>
+  
+<div class="paragraph">
+    
+  <p>In case you wish to switch the Android version targets for your project go to the project properties and Android.</p>
+</div>
+<div class="paragraph">
+    
+  <p>And also change your AndroidManifest.xml</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>&lt;uses-sdk
+    android:minSdkVersion="8"
+    android:targetSdkVersion="15" /&gt;</pre>
+  </div>
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_rest_endpoints">REST Endpoints</h4>
+  
+<div class="paragraph">
+    
+  <p>To connect to your endpoints, you need to "open" access to the specific Internet domains in res/xml/config.xml</p>
+</div>
+<div class="paragraph">
+    
+  <p>ex:</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>&lt;access origin=".*"/&gt;</pre>
+  </div>
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_change_mainactivity_title_label">Change MainActivity title/label</h4>
+  
+<div class="paragraph">
+    
+  <p>To change the title/label on the installed application, you can edit the "strings.xml" file located in "res/values/".</p>
+</div>
+<div class="paragraph">
+    
+  <p>This will change the application name on the launch icon as well as when multi-tasking.</p>
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_phonegap_api_explorer">Phonegap API Explorer</h4>
+  
+<div class="paragraph">
+    
+  <p>To test your device and Phonegap/Apache Cordova install</p>
+</div>
+<div class="paragraph">
+    
+  <p><a href="https://play.google.com/store/apps/details?id=org.coenraets.phonegapexplorer&amp;hl=en">https://play.google.com/store/apps/details?id=org.coenraets.phonegapexplorer&amp;hl=en</a></p>
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_phonegap_apache_cordova_plugins">Phonegap/Apache Cordova Plugins</h4>
+  
+<div class="paragraph">
+    
+  <p><a href="https://github.com/phonegap/phonegap-plugins">https://github.com/phonegap/phonegap-plugins</a></p>
+</div>
+<div class="paragraph">
+    
+  <p>ChildBrowser is one of the most popular – it allows you to render a webpage, inside of your application</p>
+</div>
+
+  
+</div>
+
+
+  
+</div>
+
+
+  </div>
+  
+</div>
+
+
+
+</div>
+
+            <div class="clearfix"></div>
+      </div>
+      <footer>
+          <div class="wrapper">
+              <div class="column">
+                  <h3>News</h3>
+                  
+                  <p><a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html">AeroGear 1.0.0 is out!</a></p>
+                  
+                  <p><a href="/news/2013/03/04/aerogear-1.0.0.CR1-is-out/index.html">AeroGear 1.0.0.CR1 is out!</a></p>
+                  
+                  <p><a href="/news/2013/01/30/aerogear-1.0.0.M8-is-out/index.html">AeroGear 1.0.0.M8 is out!</a></p>
+                  
+                  <p><a href="/news/2012/12/20/aerogear-1.0.0.M7-is-out/index.html">AeroGear 1.0.0.M7 is out!</a></p>
+                  
+                  <p><a href="/news/2012/10/24/aerogear-1.0.0.M6-is-out/index.html">AeroGear 1.0.0.M6 is out!</a></p>
+                  
+              </div>
+              <div class="column">
+                  <h3>Get help</h3>
+                  <p><a href="/docs">Documentation</a></p>
+                  <p><a href="/examples">Examples</a></p>
+              </div>
+              <div class="column">
+                  <h3>Contribute</h3>
+                  <p><a href="http://github.com/aerogear" target="_blank">Source code</a></p>
+                  <p><a href="http://issues.jboss.org/browse/AEROGEAR" target="_blank">Issue tracker</a></p>
+                  <p><a href="https://lists.jboss.org/mailman/listinfo/aerogear-dev" target="_blank">Mailing list</a></p>
+                  <p><a href="irc://irc.freenode.net/aerogear" target="_blank">IRC channel</a></p>
+              </div>
+              <div class="column responsive">
+                  <h3>Social</h3>
+                  <p><a href="">Twitter</a></p>
+                  <p><a href="">Google Plus</a></p>
+                  <p><a href="">Facebook</a></p>
+              </div>
+              <div class="column">
+                  <h3><a href="http://twitter.com/AeroGears" target="_blank">@AeroGears</a></h3>
+                  <div id="aerogear-twitter">Loading tweets...</div>
+              </div>
+              <div class="logos">
+                  <p>AeroGear is a <a href="http://www.jboss.org/">JBoss Community</a> project<br class="title-break"> and its development is sponsored<br class="title-break"> by <a href="http://www.redhat.com/">Red Hat, Inc</a>.<br class="title-break"><br>Project code is released under <br class="title-break">the <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache License, v2.0</a>.</p>
+                  <p><a href="http://www.jboss.org/"><img src="/img/jboss_community.png" alt="JBoss Community"></a> <a href="http://www.redhat.com/"><img src="/img/red_hat.png" alt="Red Hat"></a></p>
+                  <p>Copyright &copy; 2012, Red Hat, Inc.</p>
+  <div class="clearfix"></div>
+              </div>
+          </div>
+      </footer>
+      <script src="/js/libs/repo-modified.js"></script>
+      <script src="/js/libs/ba-linkify.min.js"></script>
+      <script src="/js/libs/jquery.twitter.min.js"></script>
+      <script src="/js/libs/jquery.smartresize.js"></script>
+      <script src="/js/script.js"></script>
+  </body>
+</html>

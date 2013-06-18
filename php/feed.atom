@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>AeroGear</title>
+ <link href="http://aerogear.org/feed.atom" rel="self"/>
+ <link href="http://aerogear.org/"/>
+ <updated>2013-06-18T11:29:55-03:00</updated>
+ <id>http://aerogear.org/</id>
+ <author>
+   <name>AeroGear Project</name>
+   <email>aerogear-dev@lists.jboss.org</email>
+ </author>
+
+ 
+ <entry>
+   <title>AeroGear 1.0.0 is out!</title>
+   <link href="http://aerogear.org/news/2013/03/28/aerogear-1.0.0-is-out/index.html"/>
+   <updated>2013-03-28T00:00:00-03:00</updated>
+   <id>http://aerogear.org/news/2013/03/28/aerogear-1.0.0-is-out/aerogear-1.0.0-is-out</id>
+   <content type="html">&lt;p&gt;We’re happy to announce the immediate availability of &lt;strong&gt;AeroGear 1.0.0&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/news/potomac_consolidated_tracon.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;A huge thank you to the AeroGear team and the open source community!&lt;/p&gt;
+
+&lt;h2 id=&quot;recap&quot;&gt;Recap&lt;/h2&gt;
+
+&lt;p&gt;For quite a while, we have been busy in implementing our ideas for a 1.0.0 release. As you know, the library offers three overall components&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Mobile Client SDKs (for Android, JavaScript and iOS)&lt;/li&gt;
+  &lt;li&gt;Server Side Framework (the Controller)&lt;/li&gt;
+  &lt;li&gt;Security accross all the layers (server and client)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;highlights&quot;&gt;Highlights&lt;/h2&gt;
+
+&lt;h3 id=&quot;android&quot;&gt;Android&lt;/h3&gt;
+
+&lt;p&gt;AeroGear for Android is available for versions 2.3.3 and greater.  In addition to the base AeroGear functionality we have provided utilities to integrate with the Android Activity lifecycle.  This allows your applications to be more stable, require less memory, and run faster.  We have also put together many guides on getting started, written tutorials covering simple and advanced use cases, gathered several sample applications, and much much more all covered in our &lt;a href=&quot;/android&quot;&gt;Android section&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;ios&quot;&gt;iOS&lt;/h3&gt;
+
+&lt;p&gt;Besides two iOS libraries, we also deliver a Xcode Template for an easy development experience! For more details on this release, checkout this &lt;a href=&quot;http://matthiaswessendorf.wordpress.com/2013/03/28/aerogear-ios-1-0-0/&quot;&gt;blog post&lt;/a&gt;!&lt;/p&gt;
+
+&lt;h3 id=&quot;javascript&quot;&gt;JavaScript&lt;/h3&gt;
+
+&lt;p&gt;The JavaScript library provides pluggable, easy to use APIs for authentication, data management and persistence. Check out this &lt;a href=&quot;http://blog.krisborchers.com/2013/03/28/aerogear-js-1-0-0-has-landed/&quot;&gt;blog post&lt;/a&gt; for details.&lt;/p&gt;
+
+&lt;h3 id=&quot;controller&quot;&gt;Controller&lt;/h3&gt;
+&lt;p&gt;The AeroGear Controller provides you with a server-side lightweight mvc controller. Check out this &lt;a href=&quot;http://dbevenius.org/&quot;&gt;blog post&lt;/a&gt; for details.&lt;/p&gt;
+
+&lt;h3 id=&quot;security&quot;&gt;Security&lt;/h3&gt;
+
+&lt;p&gt;On AeroGear we’ve been working towards security provider integration and mitigating risks on mobile web (as you know, security is hard). During this release we spent some time improving AeroGear OTP, AeroGear Security and mitigating risks. A quick overview can be seen &lt;a href=&quot;/docs/guides/aerogear-security/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;release-notes---aerogear---version-100&quot;&gt;Release Notes - AeroGear - Version 1.0.0&lt;/h2&gt;
+
+&lt;h3 id=&quot;bug&quot;&gt;Bug&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-451&quot;&gt;AEROGEAR-451&lt;/a&gt;] - Learn more links need to link some where &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-558&quot;&gt;AEROGEAR-558&lt;/a&gt;] - after update the entity Project todo-server retrieve outdated information &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-920&quot;&gt;AEROGEAR-920&lt;/a&gt;] - Hosted AG Quickstart not displayed on &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-999&quot;&gt;AEROGEAR-999&lt;/a&gt;] - aerogear.org site empty placeholders on images in the guides &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1005&quot;&gt;AEROGEAR-1005&lt;/a&gt;] - Aerogear-Controller-Demo The login procedure for registered users does not work properly after deleting the admin user &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1017&quot;&gt;AEROGEAR-1017&lt;/a&gt;] - Logout does not work for show.jsp and remove.jsp &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1023&quot;&gt;AEROGEAR-1023&lt;/a&gt;] - Fix quickstart license and white space issues exposed by qstool report &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1033&quot;&gt;AEROGEAR-1033&lt;/a&gt;] - Cars table is no longer populated. &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1041&quot;&gt;AEROGEAR-1041&lt;/a&gt;] - Quickstarts HTML5 Server unable to service requests &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1052&quot;&gt;AEROGEAR-1052&lt;/a&gt;] - TODO app will raise exceptions during the startup &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;enhancement&quot;&gt;Enhancement&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-580&quot;&gt;AEROGEAR-580&lt;/a&gt;] - Upgrade Cordova to latest &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-609&quot;&gt;AEROGEAR-609&lt;/a&gt;] - Update Cordova Setup Guide &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1032&quot;&gt;AEROGEAR-1032&lt;/a&gt;] - Update Controller User Guide &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;epic&quot;&gt;Epic&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1056&quot;&gt;AEROGEAR-1056&lt;/a&gt;] - There are a round of final updates needed before we launch 1.0.0 &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;feature-request&quot;&gt;Feature Request&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-545&quot;&gt;AEROGEAR-545&lt;/a&gt;] - Update FAQ to include “clickable” snippets of code for the platforms we support &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-632&quot;&gt;AEROGEAR-632&lt;/a&gt;] - iOS: Xcode project template for AeroGear-iOS &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-873&quot;&gt;AEROGEAR-873&lt;/a&gt;] - Refactor RestAdapterConstructor &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-889&quot;&gt;AEROGEAR-889&lt;/a&gt;] - Add a link to the full download zip below the build button &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-894&quot;&gt;AEROGEAR-894&lt;/a&gt;] - RestAdapter has undocumented interactions with UI thread &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-896&quot;&gt;AEROGEAR-896&lt;/a&gt;] - Document how RestAdapter behaves in relation to the Android Activity lifecycle &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-923&quot;&gt;AEROGEAR-923&lt;/a&gt;] - Move Aerogear.js dist to it’s own repo &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-952&quot;&gt;AEROGEAR-952&lt;/a&gt;] - Android: SqlStoreTest is broken &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-957&quot;&gt;AEROGEAR-957&lt;/a&gt;] - JS: doc: cleanup, example writing and completeness &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-959&quot;&gt;AEROGEAR-959&lt;/a&gt;] - android: Eclipse guide outdated &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-962&quot;&gt;AEROGEAR-962&lt;/a&gt;] - Killed activity doesn’t callback to the user &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-964&quot;&gt;AEROGEAR-964&lt;/a&gt;] - Create a listing of conferences and CFP &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-982&quot;&gt;AEROGEAR-982&lt;/a&gt;] - Use +tearDown to reset AGMockURLProtocol parameters &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-983&quot;&gt;AEROGEAR-983&lt;/a&gt;] - Enhance TODO app to use “cancel” when it goes in background/terminates &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-984&quot;&gt;AEROGEAR-984&lt;/a&gt;] - Android: TODO-App not working &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-986&quot;&gt;AEROGEAR-986&lt;/a&gt;] - Update aerogear-ios API.md file with usage examples &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-987&quot;&gt;AEROGEAR-987&lt;/a&gt;] - AeroGear controller demo will throw NPE on OTP workflow &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-993&quot;&gt;AEROGEAR-993&lt;/a&gt;] - add a buildScript.sh to automate otp-ios library and doc building &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-998&quot;&gt;AEROGEAR-998&lt;/a&gt;] - Multiple args on routes return HTTP 404 &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1007&quot;&gt;AEROGEAR-1007&lt;/a&gt;] - Create a iOS page that describes the wealth of options available &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1009&quot;&gt;AEROGEAR-1009&lt;/a&gt;] - OTP images are badly broken on aerogear.org &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1020&quot;&gt;AEROGEAR-1020&lt;/a&gt;] - create a new repo ‘aerogear-ios-xcode-template’ &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1021&quot;&gt;AEROGEAR-1021&lt;/a&gt;] - Fix asciidoc warnings &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1025&quot;&gt;AEROGEAR-1025&lt;/a&gt;] - AeroGear Security will fail when deployed in non JBoss environments &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1045&quot;&gt;AEROGEAR-1045&lt;/a&gt;] - Inclusion of our AG versioning policy into aerogear.org &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1049&quot;&gt;AEROGEAR-1049&lt;/a&gt;] - PageResultExtractor and PageConfig.setPageHeaderParser are poorly named &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1065&quot;&gt;AEROGEAR-1065&lt;/a&gt;] - Investigate why our OpenShift instances are always down &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;task&quot;&gt;Task&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-597&quot;&gt;AEROGEAR-597&lt;/a&gt;] - ios: improve API doc &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-725&quot;&gt;AEROGEAR-725&lt;/a&gt;] - ios: filter and query: evaluate usage of NSPredicate &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-754&quot;&gt;AEROGEAR-754&lt;/a&gt;] - Homepage: download site update &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-790&quot;&gt;AEROGEAR-790&lt;/a&gt;] - Site / Documentation Review &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-811&quot;&gt;AEROGEAR-811&lt;/a&gt;] - Move aerogearjsbuilder to AeroGear account &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-891&quot;&gt;AEROGEAR-891&lt;/a&gt;] - switch asciidoc rendering to use asciidoctor &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-992&quot;&gt;AEROGEAR-992&lt;/a&gt;] - Update Hosted kitchensinks to latest version &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-994&quot;&gt;AEROGEAR-994&lt;/a&gt;] - Custom JS builder Loading Indicator &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1003&quot;&gt;AEROGEAR-1003&lt;/a&gt;] - Update Browser Targets Page &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1008&quot;&gt;AEROGEAR-1008&lt;/a&gt;] - Review Controller docs &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1013&quot;&gt;AEROGEAR-1013&lt;/a&gt;] - Rename LoggerMessages to ExceptionBundle &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1014&quot;&gt;AEROGEAR-1014&lt;/a&gt;] - Minor code clean up &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1022&quot;&gt;AEROGEAR-1022&lt;/a&gt;] - Add a Getting started guide for iOS using the template &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1024&quot;&gt;AEROGEAR-1024&lt;/a&gt;] - Deploy new version of aergoear-controller-demo to openshift &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1028&quot;&gt;AEROGEAR-1028&lt;/a&gt;] - Move beans.xml to WEB-INF &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1029&quot;&gt;AEROGEAR-1029&lt;/a&gt;] - If no routes are defined AeroGear Controller should fail upon deployment &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1053&quot;&gt;AEROGEAR-1053&lt;/a&gt;] - Update Controller version to 1.0.0 &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1055&quot;&gt;AEROGEAR-1055&lt;/a&gt;] - Update docs to remove old quickstart/archetype repo info &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;sub-task&quot;&gt;Sub-task&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-745&quot;&gt;AEROGEAR-745&lt;/a&gt;] - Add Learn More link to Home Page and create some sort of article so people can “Learn More” about each lib &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-747&quot;&gt;AEROGEAR-747&lt;/a&gt;] - Add Learn More link to Home Page and create some sort of article so people can “Learn More” about each lib &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-748&quot;&gt;AEROGEAR-748&lt;/a&gt;] - Add Learn More link to Home Page and create some sort of article so people can “Learn More” about each lib &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-749&quot;&gt;AEROGEAR-749&lt;/a&gt;] - Add Learn More link to Home Page and create some sort of article so people can “Learn More” about each lib &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-761&quot;&gt;AEROGEAR-761&lt;/a&gt;] - ios: otp: improve AppleDoc API doc &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-791&quot;&gt;AEROGEAR-791&lt;/a&gt;] - Getting Started Guide Revamp &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-906&quot;&gt;AEROGEAR-906&lt;/a&gt;] - Update the quickstart pom files to match changes made in the jboss-jdf repository &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-913&quot;&gt;AEROGEAR-913&lt;/a&gt;] - Fix Up Quickstarts and Archetypes &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-914&quot;&gt;AEROGEAR-914&lt;/a&gt;] - Remove Aerogear Refs &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-915&quot;&gt;AEROGEAR-915&lt;/a&gt;] - Sync with JDF on the Move &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1010&quot;&gt;AEROGEAR-1010&lt;/a&gt;] - Review AeroGear Controller docs &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1011&quot;&gt;AEROGEAR-1011&lt;/a&gt;] - Review AeroGear Controller Demo docs &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1012&quot;&gt;AEROGEAR-1012&lt;/a&gt;] - Review Controller docs on site &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1048&quot;&gt;AEROGEAR-1048&lt;/a&gt;] - Make old aerogear quickstart and archetype repo private &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1057&quot;&gt;AEROGEAR-1057&lt;/a&gt;] - Create Value Add Statement for home page &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1058&quot;&gt;AEROGEAR-1058&lt;/a&gt;] - Wording for controller and security call out in bottom section of home page &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1059&quot;&gt;AEROGEAR-1059&lt;/a&gt;] - Update/Add Content to library specific landing page &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1060&quot;&gt;AEROGEAR-1060&lt;/a&gt;] - Update/Add Content to library specific landing page &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-1061&quot;&gt;AEROGEAR-1061&lt;/a&gt;] - Update/Add Content to library specific landing page&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>AeroGear 1.0.0.CR1 is out!</title>
+   <link href="http://aerogear.org/news/2013/03/04/aerogear-1.0.0.CR1-is-out/index.html"/>
+   <updated>2013-03-04T00:00:00-03:00</updated>
+   <id>http://aerogear.org/news/2013/03/04/aerogear-1.0.0.CR1-is-out/aerogear-1.0.0.CR1-is-out</id>
+   <content type="html">&lt;p&gt;We’re happy to announce the immediate availability of AeroGear 1.0.0.CR1, our first &lt;strong&gt;Candidate Release&lt;/strong&gt;!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/news/7239093056_39850518d4_z.jpg&quot; alt=&quot;gears http://www.flickr.com/photos/heartlover1717/7239093056/sizes/z/in/photostream/&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This release is all about stabilization towards our final release, which is at hand!&lt;/p&gt;
+
+&lt;p&gt;A huge thank you to the AeroGear team and the open source community!&lt;/p&gt;
+
+&lt;h2 id=&quot;new-features&quot;&gt;New features&lt;/h2&gt;
+
+&lt;p&gt;Besides the major focus on cleaning out APIs, we also added a few new features like:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;AeroGear Store’s filter method got implemented to query a subset of the stored data&lt;/li&gt;
+  &lt;li&gt;AeroGear Pipe: &lt;code&gt;cancel&lt;/code&gt; method to terminate (running) requests e.g. in case of Application shutdown.&lt;/li&gt;
+  &lt;li&gt;AeroGear Pipe: &lt;code&gt;timeout&lt;/code&gt; configuration parameter.&lt;/li&gt;
+  &lt;li&gt;AeroGear Controller was improved with support to custom headers, media types, pagination and friends.&lt;/li&gt;
+  &lt;li&gt;AeroGear.js: Removing Unneeded Utility Method.&lt;/li&gt;
+  &lt;li&gt;AeroGear security was updated with the PicketLink Alpha release (yes, we live on the edge!). &lt;/li&gt;
+  &lt;li&gt;HSTS (&lt;em&gt;HTTP Strict Transport Security&lt;/em&gt;) based on &lt;a href=&quot;http://tools.ietf.org/html/rfc6797&quot;&gt;RFC 6797&lt;/a&gt; was fully implemented as an additional security policy mechanism.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/aerogear/aerogear-controller-demo&quot;&gt;AeroGear controller demo&lt;/a&gt; and our &lt;a href=&quot;https://github.com/aerogear/TODO&quot;&gt;TODO app&lt;/a&gt; were updated with the latest bits from AG Controller and Security. &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;new-team-member&quot;&gt;New Team Member&lt;/h3&gt;
+
+&lt;p&gt;The AeroGear team is growing! Let’s give a warm welcome to &lt;a href=&quot;https://twitter.com/passos&quot;&gt;Daniel Passos&lt;/a&gt;, that joined our team today!&lt;/p&gt;
+
+&lt;h2 id=&quot;release-notes&quot;&gt;Release notes:&lt;/h2&gt;
+
+&lt;h3 id=&quot;bug&quot;&gt;Bug&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-892&quot;&gt;AEROGEAR-892&lt;/a&gt;] - CORS: Valid Request Headers should not be case sensitive. &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-893&quot;&gt;AEROGEAR-893&lt;/a&gt;] - JS paging Bug, with WebLink option &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-907&quot;&gt;AEROGEAR-907&lt;/a&gt;] - Controller demo deployment error &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-917&quot;&gt;AEROGEAR-917&lt;/a&gt;] - textStatus and jqXHR parameters are missing in the save and remove success cb &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-919&quot;&gt;AEROGEAR-919&lt;/a&gt;] - When using SessionLocal store.save() returns a undefined object &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-927&quot;&gt;AEROGEAR-927&lt;/a&gt;] - Cleanup tearDown by removing the AGMockURLProtocol reset methods. &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-928&quot;&gt;AEROGEAR-928&lt;/a&gt;] - IOS 5 test fails on testReadWithTimeout &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-934&quot;&gt;AEROGEAR-934&lt;/a&gt;] - OTP qrcode shows hashed value in Google Authenticator instead of username &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-937&quot;&gt;AEROGEAR-937&lt;/a&gt;] - Produces ordering is not honoured for routes &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-950&quot;&gt;AEROGEAR-950&lt;/a&gt;] - Timer not invalidated after succ/fail callbacks &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-954&quot;&gt;AEROGEAR-954&lt;/a&gt;] - add timeout configuration parameter in authenticator &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-955&quot;&gt;AEROGEAR-955&lt;/a&gt;] - add “cancel” to AGAuthenticationModule &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-958&quot;&gt;AEROGEAR-958&lt;/a&gt;] - OTP QRCode link returns 404 &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-960&quot;&gt;AEROGEAR-960&lt;/a&gt;] - cancelAllOperation fails with variable paths &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-961&quot;&gt;AEROGEAR-961&lt;/a&gt;] - override cancel to invalidate timer &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;feature-request&quot;&gt;Feature Request&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-617&quot;&gt;AEROGEAR-617&lt;/a&gt;] - Decouple ag security from controller to have things a la carte &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-697&quot;&gt;AEROGEAR-697&lt;/a&gt;] - Add aerogear-controller support on TODO app &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-875&quot;&gt;AEROGEAR-875&lt;/a&gt;] - iOS: Pipe timeout config param &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-897&quot;&gt;AEROGEAR-897&lt;/a&gt;] - Create aerogear-security-picketlink repository on github &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-898&quot;&gt;AEROGEAR-898&lt;/a&gt;] - Adding “cancel” to AGPipe &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-901&quot;&gt;AEROGEAR-901&lt;/a&gt;] - Add “cancel” to Pipeline &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-902&quot;&gt;AEROGEAR-902&lt;/a&gt;] - Publish TODO app in the Apple App Store &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-908&quot;&gt;AEROGEAR-908&lt;/a&gt;] - OTP iOS demo causes NPE on the server side &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-909&quot;&gt;AEROGEAR-909&lt;/a&gt;] - Change Aerogear-OTP-ios-demo to use JSON backend &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-918&quot;&gt;AEROGEAR-918&lt;/a&gt;] - ios: AGStore remove callbacks &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-921&quot;&gt;AEROGEAR-921&lt;/a&gt;] - DRY out aerogear.js Auth adapter &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-922&quot;&gt;AEROGEAR-922&lt;/a&gt;] - Use JSON.stringify for enroll/login &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-930&quot;&gt;AEROGEAR-930&lt;/a&gt;] - Upgrade TODO app to the latest stable release of PicketLink &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-931&quot;&gt;AEROGEAR-931&lt;/a&gt;] - POST/PUT request timeout interval ignored on iOS 5.x &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-938&quot;&gt;AEROGEAR-938&lt;/a&gt;] - ios: AGStore API &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-940&quot;&gt;AEROGEAR-940&lt;/a&gt;] - Add HSTS support on AeroGear Security &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-941&quot;&gt;AEROGEAR-941&lt;/a&gt;] - Demonstrate how to properly configure HTTP Basic authentication support on AG Controller demo &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-942&quot;&gt;AEROGEAR-942&lt;/a&gt;] - Demonstrate how to properly configure HTTP Digest authentication support on AG Controller demo &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-943&quot;&gt;AEROGEAR-943&lt;/a&gt;] - Add full support of AG Security on TODO app &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-944&quot;&gt;AEROGEAR-944&lt;/a&gt;] - Test Login/Logout/Enroll operations with timeout and cancel &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-951&quot;&gt;AEROGEAR-951&lt;/a&gt;] - Android: incomplete documentation on the README.md file &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-953&quot;&gt;AEROGEAR-953&lt;/a&gt;] - AeroGear Controller must handle HTTP status responses from AG Security &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-965&quot;&gt;AEROGEAR-965&lt;/a&gt;] - Release AeroGear Controller &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-966&quot;&gt;AEROGEAR-966&lt;/a&gt;] - Release AeroGear Security with PicketLink Alpha &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-976&quot;&gt;AEROGEAR-976&lt;/a&gt;] - Inclusion of HSTS support &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;task&quot;&gt;Task&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-537&quot;&gt;AEROGEAR-537&lt;/a&gt;] - TODO app should make use of aerogear-controller &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-760&quot;&gt;AEROGEAR-760&lt;/a&gt;] - Create a requirements/use-case document for AeroGear/Forge plugin integration &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-778&quot;&gt;AEROGEAR-778&lt;/a&gt;] - Simplify Routing tests &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-856&quot;&gt;AEROGEAR-856&lt;/a&gt;] - Investigate using CDI for implementing Pagination support &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-858&quot;&gt;AEROGEAR-858&lt;/a&gt;] - Remove auth dependency from pipeline, if possible - JS &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-863&quot;&gt;AEROGEAR-863&lt;/a&gt;] - Make PagingStrategy pluggable &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-884&quot;&gt;AEROGEAR-884&lt;/a&gt;] - CorsConfig exposeHeaders and validRequestHeaders should take String varags &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-899&quot;&gt;AEROGEAR-899&lt;/a&gt;] - Update Controllers README.md &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-900&quot;&gt;AEROGEAR-900&lt;/a&gt;] - Create User Guide for Controller &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-905&quot;&gt;AEROGEAR-905&lt;/a&gt;] - Update Controller Demo README &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-910&quot;&gt;AEROGEAR-910&lt;/a&gt;] - Update Controller Demo after Pagination Refactoring &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-911&quot;&gt;AEROGEAR-911&lt;/a&gt;] - Document how to cancel a request (read, save, remove) on Pipeline &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-916&quot;&gt;AEROGEAR-916&lt;/a&gt;] - Remove need for AeroGear.ajax &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-925&quot;&gt;AEROGEAR-925&lt;/a&gt;] - Document proper callback usage for handling storage errors in SessionLocal DataManager adapter &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-926&quot;&gt;AEROGEAR-926&lt;/a&gt;] - Ensure TODO app and any other app/quickstart still works with latest changes to AeroGear.js &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-929&quot;&gt;AEROGEAR-929&lt;/a&gt;] - Update TODO app to use M8 &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-935&quot;&gt;AEROGEAR-935&lt;/a&gt;] - Controller Demo should have Error Route for UnexpectedCredentialException &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-936&quot;&gt;AEROGEAR-936&lt;/a&gt;] - Controller demo auth routes should support JSON &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-945&quot;&gt;AEROGEAR-945&lt;/a&gt;] - Update Controller JavaDocs and version on site. &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-947&quot;&gt;AEROGEAR-947&lt;/a&gt;] - Remove utilities references from Gruntfile.js &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-948&quot;&gt;AEROGEAR-948&lt;/a&gt;] - Default Error Route only supports “text/html” &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-949&quot;&gt;AEROGEAR-949&lt;/a&gt;] - Refactor AbstractRestResponder and Responder interface interact better with CDI &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-956&quot;&gt;AEROGEAR-956&lt;/a&gt;] - Update CustomMediaTypeResponder to reflect changes in Controller &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-977&quot;&gt;AEROGEAR-977&lt;/a&gt;] - Refactor hasRoles to return true if the users has any of the roles, not just all of the roles. &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-978&quot;&gt;AEROGEAR-978&lt;/a&gt;] - Update AG-Controller version on site &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-985&quot;&gt;AEROGEAR-985&lt;/a&gt;] - TODO App: turn off hibernate logging. &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;sub-task&quot;&gt;Sub-task&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-825&quot;&gt;AEROGEAR-825&lt;/a&gt;] - iOS: timeout for pipe &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-827&quot;&gt;AEROGEAR-827&lt;/a&gt;] - JS: timeout for pipe &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-924&quot;&gt;AEROGEAR-924&lt;/a&gt;] - Create repo for AeroGear.js built files&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>AeroGear 1.0.0.M8 is out!</title>
+   <link href="http://aerogear.org/news/2013/01/30/aerogear-1.0.0.M8-is-out/index.html"/>
+   <updated>2013-01-30T00:00:00-02:00</updated>
+   <id>http://aerogear.org/news/2013/01/30/aerogear-1.0.0.M8-is-out/aerogear-1.0.0.M8-is-out</id>
+   <content type="html">&lt;p&gt;We’re happy to announce the immediate availability of AeroGear 1.0.0.M8 (new year’s release), packed with good stuff!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/news/2588347668_a1006846fa.jpg&quot; alt=&quot;gears http://www.flickr.com/photos/17258892@N05/2588347668/in/photostream/&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;highlights&quot;&gt;Highlights&lt;/h2&gt;
+
+&lt;p&gt;Definitely, this release’s limelight is on the pagination support across &lt;strong&gt;all&lt;/strong&gt; client library platforms &lt;a href=&quot;http://blog.sagaoftherealms.net/?p=278&quot;&gt;Android&lt;/a&gt;, &lt;a href=&quot;http://cvasilak.blogspot.com/2013/01/aerogear-ios-lib-milestone-3.html&quot;&gt;iOS&lt;/a&gt;, &lt;a href=&quot;http://blog.krisborchers.com/2013/01/30/the-next-page-in-the-story-of-aerogear/&quot;&gt;JavaScript&lt;/a&gt; and at &lt;a href=&quot;http://dbevenius.org/&quot;&gt;aerogear-controller&lt;/a&gt;, our Java server-side lightweight mvc controller.&lt;/p&gt;
+
+&lt;p&gt;You can read more about the API &lt;a href=&quot;/docs/specs/aerogear-client-paging-usage/&quot;&gt;side-by-side usage comparison&lt;/a&gt;, or look at the &lt;a href=&quot;/docs/specs/aerogear-client-paging/&quot;&gt;specification&lt;/a&gt; we’ve put together.&lt;/p&gt;
+
+&lt;p&gt;A huge thank you to the AeroGear team and the open source community!&lt;/p&gt;
+
+&lt;h2 id=&quot;release-notes&quot;&gt;Release notes:&lt;/h2&gt;
+
+&lt;h3 id=&quot;bug&quot;&gt;Bug&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-726&quot;&gt;AEROGEAR-726&lt;/a&gt;] -         Calling removeUser(user) on a IdentityManager instance removes all the users&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-729&quot;&gt;AEROGEAR-729&lt;/a&gt;] -         PicketBoxLoadUsers should use unitName to reference its persistence unit.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-730&quot;&gt;AEROGEAR-730&lt;/a&gt;] -         PicketBoxLoadUsers deployment error&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-732&quot;&gt;AEROGEAR-732&lt;/a&gt;] -         GET requests to static files (CSS for instance) are handled by the Route.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-776&quot;&gt;AEROGEAR-776&lt;/a&gt;] -         Link to documentation is obsolete in the rendered application page for kitchensink-html5-mobile example&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-793&quot;&gt;AEROGEAR-793&lt;/a&gt;] -         Exception message isn't set by default on HttpException&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-800&quot;&gt;AEROGEAR-800&lt;/a&gt;] -         Modify comment in arquillian.xml file for kitchensink-html5-mobile quickstart&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-820&quot;&gt;AEROGEAR-820&lt;/a&gt;] -         The kitchensink-html5-mobile quickstart pom.xml file does not define the property 'version.org.jboss.as'&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-845&quot;&gt;AEROGEAR-845&lt;/a&gt;] -         Need to update quickstarts to use &amp;lt;version.org.jboss.bom&amp;gt;1.0.4.CR7&amp;lt;/version.org.jboss.bom&amp;gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-874&quot;&gt;AEROGEAR-874&lt;/a&gt;] -         AeroGear Controller: Registering a user throws NPE&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;enhancement&quot;&gt;Enhancement&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-482&quot;&gt;AEROGEAR-482&lt;/a&gt;] -         Add other servers to AeroGear splash image&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-693&quot;&gt;AEROGEAR-693&lt;/a&gt;] -         Add HTML view resolver in AeroGear Controller component&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-696&quot;&gt;AEROGEAR-696&lt;/a&gt;] -         Add RESTFul endpoint for /cars in controller-demo&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-773&quot;&gt;AEROGEAR-773&lt;/a&gt;] -         Possible move of isArray to aerogear.core.js&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;epic&quot;&gt;Epic&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-785&quot;&gt;AEROGEAR-785&lt;/a&gt;] -         Add pagination support on iOS library&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-847&quot;&gt;AEROGEAR-847&lt;/a&gt;] -         1.0.0.M8 Release&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;feature-request&quot;&gt;Feature Request&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-492&quot;&gt;AEROGEAR-492&lt;/a&gt;] -         Aerogear.js custom build UI&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-535&quot;&gt;AEROGEAR-535&lt;/a&gt;] -         Add doc generation to grunt build&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-611&quot;&gt;AEROGEAR-611&lt;/a&gt;] -         Download &amp;amp; Install JBoss Developer Studio. Download Here&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-671&quot;&gt;AEROGEAR-671&lt;/a&gt;] -         Add support for Request Params&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-699&quot;&gt;AEROGEAR-699&lt;/a&gt;] -         Add support for a consumes method to Routes&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-714&quot;&gt;AEROGEAR-714&lt;/a&gt;] -         Sanitize all user-supplied data before using it as part of dynamically generated pages and data&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-715&quot;&gt;AEROGEAR-715&lt;/a&gt;] -         Malicious attackers can easily bypass the login page using XSS&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-717&quot;&gt;AEROGEAR-717&lt;/a&gt;] -         Enforce the &amp;quot;HTTPOnly&amp;quot; flag, if If the application doesn't need to access the cookie&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-718&quot;&gt;AEROGEAR-718&lt;/a&gt;] -         Disable the autocomplete feature on forms which may hold sensitive data&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-763&quot;&gt;AEROGEAR-763&lt;/a&gt;] -         ios: API Overhaul for CR1 release&lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-768&quot;&gt;AEROGEAR-768&lt;/a&gt;] -         JS: possible script injection on the todo app&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-777&quot;&gt;AEROGEAR-777&lt;/a&gt;] -         ReadFilter uses org.json.JSONObject instead of com.google.gson.JsonObject&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-782&quot;&gt;AEROGEAR-782&lt;/a&gt;] -         Upgrade AG-Sec PicketBox to the version 5.0.0-2013Jan04&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-783&quot;&gt;AEROGEAR-783&lt;/a&gt;] -         AGPropertyListStorage implementation for AGStore&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-784&quot;&gt;AEROGEAR-784&lt;/a&gt;] -         Update TODO and OTP demos to use the updated APIs&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-788&quot;&gt;AEROGEAR-788&lt;/a&gt;] -         Update aerogear-ios-integration to use the updated APIs&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-792&quot;&gt;AEROGEAR-792&lt;/a&gt;] -         JS Licensing&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-855&quot;&gt;AEROGEAR-855&lt;/a&gt;] -         ios: read:id is broken&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-868&quot;&gt;AEROGEAR-868&lt;/a&gt;] -         transformQueryString fails with exception&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-869&quot;&gt;AEROGEAR-869&lt;/a&gt;] -         Totp.now() throws NullPointerException using Clock with custom interval&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-871&quot;&gt;AEROGEAR-871&lt;/a&gt;] -         site: ios: Update links to M3 tarball, once it is there&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;task&quot;&gt;Task&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-411&quot;&gt;AEROGEAR-411&lt;/a&gt;] -         Routes should allow page redirection on error or login forbidden&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-515&quot;&gt;AEROGEAR-515&lt;/a&gt;] -         Default Error Handling should support JSON response&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-630&quot;&gt;AEROGEAR-630&lt;/a&gt;] -         [Android] PipeConfig Ergonomics&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-645&quot;&gt;AEROGEAR-645&lt;/a&gt;] -         Add Paging support on RESTful endpoints&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-654&quot;&gt;AEROGEAR-654&lt;/a&gt;] -         Document CORS Support&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-657&quot;&gt;AEROGEAR-657&lt;/a&gt;] -         Create a admin page for user registration&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-659&quot;&gt;AEROGEAR-659&lt;/a&gt;] -         OTP authentication will fail after logout event&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-665&quot;&gt;AEROGEAR-665&lt;/a&gt;] -         Images look a bit small after image scaling on aerogear.org&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-679&quot;&gt;AEROGEAR-679&lt;/a&gt;] -         Create a simple JS to demonstrate CORS functionality&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-705&quot;&gt;AEROGEAR-705&lt;/a&gt;] -         AeroGearLogger routeCatchAllException should be annotated with @Cause&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-769&quot;&gt;AEROGEAR-769&lt;/a&gt;] -         Bump version to 1.0.0.CR1-date-SNAPSHOT&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-774&quot;&gt;AEROGEAR-774&lt;/a&gt;] -         Update copyright year in all license files for all libs, demos, quickstarts, etc.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-780&quot;&gt;AEROGEAR-780&lt;/a&gt;] -         Add consumes example to AeroGear Controller demo&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-781&quot;&gt;AEROGEAR-781&lt;/a&gt;] -         Add example of Error Route producing JSON&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-794&quot;&gt;AEROGEAR-794&lt;/a&gt;] -         Pagination support&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-808&quot;&gt;AEROGEAR-808&lt;/a&gt;] -         TODO app fix TokenServletFilterTest failures&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-809&quot;&gt;AEROGEAR-809&lt;/a&gt;] -         TODO App: /auth/register should be changed to /auth/enroll&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-810&quot;&gt;AEROGEAR-810&lt;/a&gt;] -         Style Sheet Cleanup&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-816&quot;&gt;AEROGEAR-816&lt;/a&gt;] -         TODO App: Fix user registration&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-817&quot;&gt;AEROGEAR-817&lt;/a&gt;] -         Add html view resolver example to controller-demo&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-818&quot;&gt;AEROGEAR-818&lt;/a&gt;] -         JS Builder needs license in src files&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-819&quot;&gt;AEROGEAR-819&lt;/a&gt;] -         Remove server2.js from builder&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-832&quot;&gt;AEROGEAR-832&lt;/a&gt;] -         Controller WebLink implementation should keep parameters given on the request&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-833&quot;&gt;AEROGEAR-833&lt;/a&gt;] -         Remove DataManager dependency from Pipeline&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-834&quot;&gt;AEROGEAR-834&lt;/a&gt;] -         Update Specification regarding Pagination in AeroGear Controller&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-856&quot;&gt;AEROGEAR-856&lt;/a&gt;] -         Investigate using CDI for implementing Pagination support&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-857&quot;&gt;AEROGEAR-857&lt;/a&gt;] -         review all the repository settings for jbossbot&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-860&quot;&gt;AEROGEAR-860&lt;/a&gt;] -         verify jbossbot settings for all the repositories&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-867&quot;&gt;AEROGEAR-867&lt;/a&gt;] -         Overload .consumes to take MediaTypes in addition to Strings&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-870&quot;&gt;AEROGEAR-870&lt;/a&gt;] -         Update quickstart jboss plugin to 7.3.Final&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-872&quot;&gt;AEROGEAR-872&lt;/a&gt;] -         Move kitchensink-js to own repo&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-877&quot;&gt;AEROGEAR-877&lt;/a&gt;] -         Create corscontroller branch for CORS specific openshift instance&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-878&quot;&gt;AEROGEAR-878&lt;/a&gt;] -         Update Controller JavaDocs&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-880&quot;&gt;AEROGEAR-880&lt;/a&gt;] -         Update Custom JS builder After Release&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-881&quot;&gt;AEROGEAR-881&lt;/a&gt;] -         Custom Builder - Read Version from Repo&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-883&quot;&gt;AEROGEAR-883&lt;/a&gt;] -         Release Updates&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;sub-task&quot;&gt;Sub-task&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-746&quot;&gt;AEROGEAR-746&lt;/a&gt;] -         Add Learn More link to Home Page and create some sort of article so people can &amp;quot;Learn More&amp;quot; about each lib&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-751&quot;&gt;AEROGEAR-751&lt;/a&gt;] -         iOS: overhaul config API&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-758&quot;&gt;AEROGEAR-758&lt;/a&gt;] -         ios: pipe: overhaul the remove method&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-764&quot;&gt;AEROGEAR-764&lt;/a&gt;] -         ios: AGPipe: Change the URL property&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-765&quot;&gt;AEROGEAR-765&lt;/a&gt;] -         ios: rename AGRestAdapter to AGRESTAdapter&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-766&quot;&gt;AEROGEAR-766&lt;/a&gt;] -         ios: AGPipeline: rename init: and pipeline:&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-767&quot;&gt;AEROGEAR-767&lt;/a&gt;] -         ios: API: rename 'getter' for 'modules'&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-770&quot;&gt;AEROGEAR-770&lt;/a&gt;] -         Work out custom grunt build options&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-771&quot;&gt;AEROGEAR-771&lt;/a&gt;] -         Figure out inclusion into aerogear.org&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-786&quot;&gt;AEROGEAR-786&lt;/a&gt;] -         Add pagination support on JS library&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-787&quot;&gt;AEROGEAR-787&lt;/a&gt;] -         Add pagination support on Android library&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-795&quot;&gt;AEROGEAR-795&lt;/a&gt;] -         Create Route with paging support in aerogear-controller-demo.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-797&quot;&gt;AEROGEAR-797&lt;/a&gt;] -         How to monitor JS Custom builder status&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-807&quot;&gt;AEROGEAR-807&lt;/a&gt;] -         iOS: API: AGStore's remove takes an id, should take an object&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-813&quot;&gt;AEROGEAR-813&lt;/a&gt;] -         Server Side Paging Support&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-814&quot;&gt;AEROGEAR-814&lt;/a&gt;] -         Specification for query RESTFul resources using offset, limit &amp;amp; total&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-821&quot;&gt;AEROGEAR-821&lt;/a&gt;] -         Create Server Side Paging Specification&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-831&quot;&gt;AEROGEAR-831&lt;/a&gt;] -         Add Web Linking support&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-835&quot;&gt;AEROGEAR-835&lt;/a&gt;] -         iOS: paging: Add paging support to AGPipeConf.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-836&quot;&gt;AEROGEAR-836&lt;/a&gt;] -         ios: paging: define ParameterProvider API&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-837&quot;&gt;AEROGEAR-837&lt;/a&gt;] -         iOS: paging: create paging object&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-838&quot;&gt;AEROGEAR-838&lt;/a&gt;] -         iOS: paging: create metadata resolver strategy for header&lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-839&quot;&gt;AEROGEAR-839&lt;/a&gt;] -         iOS: paging: create metadata resolver strategy for body&lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-840&quot;&gt;AEROGEAR-840&lt;/a&gt;] -         iOS: paging: create metadata resolver strategy for webLinking&lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-841&quot;&gt;AEROGEAR-841&lt;/a&gt;] -         Update TODO app&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-842&quot;&gt;AEROGEAR-842&lt;/a&gt;] -         Update kitchensink-js&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-844&quot;&gt;AEROGEAR-844&lt;/a&gt;] -         Update Custom JS builder&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-846&quot;&gt;AEROGEAR-846&lt;/a&gt;] -         add a readWithParams on the AGPipe and remove the existing readWithFilter&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-849&quot;&gt;AEROGEAR-849&lt;/a&gt;] -         iOS blog post on new M8 stuff&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-850&quot;&gt;AEROGEAR-850&lt;/a&gt;] -         Android blog post on new M8 stuff&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-851&quot;&gt;AEROGEAR-851&lt;/a&gt;] -         JS blog post on new M8 stuff&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-852&quot;&gt;AEROGEAR-852&lt;/a&gt;] -         general release blog on aerogear.org&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-859&quot;&gt;AEROGEAR-859&lt;/a&gt;] -         Add example of Web Linking Pagination to controller demo&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-861&quot;&gt;AEROGEAR-861&lt;/a&gt;] -         iOS: paging: polish API&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-864&quot;&gt;AEROGEAR-864&lt;/a&gt;] -         ios: remove filter config and read with filter…&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-865&quot;&gt;AEROGEAR-865&lt;/a&gt;] -         iOS: paging: remove pagingLocation parameter&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-866&quot;&gt;AEROGEAR-866&lt;/a&gt;] -         Update aerogear-ios-integration project to include paging integration tests&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://issues.jboss.org/browse/AEROGEAR-879&quot;&gt;AEROGEAR-879&lt;/a&gt;] -         Controller blog post on new M8 stuff&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>AeroGear 1.0.0.M7 is out!</title>
+   <link href="http://aerogear.org/news/2012/12/20/aerogear-1.0.0.M7-is-out/index.html"/>
+   <updated>2012-12-20T00:00:00-02:00</updated>
+   <id>http://aerogear.org/news/2012/12/20/aerogear-1.0.0.M7-is-out/aerogear-1.0.0.M7-is-out</id>
+   <content type="html">&lt;p&gt;We’re happy to announce the immediate availability of AeroGear 1.0.0.M7 (xmas release), packed with good stuff!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/news/3483126977_5011f91042.jpg&quot; alt=&quot;gears http://www.flickr.com/photos/crashmaster/3483126977/sizes/m/in/photostream/&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;highlights&quot;&gt;Highlights&lt;/h2&gt;
+
+&lt;h3 id=&quot;aerogear-js&quot;&gt;AeroGear-JS&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;New SessionLocal adapter for DataManager providing sessionStorage and localStorage access&lt;/li&gt;
+  &lt;li&gt;JSONP support for the Pipeline Rest adapter&lt;/li&gt;
+  &lt;li&gt;Improved filtering in DataManager allowing filtering of nested objects&lt;/li&gt;
+  &lt;li&gt;New version of the &lt;a href=&quot;http://js-aerogear.rhcloud.com/&quot;&gt;Kitchensink Quickstart&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.krisborchers.com/2012/12/20/aerogear-from-a-different-angle/&quot;&gt;New demo&lt;/a&gt; combining AeroGear with Angular.js&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;aerogear-ios&quot;&gt;AeroGear-iOS&lt;/h3&gt;
+
+&lt;p&gt;For the iOS library we had four major sections were new features were added and work on even more features started:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Configuration objects&lt;/li&gt;
+  &lt;li&gt;CoreData and Model APIs&lt;/li&gt;
+  &lt;li&gt;Query and Search&lt;/li&gt;
+  &lt;li&gt;OTP (One-Time Password)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The new iOS features are described &lt;a href=&quot;http://matthiaswessendorf.wordpress.com/2012/12/20/aerogear-ios-lib-milestone-2/&quot;&gt;here&lt;/a&gt;. There is a separate blog post, which covers the new OTP feature (including iOS) in &lt;a href=&quot;http://cvasilak.blogspot.com/2012/12/aerogear-and-otp.html&quot;&gt;detail&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;aerogear-android&quot;&gt;AeroGear-Android&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;POJO based configuration&lt;/li&gt;
+  &lt;li&gt;Authentication and authorization framework&lt;/li&gt;
+  &lt;li&gt;Compatible with 2.3+&lt;/li&gt;
+  &lt;li&gt;In-memory datastore (partial)&lt;/li&gt;
+  &lt;li&gt;Support for querying and paging restful services&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;aerogear-controller&quot;&gt;AeroGear-Controller&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Error Routes&lt;/li&gt;
+  &lt;li&gt;Cross Origin Resource Sharing (CORS) support&lt;/li&gt;
+  &lt;li&gt;RESTful Routes (partial) support&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The new AeroGear-Controller features are described &lt;a href=&quot;http://dbevenius.org&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;aerogear-security&quot;&gt;AeroGear Security&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Time-based One-time Password with support on the server and client side&lt;/li&gt;
+  &lt;li&gt;Inclusion of PicketLink and PicketBox as security provider&lt;/li&gt;
+  &lt;li&gt;DSL secured route support (role-based) integration with AeroGear Controller&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;new-team-members&quot;&gt;New Team Members&lt;/h2&gt;
+
+&lt;p&gt;Say hi to our newest team member &lt;a href=&quot;https://twitter.com/sebi2706&quot;&gt;Sébastien&lt;/a&gt;, hacking directly from the beautiful lands of the south France.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>AeroGear 1.0.0.M6 is out!</title>
+   <link href="http://aerogear.org/news/2012/10/24/aerogear-1.0.0.M6-is-out/index.html"/>
+   <updated>2012-10-24T00:00:00-02:00</updated>
+   <id>http://aerogear.org/news/2012/10/24/aerogear-1.0.0.M6-is-out/aerogear-1.0.0.M6-is-out</id>
+   <content type="html">&lt;p&gt;We’re happy to announce the immediate availability of AeroGear 1.0.0.M6, packed with good stuff!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/news/440777294_3f085783ae_n.jpg&quot; alt=&quot;gears http://www.flickr.com/photos/saxcubano/440777294/sizes/n/in/photostream/&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;highlights&quot;&gt;Highlights&lt;/h2&gt;
+
+&lt;h3 id=&quot;aerogear-js&quot;&gt;AeroGear-JS&lt;/h3&gt;
+
+&lt;p&gt;AeroGear-JS 1.0.0.M1 lays down the foundation for data synchronization and security.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Authentication / Authorization&lt;/li&gt;
+  &lt;li&gt;Memory based data manager to separate data management from pipeline&lt;/li&gt;
+  &lt;li&gt;Data Synchronization groundwork including data status tracking (new, modified, removed)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;API documentation can be found on the &lt;a href=&quot;http://aerogear.org/docs/specs/aerogear-js/&quot;&gt;project website&lt;/a&gt; and a &lt;a href=&quot;https://github.com/aerogear/TODO&quot;&gt;TODO app demo&lt;/a&gt; is available to see these new options in action.&lt;/p&gt;
+
+&lt;h3 id=&quot;aerogear-ios&quot;&gt;AeroGear-iOS&lt;/h3&gt;
+
+&lt;p&gt;AeroGear-iOS 1.0.0.M1 introduces a simple API to communicate against RESTful endpoints, and much more!&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Authentication / Authorization&lt;/li&gt;
+  &lt;li&gt;Data Synchronization groundwork (in-memory storage for now)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can find a pretty comprehensive API usage example into a &lt;a href=&quot;https://github.com/aerogear/aerogear-todo-ios&quot;&gt;TODO app demo&lt;/a&gt;, or &lt;a href=&quot;https://github.com/aerogear/aerogear-ios/blob/master/API.md&quot;&gt;learn more&lt;/a&gt; about it.&lt;/p&gt;
+
+&lt;h2 id=&quot;whats-next&quot;&gt;What’s next?&lt;/h2&gt;
+
+&lt;p&gt;We are already working to bring out of the oven improvements to AeroGear-Controller, AeroGear-Security and AeroGear-Android. Stay tuned!&lt;/p&gt;
+
+&lt;h2 id=&quot;new-team-members&quot;&gt;New Team Members&lt;/h2&gt;
+
+&lt;p&gt;AeroGear team is growing! A big welcome to &lt;a href=&quot;https://twitter.com/cvasilak&quot;&gt;Christos&lt;/a&gt;, &lt;a href=&quot;https://twitter.com/sienaluke&quot;&gt;Luke&lt;/a&gt;, &lt;a href=&quot;https://twitter.com/dbevenius&quot;&gt;Daniel&lt;/a&gt;, and &lt;a href=&quot;https://twitter.com/summerspittman&quot;&gt;Summers&lt;/a&gt;!&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+
+</feed>

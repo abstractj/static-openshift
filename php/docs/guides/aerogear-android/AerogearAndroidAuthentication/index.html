@@ -1,0 +1,387 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+      <title>AeroGear - AeroGear Android Authentication</title>
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+
+      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="alternate" type="application/atom+xml" title="feed" href="/feed.atom"/>
+      <link rel="stylesheet" href="/css/font-awesome.min.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:600,300,300italic,600italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+      <script src="/js/libs/modernizr-2.6.2.min.js"></script>
+		  <script type="text/javascript">
+
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-28733717-2']);
+			  _gaq.push(['_setDomainName', 'aerogear.org']);
+			  _gaq.push(['_trackPageview']);
+
+			  (function() {
+				  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+
+		  </script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+      <script>window.jQuery || document.write( '<script src="/js/libs/jquery-1.7.2.min.js"><\/script>' )</script>
+  </head>
+  <body>
+      <header>
+          <div class="wrapper">
+              <a href="/"><div id="logo"></div></a>
+              <a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html" class="news fixed">Hey listen!<br class="title-break"> AeroGear 1.0.0 is out!</a>
+          </div>
+      </header>
+         
+      <nav>
+          <div class="wrapper">
+            <div class="links">
+                <a href="/" class="fixed">Home</a>
+                <a href="/download" class="">Get started</a>
+                <a href="/docs" class="">Documentation</a>
+                <a href="/news" class="fixed ">News</a>
+                <a href="/community" class="">Community</a>        
+            </div>
+            <a href="https://www.facebook.com/AeroGearProject"><div class="social facebook"></div></a>
+            <a href="https://plus.google.com/106588661437153585722/posts"><div class="social google-plus"></div></a>
+            <a href="https://www.twitter.com/aerogears"><div class="social twitter"></div></a>
+          </div>    
+          <div class="clearfix"></div>
+      </nav>
+
+      <div class="wrapper inner-container">
+
+          <div class="basic">
+    
+<div class="sect1">
+  <h2 id="_aerogear_android_authentication">AeroGear Android Authentication</h2>
+  
+  <div class="sectionbody">
+<div class="paragraph">
+    
+  <p>The goal of this guide is to provide a description of how authentication works in AeroGear Android and to give developers the ability to integrate their Android application with AeroGear-Controller based services as well as other RESTful services.</p>
+</div>
+<div class="paragraph">
+    
+  <p>In RESTful services there are two basic parts of Authentication:</p>
+</div>
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Logging in and Fetching a token</p>
+      
+    </li>
+  
+    <li>
+      <p>Applying the token to a request</p>
+      
+    </li>
+  
+  </ul>
+</div>
+<div class="paragraph">
+    
+  <p>This guide will go in depth on these two topics; however, we will also discuss briefly:</p>
+</div>
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Registering a new user</p>
+      
+    </li>
+  
+    <li>
+      <p>Logging out of a service</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+  </div>
+  
+</div>
+
+
+<div class="sect1">
+  <h2 id="_the_authentication_api">The Authentication API</h2>
+  
+  <div class="sectionbody">
+<div class="paragraph">
+    
+  <p>Interaction with Authentication services is mediated using classes which implement the <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/authentication/AuthenticationModule.html"><strong>AuthenticationModule</strong></a> interface, register themselves with the <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/authentication/impl/Authenticator.html"><strong>Authenticator</strong></a> factory class, and apply themselves to a <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/pipeline/Pipe.html"><strong>Pipe</strong></a> using <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/impl/pipeline/PipeConfig.html"><strong>PipeConfig</strong></a>.</p>
+</div>
+<div class="paragraph">
+    
+  <p><a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/authentication/AuthenticationModule.html"><strong>AuthenticationModule</strong></a> wraps up URL fields for enrolling, logging in, and logging out and defines the methods which call these URLs.  Once a login has been succesfully completed, it also provides an <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/authentication/AuthorizationFields.html"><strong>AuthorizationFields</strong></a> object which encapuslates the necessary parameteres for applying authorization to a request via a <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/pipeline/Pipe.html"><strong>Pipe</strong></a>.</p>
+</div>
+<div class="paragraph">
+    
+  <p><a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/authentication/impl/Authenticator.html"><strong>Authenticator</strong></a> is a manager and a factory.  It can consume an <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/authentication/AuthenticationConfig.html"><strong>AuthenticationConfig</strong></a> object and instanciate a module tuned to work with an AeroGear Controller based server, or you can create a custom <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/authentication/AuthenticationModule.html"><strong>AuthenticationModule</strong></a> and register it with then <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/authentication/impl/Authenticator.html"><strong>Authenticator</strong></a>.  <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/authentication/impl/Authenticator.html"><strong>Authenticator</strong></a> also supplies getters which can wrap any <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/authentication/AuthenticationModule.html"><strong>AuthenticationModule</strong></a> in a proxy which delegates calls to the server to an Android Loader.</p>
+</div>
+<div class="paragraph">
+    
+  <p><strong>AbstractAuthenticationModule</strong> is a convenience class for integrating with non AeroGear REST services.  It is also useful for when you want to only support a subset of the <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/authentication/AuthenticationModule.html"><strong>AuthenticationModule</strong></a>'s functionality, and it configures a THREAD_POOL_EXECUTOR for you to delegate your network calls to.</p>
+</div>
+
+<div class="sect2">
+  <h3 id="_using_authentication_the_todo_app">Using Authentication: The TODO App</h3>
+  
+<div class="paragraph">
+    
+  <p>For an example of using the Authentication API to connect to a AeroGear Controller, let's look at <a href="https://github.com/aerogear/aerogear-android-todo">https://github.com/aerogear/aerogear-android-todo</a>.</p>
+</div>
+
+<div class="sect3">
+  <h4 id="_setting_up_authentication">Setting up Authentication</h4>
+  
+<div class="listingblock">
+  <div class="title">ToDoApplication</div>
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="java">
+//Class definitions, exceptions, and full configuration of Pipes are snipped for clarity.
+
+URL baseURL = new URL("http://todo-aerogear.rhcloud.com/todo-server");
+private Pipeline pipeline = new Pipeline(baseURL);
+private Authenticator auth = new Authenticator(baseURL);
+
+@Override
+public void onCreate() {
+	super.onCreate();
+
+	//Supply configuration
+	AuthenticationConfig config = new AuthenticationConfig();
+	config.setEnrollEndpoint("/auth/register");
+
+	//Create AuthenticationModule
+	AuthenticationModule authModule = auth.auth("login", config);
+
+	//Add AuthenticationModule to Pipe
+	PipeConfig pipeConfigTask = new PipeConfig(baseURL, Task.class);
+	pipeConfigTask.setAuthModule(authModule);
+	pipeline.pipe(Task.class, pipeConfigTask);
+
+}</code></pre>
+    
+  </div>
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_using_authentication">Using Authentication</h4>
+  
+<div class="paragraph">
+    
+  <p>While the application is not logged in, <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/authentication/AuthenticationModule.html"><strong>AuthenticationModule</strong></a> will stay out of the way.  However, interacting with authentication is this simple.</p>
+</div>
+<div class="listingblock">
+  <div class="title">AuthenticationMethodsExample</div>
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="java">public void login(FragmentActivity activity, String username, String password,
+			Callback&lt;HeaderAndBody&gt; callback) {
+	authenticator.get("login", activity).login(username, password, callback);
+
+}
+
+public void logout(FragmentActivity activity, Callback&lt;Void&gt; callback) {
+	authenticator.get("login", activity).logout(callback);
+}
+
+public void enroll(FragmentActivity activity, String firstName, String lastName, String emailAddress,
+		String username, String password, String role,
+		Callback&lt;HeaderAndBody&gt; callback) {
+
+	HashMap&lt;String, String&gt; userData = new HashMap&lt;String, String&gt;();
+	userData.put("firstname", firstName);
+	userData.put("lastname", lastName);
+	userData.put("email", emailAddress);
+	userData.put("username", username);
+	userData.put("password", password);
+	userData.put("role", role);
+
+	authenticator.get("login", activity).enroll(userData, callback);
+}</code></pre>
+    
+  </div>
+</div>
+
+  
+</div>
+
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_using_authentication_custom_applications">Using Authentication: Custom Applications</h3>
+  
+<div class="paragraph">
+    
+  <p>AeroGear Android's Authentication API provides a framework for supporting many other RESTful services.  Obviously this guide cannot cover all of them, but we will review custom authentication with one third party service, <a href="http://www.reddit.com">Reddit</a>.</p>
+</div>
+<div class="paragraph">
+    
+  <p>To retrieve the tokens Reddit requires for accessing a user's data we must log in as that user.  Reddit's login service consumes a HTTP POST at the URL <a href="http://www.reddit.com/api/login/%username">http://www.reddit.com/api/login/%username</a> with the Content-Type of application/x-www-form-urlencoded.  The request body is required to also the parameters <tt>user</tt>, <tt>passwd</tt>, and <tt>api_type</tt>.  It returns a JSON response with parameters "json.data.modhash" and "json.data.cookie".  These parameters are extracted as part of the <tt>login</tt> method and passed to the <a href="/docs/specs/aerogear-android/org/jboss/aerogear/android/pipeline/Pipe.html"><strong>Pipe</strong></a> implementation from the <tt>getAuthorizationFields</tt> method.</p>
+</div>
+
+<div class="sect3">
+  <h4 id="_redditauthenticationmodule">RedditAuthenticationModule</h4>
+  
+<div class="listingblock">
+  <div class="title">RedditAuthenticationModule</div>
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="java">public class RedditAuthenticationModule extends AbstractAuthenticationModule {
+
+    private String authToken = "";
+    private String modHash = "";
+
+    public void login(final String username, final String password,
+		    final Callback&lt;HeaderAndBody&gt; callback) {
+        THREAD_POOL_EXECUTOR.execute(new Runnable() {
+		private Exception exception;
+		private HeaderAndBody result;
+
+		@Override
+		public void run() {
+		        try {
+		        	HttpProvider provider =
+					new HttpRestProvider( new URL(String.format("http://www.reddit.com/api/login/%s", username)) );
+		        	provider.setDefaultHeader("User-Agent", "AeroGear StoryList Demo /u/secondsun");
+		        	provider.setDefaultHeader("Content-Type", "application/x-www-form-urlencoded");
+
+				result = provider.post(String.format("user=%s&amp;api_type=json&amp;passwd=%s",username,password);
+
+				String json = new String(result.getBody());
+				JsonObject authenticationObject = new JsonParser().parse(json).getAsJsonObject()
+										  .get("json").getAsJsonObject()
+										  .get("data").getAsJsonObject();
+
+				modHash = authenticationObject.get("modhash").getAsString();
+				authToken = authenticationObject.get("cookie").getAsString();
+
+				isLoggedIn = true;
+		        } catch (Exception e) {
+		            exception = e;
+		        }
+
+			if (exception == null) {
+		            callback.onSuccess(this.result);
+		        } else {
+		            callback.onFailure(exception);
+		        }
+
+		}
+
+
+	});
+
+
+	}
+
+    public AuthorizationFields getAuthorizationFields() {
+
+        AuthorizationFields fields = new AuthorizationFields();
+        fields.addHeader("User-Agent", "AeroGear StoryList Demo /u/secondsun");
+        if (isLoggedIn) {
+            fields.addHeader("Cookie", "reddit_session="+authToken);
+            fields.addQueryParameter("uh", modHash);
+        }
+        return fields;
+    }
+
+}</code></pre>
+    
+  </div>
+</div>
+
+  
+</div>
+
+
+  
+</div>
+
+
+  </div>
+  
+</div>
+
+
+
+</div>
+
+            <div class="clearfix"></div>
+      </div>
+      <footer>
+          <div class="wrapper">
+              <div class="column">
+                  <h3>News</h3>
+                  
+                  <p><a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html">AeroGear 1.0.0 is out!</a></p>
+                  
+                  <p><a href="/news/2013/03/04/aerogear-1.0.0.CR1-is-out/index.html">AeroGear 1.0.0.CR1 is out!</a></p>
+                  
+                  <p><a href="/news/2013/01/30/aerogear-1.0.0.M8-is-out/index.html">AeroGear 1.0.0.M8 is out!</a></p>
+                  
+                  <p><a href="/news/2012/12/20/aerogear-1.0.0.M7-is-out/index.html">AeroGear 1.0.0.M7 is out!</a></p>
+                  
+                  <p><a href="/news/2012/10/24/aerogear-1.0.0.M6-is-out/index.html">AeroGear 1.0.0.M6 is out!</a></p>
+                  
+              </div>
+              <div class="column">
+                  <h3>Get help</h3>
+                  <p><a href="/docs">Documentation</a></p>
+                  <p><a href="/examples">Examples</a></p>
+              </div>
+              <div class="column">
+                  <h3>Contribute</h3>
+                  <p><a href="http://github.com/aerogear" target="_blank">Source code</a></p>
+                  <p><a href="http://issues.jboss.org/browse/AEROGEAR" target="_blank">Issue tracker</a></p>
+                  <p><a href="https://lists.jboss.org/mailman/listinfo/aerogear-dev" target="_blank">Mailing list</a></p>
+                  <p><a href="irc://irc.freenode.net/aerogear" target="_blank">IRC channel</a></p>
+              </div>
+              <div class="column responsive">
+                  <h3>Social</h3>
+                  <p><a href="">Twitter</a></p>
+                  <p><a href="">Google Plus</a></p>
+                  <p><a href="">Facebook</a></p>
+              </div>
+              <div class="column">
+                  <h3><a href="http://twitter.com/AeroGears" target="_blank">@AeroGears</a></h3>
+                  <div id="aerogear-twitter">Loading tweets...</div>
+              </div>
+              <div class="logos">
+                  <p>AeroGear is a <a href="http://www.jboss.org/">JBoss Community</a> project<br class="title-break"> and its development is sponsored<br class="title-break"> by <a href="http://www.redhat.com/">Red Hat, Inc</a>.<br class="title-break"><br>Project code is released under <br class="title-break">the <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache License, v2.0</a>.</p>
+                  <p><a href="http://www.jboss.org/"><img src="/img/jboss_community.png" alt="JBoss Community"></a> <a href="http://www.redhat.com/"><img src="/img/red_hat.png" alt="Red Hat"></a></p>
+                  <p>Copyright &copy; 2012, Red Hat, Inc.</p>
+  <div class="clearfix"></div>
+              </div>
+          </div>
+      </footer>
+      <script src="/js/libs/repo-modified.js"></script>
+      <script src="/js/libs/ba-linkify.min.js"></script>
+      <script src="/js/libs/jquery.twitter.min.js"></script>
+      <script src="/js/libs/jquery.smartresize.js"></script>
+      <script src="/js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,433 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+      <title>AeroGear - AeroGear Android Library</title>
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+
+      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="alternate" type="application/atom+xml" title="feed" href="/feed.atom"/>
+      <link rel="stylesheet" href="/css/font-awesome.min.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:600,300,300italic,600italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+      <script src="/js/libs/modernizr-2.6.2.min.js"></script>
+		  <script type="text/javascript">
+
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-28733717-2']);
+			  _gaq.push(['_setDomainName', 'aerogear.org']);
+			  _gaq.push(['_trackPageview']);
+
+			  (function() {
+				  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+
+		  </script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+      <script>window.jQuery || document.write( '<script src="/js/libs/jquery-1.7.2.min.js"><\/script>' )</script>
+  </head>
+  <body>
+      <header>
+          <div class="wrapper">
+              <a href="/"><div id="logo"></div></a>
+              <a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html" class="news fixed">Hey listen!<br class="title-break"> AeroGear 1.0.0 is out!</a>
+          </div>
+      </header>
+         
+      <nav>
+          <div class="wrapper">
+            <div class="links">
+                <a href="/" class="fixed">Home</a>
+                <a href="/download" class="">Get started</a>
+                <a href="/docs" class="">Documentation</a>
+                <a href="/news" class="fixed ">News</a>
+                <a href="/community" class="">Community</a>        
+            </div>
+            <a href="https://www.facebook.com/AeroGearProject"><div class="social facebook"></div></a>
+            <a href="https://plus.google.com/106588661437153585722/posts"><div class="social google-plus"></div></a>
+            <a href="https://www.twitter.com/aerogears"><div class="social twitter"></div></a>
+          </div>    
+          <div class="clearfix"></div>
+      </nav>
+
+      <div class="wrapper inner-container">
+
+          <div class="basic">
+    <div id="preamble">
+  <div class="sectionbody">
+<div class="paragraph">
+    
+  <p>This document covers the requirements, use-cases and planned API&#8217;s for the AeroGear Android library.</p>
+</div>
+
+  </div>
+</div>
+
+<div class="sect1">
+  <h2 id="_external_references">External References</h2>
+  
+  <div class="sectionbody">
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p><a href="https://github.com/aerogear/aerogear-android/">Github Repo</a></p>
+      
+    </li>
+  
+    <li>
+      <p><a href="https://issues.jboss.org/browse/AGDROID/">JIRA</a></p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+<div class="sect2">
+  <h3 id="_1_0_x">1.0.x</h3>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Add cookie on requests to keep session (<a href="https://issues.jboss.org/browse/AGDROID-16">AGDROID-16</a>)</p>
+      
+    </li>
+  
+    <li>
+      <p>Remove Auth-Token (<a href="https://issues.jboss.org/browse/AGDROID-25">AGDROID-25</a>)</p>
+      
+    </li>
+  
+    <li>
+      <p>Accept Header (<a href="https://issues.jboss.org/browse/AGDROID-1">AGDROID-1</a>)</p>
+      
+    </li>
+  
+    <li>
+      <p>Integration test project and main project in travis (<a href="https://issues.jboss.org/browse/AGDROID-32">AGDROID-32</a> / <a href="https://issues.jboss.org/browse/AGDROID-15">AGDROID-15</a>)</p>
+      
+    </li>
+  
+    <li>
+      <p>RecordId annotation does not consider superclasses (<a href="https://issues.jboss.org/browse/AGDROID-13">AGDROID-13</a>)</p>
+      
+    </li>
+  
+    <li>
+      <p>Pipe Timeout (<a href="https://issues.jboss.org/browse/AGDROID-31">AGDROID-31</a>)</p>
+      
+    </li>
+  
+    <li>
+      <p>Create android OTP demo app (<a href="https://issues.jboss.org/browse/AGDROID-19">AGDROID-19</a>)</p>
+      
+    </li>
+  
+    <li>
+      <p>Pipe.read can&#8217;t configure how readfilter params are turned into a query (<a href="https://issues.jboss.org/browse/AGDROID-4">AGDROID-4</a>)</p>
+      
+    </li>
+  
+    <li>
+      <p>Mark http basic as experimental (<a href="https://issues.jboss.org/browse/AGDROID-2">AGDROID-2</a>)</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_1_1">1.1</h3>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>HttpDigest Authentication (<a href="https://issues.jboss.org/browse/AGDROID-10">AGDROID-10</a>)</p>
+      
+    </li>
+  
+    <li>
+      <p>Multipart/File Upload (<a href="https://issues.jboss.org/browse/AGDROID-9">AGDROID-9</a>)</p>
+      
+    </li>
+  
+    <li>
+      <p>Deprecate readWithFilter and add a renamed "Read" method (<a href="https://issues.jboss.org/browse/AGDROID-6">AGDROID-6</a>)</p>
+      
+    </li>
+  
+    <li>
+      <p>Provide a parameter on Android to enable/disable the usage of cookies (<a href="https://issues.jboss.org/browse/AGDROID-28">AGDROID-28</a>)</p>
+      
+    </li>
+  
+    <li>
+      <p>Pipe needs a cancel method (<a href="https://issues.jboss.org/browse/AGDROID-11">AGDROID-11</a>)</p>
+      
+    </li>
+  
+    <li>
+      <p>HttpBasic Authentication (<a href="https://issues.jboss.org/browse/AGDROID-27">AGDROID-27</a>)</p>
+      
+    </li>
+  
+    <li>
+      <p>Add HOTP support to aerogear-otp-java (<a href="https://issues.jboss.org/browse/AGDROID-30">AGDROID-30</a>)</p>
+      
+    </li>
+  
+    <li>
+      <p>Pipe Retrieve by ID (<a href="https://issues.jboss.org/browse/AGDROID-7">AGDROID-7</a>)</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_1_2">1.2</h3>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Push</p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Client APIS</p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Register w/ AG-PUSH server</p>
+      
+    </li>
+  
+    <li>
+      <p>Necessary callbacks</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+    <li>
+      <p>Server APIs</p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Google Cloud provider handling</p>
+      
+    </li>
+  
+    <li>
+      <p>Unregister, resend etc</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_next">Next</h3>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Sync &amp; Offline (1.3 ish)</p>
+      
+    </li>
+  
+    <li>
+      <p>Accounts Integration</p>
+      
+    </li>
+  
+    <li>
+      <p>Notifications</p>
+      
+    </li>
+  
+    <li>
+      <p>Analytics and Monitoring/measuring</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_2_0">2.0</h3>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Remove deprecated APIs</p>
+      
+    </li>
+  
+    <li>
+      <p>Android specific Services</p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>ex. Account, Sharing Adapter,</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_misc">Misc</h3>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Implementation and API usage for android crypto (<a href="https://issues.jboss.org/browse/AGDROID-34">AGDROID-34</a>)</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+  </div>
+  
+</div>
+
+
+
+</div>
+
+            <div class="clearfix"></div>
+      </div>
+      <footer>
+          <div class="wrapper">
+              <div class="column">
+                  <h3>News</h3>
+                  
+                  <p><a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html">AeroGear 1.0.0 is out!</a></p>
+                  
+                  <p><a href="/news/2013/03/04/aerogear-1.0.0.CR1-is-out/index.html">AeroGear 1.0.0.CR1 is out!</a></p>
+                  
+                  <p><a href="/news/2013/01/30/aerogear-1.0.0.M8-is-out/index.html">AeroGear 1.0.0.M8 is out!</a></p>
+                  
+                  <p><a href="/news/2012/12/20/aerogear-1.0.0.M7-is-out/index.html">AeroGear 1.0.0.M7 is out!</a></p>
+                  
+                  <p><a href="/news/2012/10/24/aerogear-1.0.0.M6-is-out/index.html">AeroGear 1.0.0.M6 is out!</a></p>
+                  
+              </div>
+              <div class="column">
+                  <h3>Get help</h3>
+                  <p><a href="/docs">Documentation</a></p>
+                  <p><a href="/examples">Examples</a></p>
+              </div>
+              <div class="column">
+                  <h3>Contribute</h3>
+                  <p><a href="http://github.com/aerogear" target="_blank">Source code</a></p>
+                  <p><a href="http://issues.jboss.org/browse/AEROGEAR" target="_blank">Issue tracker</a></p>
+                  <p><a href="https://lists.jboss.org/mailman/listinfo/aerogear-dev" target="_blank">Mailing list</a></p>
+                  <p><a href="irc://irc.freenode.net/aerogear" target="_blank">IRC channel</a></p>
+              </div>
+              <div class="column responsive">
+                  <h3>Social</h3>
+                  <p><a href="">Twitter</a></p>
+                  <p><a href="">Google Plus</a></p>
+                  <p><a href="">Facebook</a></p>
+              </div>
+              <div class="column">
+                  <h3><a href="http://twitter.com/AeroGears" target="_blank">@AeroGears</a></h3>
+                  <div id="aerogear-twitter">Loading tweets...</div>
+              </div>
+              <div class="logos">
+                  <p>AeroGear is a <a href="http://www.jboss.org/">JBoss Community</a> project<br class="title-break"> and its development is sponsored<br class="title-break"> by <a href="http://www.redhat.com/">Red Hat, Inc</a>.<br class="title-break"><br>Project code is released under <br class="title-break">the <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache License, v2.0</a>.</p>
+                  <p><a href="http://www.jboss.org/"><img src="/img/jboss_community.png" alt="JBoss Community"></a> <a href="http://www.redhat.com/"><img src="/img/red_hat.png" alt="Red Hat"></a></p>
+                  <p>Copyright &copy; 2012, Red Hat, Inc.</p>
+  <div class="clearfix"></div>
+              </div>
+          </div>
+      </footer>
+      <script src="/js/libs/repo-modified.js"></script>
+      <script src="/js/libs/ba-linkify.min.js"></script>
+      <script src="/js/libs/jquery.twitter.min.js"></script>
+      <script src="/js/libs/jquery.smartresize.js"></script>
+      <script src="/js/script.js"></script>
+  </body>
+</html>

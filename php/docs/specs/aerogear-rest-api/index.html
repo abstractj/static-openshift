@@ -1,0 +1,387 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+      <title>AeroGear - AeroGear REST API</title>
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+
+      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="alternate" type="application/atom+xml" title="feed" href="/feed.atom"/>
+      <link rel="stylesheet" href="/css/font-awesome.min.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:600,300,300italic,600italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+      <script src="/js/libs/modernizr-2.6.2.min.js"></script>
+		  <script type="text/javascript">
+
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-28733717-2']);
+			  _gaq.push(['_setDomainName', 'aerogear.org']);
+			  _gaq.push(['_trackPageview']);
+
+			  (function() {
+				  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+
+		  </script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+      <script>window.jQuery || document.write( '<script src="/js/libs/jquery-1.7.2.min.js"><\/script>' )</script>
+  </head>
+  <body>
+      <header>
+          <div class="wrapper">
+              <a href="/"><div id="logo"></div></a>
+              <a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html" class="news fixed">Hey listen!<br class="title-break"> AeroGear 1.0.0 is out!</a>
+          </div>
+      </header>
+         
+      <nav>
+          <div class="wrapper">
+            <div class="links">
+                <a href="/" class="fixed">Home</a>
+                <a href="/download" class="">Get started</a>
+                <a href="/docs" class="">Documentation</a>
+                <a href="/news" class="fixed ">News</a>
+                <a href="/community" class="">Community</a>        
+            </div>
+            <a href="https://www.facebook.com/AeroGearProject"><div class="social facebook"></div></a>
+            <a href="https://plus.google.com/106588661437153585722/posts"><div class="social google-plus"></div></a>
+            <a href="https://www.twitter.com/aerogears"><div class="social twitter"></div></a>
+          </div>    
+          <div class="clearfix"></div>
+      </nav>
+
+      <div class="wrapper inner-container">
+
+          <div class="basic">
+    <h1 id="aerogear-server-side-interfaces">AeroGear Server Side Interfaces</h1>
+<p>This document describes the server side interfaces for AeroGear and is intended to be a guide for users creating new RESTful 
+server side applications as well as for client developers to know how to interact with RESTful applications (what request/responses will look like).</p>
+
+<hr />
+
+<h2 id="transport-protocol">Transport protocol</h2>
+<p>The APIs described in this document are based on <a href="http://www.ietf.org/rfc/rfc2616.txt">Hypertext Transfer Protocol, version 1.1</a>
+and <em>HTTPS</em> is recommended. </p>
+
+<hr />
+
+<h2 id="resources">Resources</h2>
+<p>A resource, or an endpoint, is identified by an URL which is referred to as the resource url.<br />
+For example, if you might have a resource of cars:</p>
+
+<p><code>http://server:port/myapp/cars</code></p>
+
+<p>When requesting data from a resource you often want to specify the format of the returned data.<br />
+This is accomplished by using a HTTP header named <em>Accept</em>:</p>
+
+<p><code>Accept: application/json</code></p>
+
+<h3 id="baseurl">BaseURL</h3>
+<p>All AeroGear client libraries (JavaScript, Objective-C, and Android) have the concept of a base url when creating a pipeline. This base 
+url is the path to your application running somewhere.   </p>
+
+<p>For example, say you deploy a web application with a context path of <em>myapp</em> to a web/application server. The base url is the would 
+be the URL to the root of this web application: </p>
+
+<p><code>http://server:port/myapp</code></p>
+
+<hr />
+
+<h2 id="versioning">Versioning</h2>
+<p>Depending on the application in question, you might want to version it. There are several approaches to versioning RESTful application and we will discuss a few alternative methods in this section.</p>
+
+<h4 id="using-separate-urls">Using separate URLs</h4>
+<p>This method separates two version of application by using different URLs to the resource.<br />
+In this case you might have version 1 deployed with a context path of:</p>
+
+<p><code>http://server:port/myapp/v1</code></p>
+
+<p>And later deploy version 2 as:</p>
+
+<p><code>http://server:port/myapp/v2</code></p>
+
+<p>Configuring the context path is specific to your web/application server. For example, configuring a context path for AS7 you would add a WEB-INF/jboss-web.xml:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;jboss-web&gt;
+  &lt;context-root&gt;myapp/v1&lt;/context-root&gt;
+&lt;/jboss-web&gt;
+</code></pre>
+
+<h4 id="using-a-query-parameter">Using a Query parameter</h4>
+<p>This method specifies the version using a query path parameter, for example:</p>
+
+<p><code>http://server:port/myapp/cars/1?version=1</code></p>
+
+<h4 id="using-the-mediatype">Using the Mediatype</h4>
+<p>This method uses the HTTP <em>Accept</em> and <em>Content-Type</em> headers to handle versioning of data as well as describing data. A client uses the HTTP request header <em>Accept</em> to specify the media type(s) that it accepts. Using this method one can specify both the type wanted and the version:</p>
+
+<p><code>Accept: application/vnd.myapp.cars+json; version=1.0</code></p>
+
+<p>Note that you can create your own MIME types using the vnd (vendor) prefix, which is what the example above is doing. When a client requests data from your service, they create an HTTP request and set the Accept header to the correct MIME type.</p>
+
+<hr />
+
+<h2 id="http-methods">HTTP Methods</h2>
+<p>This section describes the different HTTP methods and the expected return status and messages for successful and unsuccessful requests.</p>
+
+<h3 id="http-get-method">HTTP GET Method</h3>
+<p>Example of reading a resource, in this case a car with a certain id:</p>
+
+<p><code>http://server:port/myapp/cars/1</code></p>
+
+<h5 id="success-status-code-and-returned-body">Success status code and returned body</h5>
+<ul>
+  <li><code>HTTP/1.1 200 OK</code><br />
+  The Body will contain the data in the requested format.</li>
+</ul>
+
+<h5 id="failure-status-code-and-desciption">Failure status code and desciption</h5>
+<ul>
+  <li><code>HTTP/1.1 401 Unauthorized</code><br />
+  The request requires authentication.</li>
+  <li><code>HTTP/1.1 404 Not Found</code><br />
+  The requested resouces does not exist.</li>
+</ul>
+
+<h3 id="http-put-method">HTTP PUT Method</h3>
+<p>Example of a PUT request:</p>
+
+<p><code>http://server:port/myapp/cars/1</code></p>
+
+<h5 id="success-status-code-and-returned-body-1">Success status code and returned body</h5>
+<ul>
+  <li><code>HTTP/1.1 200 OK</code><br />
+  The Body will contain the data in the updated data.</li>
+  <li><code>HTTP/1.1 201 Created</code><br />
+  The newly added data.</li>
+</ul>
+
+<p>A reason for returning the data could be that the server needs to process the data, for example, it might need to generate an unique id or something like that. </p>
+
+<h5 id="failure-status-code-and-desciption-1">Failure status code and desciption</h5>
+<ul>
+  <li><code>HTTP/1.1 400 Bad Request</code><br />
+  The format of the client request was incorrect.</li>
+  <li><code>HTTP/1.1 401 Unauthorized</code><br />
+  The request requires authentication.</li>
+  <li><code>HTTP/1.1 409 Conflict</code><br />
+  The data passed-in conflicted with the stored.</li>
+  <li><code>HTTP/1.1 415 Unsupported Media Type</code><br />
+  The requested media type is not supported.  </li>
+</ul>
+
+<h5 id="headers">Headers</h5>
+<ul>
+  <li><code>Location</code><br />
+  URL to the resource.</li>
+</ul>
+
+<h3 id="http-post-method">HTTP POST Method</h3>
+<p>Example of a POST request:</p>
+
+<p><code>http://server:port/myapp/cars/1</code></p>
+
+<h5 id="success-status-code-and-returned-body-2">Success status code and returned body</h5>
+<ul>
+  <li><code>HTTP/1.1 201 Created</code><br />
+  The newly added data.</li>
+</ul>
+
+<h5 id="failure-status-code-and-desciption-2">Failure status code and desciption</h5>
+<ul>
+  <li><code>HTTP/1.1 400 Bad Request</code><br />
+  The format of the client request was incorrect.</li>
+  <li><code>HTTP/1.1 401 Unauthorized</code><br />
+  The request requires authentication.</li>
+  <li><code>HTTP/1.1 409 Conflict</code><br />
+  The data passed-in conflicted with the stored.</li>
+  <li><code>HTTP/1.1 415 Unsupported Media Type</code><br />
+  The requested media type is not supported.  </li>
+</ul>
+
+<h5 id="headers-1">Headers</h5>
+<ul>
+  <li><code>Location</code><br />
+  URL to the resource.</li>
+</ul>
+
+<h3 id="http-delete-method">HTTP DELETE Method</h3>
+<p>Example of a DELETE request:</p>
+
+<p><code>http://server:port/myapp/cars/1</code></p>
+
+<h5 id="success-status-code-and-returned-body-3">Success status code and returned body</h5>
+<ul>
+  <li><code>HTTP/1.1 203 No Content</code><br />
+  Empty body.</li>
+</ul>
+
+<h5 id="failure-status-code-and-desciption-3">Failure status code and desciption</h5>
+<ul>
+  <li><code>HTTP/1.1 400 Bad Request</code><br />
+  The format of the client request was incorrect.</li>
+  <li><code>HTTP/1.1 404 Not Found</code><br />
+  The requested resource does not exist.</li>
+</ul>
+
+<hr />
+
+<h2 id="pagination-in-aerogear-controller">Pagination in AeroGear Controller</h2>
+<p>This section describes the pagination metadata expected to be passed between a client and an AeroGear Server Side endpoint (route). </p>
+
+<h3 id="parameters">Parameters</h3>
+<ul>
+  <li><code>offset</code><br />
+The offset of the first element that should be included in the returned collection. Default value is <em>0</em>.</li>
+  <li><code>limit</code><br />
+The number of elements that should be returned. Default value is <em>10</em>.</li>
+</ul>
+
+<h3 id="metadata">Metadata</h3>
+<p>Information about the pagination parameters, and url links to the previous and first pages need to be passed from the server to the clients. 
+There are several options available here:  </p>
+
+<ul>
+  <li>Information is passed in a single HTTP Response Header as defined by the <a href="http://tools.ietf.org/html/draft-nottingham-http-link-header-10">Web Linking</a> specification.</li>
+  <li>Information is passed as multiple HTTP Response Headers  </li>
+</ul>
+
+<h4 id="http-response-headers">HTTP Response Headers</h4>
+<p>Web Linking returns a single response header named <code>Link</code> :<br />
+* <code>Link:</code><br />
+    <a href="https://server:host/myapp/cars?offset=10&amp;limit=10">https://server:host/myapp/cars?offset=10&amp;limit=10</a>; rel=”previous”,<br />
+    <a href="https://server:host/myapp/cars?offset=30&amp;limit=10">https://server:host/myapp/cars?offset=30&amp;limit=10</a>; rel=”next”,  </p>
+
+<p>Alternatively use custom HTTP response headers:</p>
+
+<ul>
+  <li><code>AG-Links-Previous: http://server:host/app/cars?offset=10&amp;limit=10</code> <br />
+ The url to the previous set of items</li>
+  <li><code>AG-Links-Next: http://server:host/app/cars?offset=20&amp;limit=10</code><br />
+ The url to the next set of items  </li>
+</ul>
+
+<p>The <code>AG-</code> prefix above is the default in AeroGear Controller but can be overridden if required. </p>
+
+<hr />
+
+<h2 id="aerogear-security">AeroGear-Security</h2>
+<p>When AeroGear-Security is used as the SecurityProvider for AeroGear-Controller, or possibly deployed standalone, it has a number of endpoints that it exposes which handle different authentication aspects.</p>
+
+<h3 id="registering-a-user">Registering a user</h3>
+
+<p><code>http://server:host/myapp/auth/enroll</code></p>
+
+<h5 id="success-status-code-and-returned-body-4">Success status code and returned body</h5>
+<ul>
+  <li><code>HTTP/1.1 200 OK</code><br />
+  The Body will contain the credentials in JSON format.</li>
+</ul>
+
+<h5 id="failure-status-code-and-desciption-4">Failure status code and desciption</h5>
+<ul>
+  <li><code>HTTP/1.1 400 Bad Request</code><br />
+  The request could not be understood by the server due to malformed syntax.</li>
+</ul>
+
+<h3 id="login">Login</h3>
+
+<p><code>http://server:host/myapp/auth/login</code></p>
+
+<h5 id="success-status-code-and-returned-body-5">Success status code and returned body</h5>
+<ul>
+  <li><code>HTTP/1.1 200 OK</code><br />
+  The Body will contain the credentials in JSON format.</li>
+</ul>
+
+<h5 id="failure-status-code-and-desciption-5">Failure status code and desciption</h5>
+<ul>
+  <li><code>HTTP/1.1 400 Bad Request</code><br />
+  The request could not be understood by the server due to malformed syntax.</li>
+  <li><code>HTTP/1.1 401 Unauthorized</code><br />
+  The request requires user authentication.</li>
+</ul>
+
+<h3 id="logout">Logout</h3>
+
+<p><code>http://server:host/myapp/auth/logout</code></p>
+
+<h5 id="success-status-code-and-returned-body-6">Success status code and returned body</h5>
+<ul>
+  <li><code>HTTP/1.1 200 OK</code><br />
+  The Body will contain the credentials in JSON format.</li>
+</ul>
+
+<h5 id="failure-status-code-and-desciption-6">Failure status code and desciption</h5>
+<ul>
+  <li><code>HTTP/1.1 400 Bad Request</code><br />
+  The request could not be understood by the server due to malformed syntax.</li>
+  <li><code>HTTP/1.1 401 Unauthorized</code>  </li>
+</ul>
+
+</div>
+
+            <div class="clearfix"></div>
+      </div>
+      <footer>
+          <div class="wrapper">
+              <div class="column">
+                  <h3>News</h3>
+                  
+                  <p><a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html">AeroGear 1.0.0 is out!</a></p>
+                  
+                  <p><a href="/news/2013/03/04/aerogear-1.0.0.CR1-is-out/index.html">AeroGear 1.0.0.CR1 is out!</a></p>
+                  
+                  <p><a href="/news/2013/01/30/aerogear-1.0.0.M8-is-out/index.html">AeroGear 1.0.0.M8 is out!</a></p>
+                  
+                  <p><a href="/news/2012/12/20/aerogear-1.0.0.M7-is-out/index.html">AeroGear 1.0.0.M7 is out!</a></p>
+                  
+                  <p><a href="/news/2012/10/24/aerogear-1.0.0.M6-is-out/index.html">AeroGear 1.0.0.M6 is out!</a></p>
+                  
+              </div>
+              <div class="column">
+                  <h3>Get help</h3>
+                  <p><a href="/docs">Documentation</a></p>
+                  <p><a href="/examples">Examples</a></p>
+              </div>
+              <div class="column">
+                  <h3>Contribute</h3>
+                  <p><a href="http://github.com/aerogear" target="_blank">Source code</a></p>
+                  <p><a href="http://issues.jboss.org/browse/AEROGEAR" target="_blank">Issue tracker</a></p>
+                  <p><a href="https://lists.jboss.org/mailman/listinfo/aerogear-dev" target="_blank">Mailing list</a></p>
+                  <p><a href="irc://irc.freenode.net/aerogear" target="_blank">IRC channel</a></p>
+              </div>
+              <div class="column responsive">
+                  <h3>Social</h3>
+                  <p><a href="">Twitter</a></p>
+                  <p><a href="">Google Plus</a></p>
+                  <p><a href="">Facebook</a></p>
+              </div>
+              <div class="column">
+                  <h3><a href="http://twitter.com/AeroGears" target="_blank">@AeroGears</a></h3>
+                  <div id="aerogear-twitter">Loading tweets...</div>
+              </div>
+              <div class="logos">
+                  <p>AeroGear is a <a href="http://www.jboss.org/">JBoss Community</a> project<br class="title-break"> and its development is sponsored<br class="title-break"> by <a href="http://www.redhat.com/">Red Hat, Inc</a>.<br class="title-break"><br>Project code is released under <br class="title-break">the <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache License, v2.0</a>.</p>
+                  <p><a href="http://www.jboss.org/"><img src="/img/jboss_community.png" alt="JBoss Community"></a> <a href="http://www.redhat.com/"><img src="/img/red_hat.png" alt="Red Hat"></a></p>
+                  <p>Copyright &copy; 2012, Red Hat, Inc.</p>
+  <div class="clearfix"></div>
+              </div>
+          </div>
+      </footer>
+      <script src="/js/libs/repo-modified.js"></script>
+      <script src="/js/libs/ba-linkify.min.js"></script>
+      <script src="/js/libs/jquery.twitter.min.js"></script>
+      <script src="/js/libs/jquery.smartresize.js"></script>
+      <script src="/js/script.js"></script>
+  </body>
+</html>

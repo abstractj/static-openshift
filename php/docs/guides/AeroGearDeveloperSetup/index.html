@@ -1,0 +1,500 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+      <title>AeroGear - Developer Setup Guide</title>
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+
+      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="alternate" type="application/atom+xml" title="feed" href="/feed.atom"/>
+      <link rel="stylesheet" href="/css/font-awesome.min.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:600,300,300italic,600italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+      <script src="/js/libs/modernizr-2.6.2.min.js"></script>
+		  <script type="text/javascript">
+
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-28733717-2']);
+			  _gaq.push(['_setDomainName', 'aerogear.org']);
+			  _gaq.push(['_trackPageview']);
+
+			  (function() {
+				  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+
+		  </script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+      <script>window.jQuery || document.write( '<script src="/js/libs/jquery-1.7.2.min.js"><\/script>' )</script>
+  </head>
+  <body>
+      <header>
+          <div class="wrapper">
+              <a href="/"><div id="logo"></div></a>
+              <a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html" class="news fixed">Hey listen!<br class="title-break"> AeroGear 1.0.0 is out!</a>
+          </div>
+      </header>
+         
+      <nav>
+          <div class="wrapper">
+            <div class="links">
+                <a href="/" class="fixed">Home</a>
+                <a href="/download" class="">Get started</a>
+                <a href="/docs" class="">Documentation</a>
+                <a href="/news" class="fixed ">News</a>
+                <a href="/community" class="">Community</a>        
+            </div>
+            <a href="https://www.facebook.com/AeroGearProject"><div class="social facebook"></div></a>
+            <a href="https://plus.google.com/106588661437153585722/posts"><div class="social google-plus"></div></a>
+            <a href="https://www.twitter.com/aerogears"><div class="social twitter"></div></a>
+          </div>    
+          <div class="clearfix"></div>
+      </nav>
+
+      <div class="wrapper inner-container">
+
+          <div class="basic">
+    
+<div class="sect1">
+  <h2 id="_aerogear_developer_tools_guide">AeroGear Developer Tools Guide</h2>
+  
+  <div class="sectionbody">
+<div class="paragraph">
+    
+  <p>This article shows suggestions of common tools that the AeroGear team uses for the development of HTML5 + REST Mobile Apps, Hybrid Apps, and Native Client Apps.</p>
+</div>
+<div class="paragraph">
+    
+  <p><em>note: this guide will assume you plan to use JBoss AS 7 as your backend.( <a href="http://jboss.org/as7">Get It Here</a> )</em></p>
+</div>
+
+<div class="sect2">
+  <h3 id="_getting_started">Getting Started</h3>
+  
+<div class="paragraph">
+    
+  <p>To get started the following are highly recommended</p>
+</div>
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Java 6.0 (Java SDK 1.6)+</p>
+      
+    </li>
+  
+    <li>
+      <p><a href="http://maven.apache.org/download.html">Maven 3+</a></p>
+      
+    </li>
+  
+    <li>
+      <p><a href="https://help.github.com/articles/set-up-git">Git</a></p>
+      
+    </li>
+  
+    <li>
+      <p><a href="http://github.com">Github.com account</a></p>
+      
+    </li>
+  
+    <li>
+      <p><a href="http://developer.android.com/sdk/index.html">Android SDK</a></p>
+      
+    </li>
+  
+    <li>
+      <p><a href="http://incubator.apache.org/cordova/">Apache Cordova</a></p>
+      
+    </li>
+  
+    <li>
+      <p><a href="https://developer.apple.com/">iOS SDK</a></p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_lets_start_coding">Lets Start Coding</h3>
+  
+<div class="paragraph">
+    
+  <p>To start coding and create your new awesome app, you&#8217;ll need an editor.</p>
+</div>
+
+<div class="sect3">
+  <h4 id="_full_fledged_ide_s">Full Fledged IDE&#8217;s</h4>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p><a href="http://www.jboss.org/tools">JBoss Tools</a></p>
+      
+    </li>
+  
+    <li>
+      <p><a href="http://www.redhat.com/products/jbossenterprisemiddleware/developer-studio/">JBoss Developer Studio</a></p>
+      
+    </li>
+  
+    <li>
+      <p><a href="http://www.jetbrains.com/idea/">Intelli J</a></p>
+      
+    </li>
+  
+    <li>
+      <p><a href="https://developer.apple.com/">Xcode</a> - OS X only</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_text_editors">Text Editors</h4>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p><a href="http://www.vim.org/">Vim</a></p>
+      
+    </li>
+  
+    <li>
+      <p><a href="http://sublimetext.com">Sublime Text 2</a> - see below for recommended packages</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_debuging">Debuging</h4>
+  
+<div class="paragraph">
+    
+  <p>The Full Fledged IDE&#8217;s all have good debbugers for compiled code, but for JavaScript(mobile web) there are options:</p>
+</div>
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p><a href="https://www.google.com/intl/en/chrome/browser/">Chrome Developer Tools</a></p>
+      
+    </li>
+  
+    <li>
+      <p><a href="http://getfirebug.com/">Firebug</a></p>
+      
+    </li>
+  
+    <li>
+      <p><a href="http://www.apple.com/safari/">Safari Web Inspector</a></p>
+      
+    </li>
+  
+  </ul>
+</div>
+<div class="paragraph">
+    
+  <p>However, debugging a remote Web App gets a little tricky.</p>
+</div>
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>iOS 6</p>
+      
+    </li>
+  
+    <li>
+      <p><a href="http://people.apache.org/~pmuellr/weinre/docs/latest/">WEINRE</a></p>
+      
+    </li>
+  
+    <li>
+      <p><a href="https://developers.google.com/chrome/mobile/docs/debugging">Chrome for Android</a></p>
+      
+    </li>
+  
+    <li>
+      <p><a href="https://github.com/square/PonyDebugger#readme">PonyDebugger</a></p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_communication">Communication</h3>
+  
+<div class="paragraph">
+    
+  <p>As stated by <a href="../Contributing">this guide</a>, communication is key.  Here are some IRC programs:</p>
+</div>
+
+<div class="sect3">
+  <h4 id="_multi_platform">Multi-Platform</h4>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p><a href="http://www.pidgin.im/">Pidgin</a></p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_os_x">OS X</h4>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p><a href="http://adium.im/">Adium</a></p>
+      
+    </li>
+  
+    <li>
+      <p><a href="http://codeux.com/textual/">Textual</a></p>
+      
+    </li>
+  
+    <li>
+      <p><a href="http://limechat.net/mac/">Limechat</a></p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_windows">Windows</h4>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p><a href="http://www.mirc.com/">mIRC</a></p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_sublime_text_2_packages">Sublime Text 2 Packages</h3>
+  
+<div class="paragraph">
+    
+  <p>according to <a href="http://www.sublimetext.com/">sublimetext.com</a> :</p>
+</div>
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre>Sublime Text is a sophisticated text editor for code, markup and prose.
+You'll love the slick user interface, extraordinary features and amazing performance.</pre>
+    
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>Here are some packages that will help the development process:</p>
+</div>
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>SublimeLinter</p>
+      
+    </li>
+  
+    <li>
+      <p>TrailingSpaces</p>
+      
+    </li>
+  
+    <li>
+      <p>Markdown Preview</p>
+      
+    </li>
+  
+  </ul>
+</div>
+<div class="admonitionblock">
+  <table>
+    <tr>
+      <td class="icon">
+        
+        <div class="title">Tip</div>
+        
+      </td>
+      <td class="content">
+        
+        The easiest way to install packages is through the <a href="http://wbond.net/sublime_packages/package_control/installation">package manager</a>.
+
+      </td>
+    </tr>
+  </table>
+</div>
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_utilities">Utilities</h3>
+  
+<div class="paragraph">
+    
+  <p>Helpful utility packages:</p>
+</div>
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p><a href="http://mxcl.github.com/homebrew/">homebrew</a></p>
+      
+    </li>
+  
+    <li>
+      <p><a href="http://howtonode.org/how-to-install-nodejs">node</a></p>
+      
+    </li>
+  
+    <li>
+      <p><a href="http://kdiff3.sourceforge.net/">kdiff3</a></p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+  </div>
+  
+</div>
+
+
+
+</div>
+
+            <div class="clearfix"></div>
+      </div>
+      <footer>
+          <div class="wrapper">
+              <div class="column">
+                  <h3>News</h3>
+                  
+                  <p><a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html">AeroGear 1.0.0 is out!</a></p>
+                  
+                  <p><a href="/news/2013/03/04/aerogear-1.0.0.CR1-is-out/index.html">AeroGear 1.0.0.CR1 is out!</a></p>
+                  
+                  <p><a href="/news/2013/01/30/aerogear-1.0.0.M8-is-out/index.html">AeroGear 1.0.0.M8 is out!</a></p>
+                  
+                  <p><a href="/news/2012/12/20/aerogear-1.0.0.M7-is-out/index.html">AeroGear 1.0.0.M7 is out!</a></p>
+                  
+                  <p><a href="/news/2012/10/24/aerogear-1.0.0.M6-is-out/index.html">AeroGear 1.0.0.M6 is out!</a></p>
+                  
+              </div>
+              <div class="column">
+                  <h3>Get help</h3>
+                  <p><a href="/docs">Documentation</a></p>
+                  <p><a href="/examples">Examples</a></p>
+              </div>
+              <div class="column">
+                  <h3>Contribute</h3>
+                  <p><a href="http://github.com/aerogear" target="_blank">Source code</a></p>
+                  <p><a href="http://issues.jboss.org/browse/AEROGEAR" target="_blank">Issue tracker</a></p>
+                  <p><a href="https://lists.jboss.org/mailman/listinfo/aerogear-dev" target="_blank">Mailing list</a></p>
+                  <p><a href="irc://irc.freenode.net/aerogear" target="_blank">IRC channel</a></p>
+              </div>
+              <div class="column responsive">
+                  <h3>Social</h3>
+                  <p><a href="">Twitter</a></p>
+                  <p><a href="">Google Plus</a></p>
+                  <p><a href="">Facebook</a></p>
+              </div>
+              <div class="column">
+                  <h3><a href="http://twitter.com/AeroGears" target="_blank">@AeroGears</a></h3>
+                  <div id="aerogear-twitter">Loading tweets...</div>
+              </div>
+              <div class="logos">
+                  <p>AeroGear is a <a href="http://www.jboss.org/">JBoss Community</a> project<br class="title-break"> and its development is sponsored<br class="title-break"> by <a href="http://www.redhat.com/">Red Hat, Inc</a>.<br class="title-break"><br>Project code is released under <br class="title-break">the <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache License, v2.0</a>.</p>
+                  <p><a href="http://www.jboss.org/"><img src="/img/jboss_community.png" alt="JBoss Community"></a> <a href="http://www.redhat.com/"><img src="/img/red_hat.png" alt="Red Hat"></a></p>
+                  <p>Copyright &copy; 2012, Red Hat, Inc.</p>
+  <div class="clearfix"></div>
+              </div>
+          </div>
+      </footer>
+      <script src="/js/libs/repo-modified.js"></script>
+      <script src="/js/libs/ba-linkify.min.js"></script>
+      <script src="/js/libs/jquery.twitter.min.js"></script>
+      <script src="/js/libs/jquery.smartresize.js"></script>
+      <script src="/js/script.js"></script>
+  </body>
+</html>

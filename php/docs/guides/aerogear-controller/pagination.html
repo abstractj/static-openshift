@@ -1,0 +1,335 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+      <title>AeroGear - AeroGear Controller Pagination</title>
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+
+      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="alternate" type="application/atom+xml" title="feed" href="/feed.atom"/>
+      <link rel="stylesheet" href="/css/font-awesome.min.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:600,300,300italic,600italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+      <script src="/js/libs/modernizr-2.6.2.min.js"></script>
+		  <script type="text/javascript">
+
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-28733717-2']);
+			  _gaq.push(['_setDomainName', 'aerogear.org']);
+			  _gaq.push(['_trackPageview']);
+
+			  (function() {
+				  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+
+		  </script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+      <script>window.jQuery || document.write( '<script src="/js/libs/jquery-1.7.2.min.js"><\/script>' )</script>
+  </head>
+  <body>
+      <header>
+          <div class="wrapper">
+              <a href="/"><div id="logo"></div></a>
+              <a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html" class="news fixed">Hey listen!<br class="title-break"> AeroGear 1.0.0 is out!</a>
+          </div>
+      </header>
+         
+      <nav>
+          <div class="wrapper">
+            <div class="links">
+                <a href="/" class="fixed">Home</a>
+                <a href="/download" class="">Get started</a>
+                <a href="/docs" class="">Documentation</a>
+                <a href="/news" class="fixed ">News</a>
+                <a href="/community" class="">Community</a>        
+            </div>
+            <a href="https://www.facebook.com/AeroGearProject"><div class="social facebook"></div></a>
+            <a href="https://plus.google.com/106588661437153585722/posts"><div class="social google-plus"></div></a>
+            <a href="https://www.twitter.com/aerogears"><div class="social twitter"></div></a>
+          </div>    
+          <div class="clearfix"></div>
+      </nav>
+
+      <div class="wrapper inner-container">
+
+          <div class="basic">
+    <h2 id="pagination-in-aerogear-controller">Pagination in AeroGear Controller</h2>
+<p>Pagination is the ability to return a limited number of elements in response to a call. The number of elements returned is 
+referred to as a page.   </p>
+
+<p>In AeroGear Controller the strategy used for implementing pagination is using an offset/limit:  </p>
+
+<ul>
+  <li>
+    <p><code>offset</code><br />
+The offset of the first element that should be included in the returned collection. Default value is <em>0</em>.  </p>
+  </li>
+  <li>
+    <p><code>limit</code><br />
+The number of elements that should be returned. Default value is <em>10</em>.  </p>
+  </li>
+</ul>
+
+<h3 id="paging-example">Paging example</h3>
+<p>Let’s look at an example of a Route with an endpoint that supports pagination:</p>
+
+<pre><code>route()
+       .from("/cars")
+       .on(RequestMethod.GET)
+       .produces(JSON)
+       .to(Cars.class).findCarsBy(param(PaginationInfo.class), param("color"));
+</code></pre>
+
+<p><a href="http://aerogear.org/docs/specs/aerogear-controller/org/jboss/aerogear/controller/router/rest/pagination/PaginationInfo.html">PaginationInfo</a> is used to avoid having to add the params for <code>offset</code> and <code>limit</code> which would otherwise have 
+been required:</p>
+
+<pre><code>route()
+       .from("/cars")
+       .on(RequestMethod.GET)
+       .produces(JSON)
+       .to(Cars.class).findCarsBy(param("offset"), param("limit"), param("color"));
+</code></pre>
+
+<p>This might not look too bad, but imaging that you need to specify several query parameters in addition to <code>color</code> in the 
+example above, and it can get pretty messy. So, instead we use the <code>PaginationInfo</code> type, which it will be populated with 
+values from the request which are then available to the target method. This information can then be used by the endpoint target 
+method to return a paged collection of data.</p>
+
+<p>The target endpoint method, <code>findCarsBy</code> in this example, is annotated and this is where pagination can be configured:</p>
+
+<pre><code>@Paginated 
+public List&lt;Car&gt; findCarsBy(PaginationInfo paginationInfo, String color) {
+    return getCars(paginationInfo.getOffset(), color, paginationInfo.getLimit());
+}
+</code></pre>
+
+<h3 id="configuration-options">Configuration Options</h3>
+<p>The <a href="http://aerogear.org/docs/specs/aerogear-controller/org/jboss/aerogear/controller/router/rest/pagination/Paginated.html">Paginated</a> 
+annotation has options that can be overridden:    </p>
+
+<ul>
+  <li>
+    <p><code>offsetParamName</code><br />
+The name of the query parameter used for the <em>offset</em>. If not specified defaults to ‘offset’.  </p>
+  </li>
+  <li>
+    <p><code>defaultOffset</code><br />
+The value to be used as the default ‘offset’ if no query parameter named ‘offsetParamName’ was included in the request.  </p>
+  </li>
+  <li>
+    <p><code>limitParamName</code><br />
+The name of the query parameter used for the ‘limit’. If not specified defaults to ‘limit’.    </p>
+  </li>
+  <li>
+    <p><code>defaultLimit</code><br />
+The value to be used as the default ‘limit’ if no query parameter named ‘limitParamName’ was included in the request.  </p>
+  </li>
+  <li>
+    <p><code>customHeadersPrefix</code><br />
+The prefix to be used for next/previous HTTP response headers. Defaults to ‘AG-‘.  </p>
+  </li>
+  <li>
+    <p><code>webLinking</code><br />
+Determines if Web Linking should be used, or false if custom HTTP headers should be used.  </p>
+  </li>
+</ul>
+
+<h3 id="linking">Linking</h3>
+<p>Related to pagination is also the ability to navigate, to get to the <code>next</code>/<code>previous</code> page.   </p>
+
+<h4 id="web-linking">Web Linking</h4>
+<p>By default AeroGear-Controller uses the <a href="http://tools.ietf.org/html/rfc5988">Web Linking</a> standard.</p>
+
+<h4 id="web-linking-example">Web Linking example:</h4>
+
+<pre><code>@Paginated 
+public List&lt;Car&gt; findCarsBy(PaginationInfo pinfo, String color) {
+    return getCars(paginationInfo.getOffset(), color, paginationInfo.getLimit());
+}
+</code></pre>
+
+<p>The response from calling the above route would return a single header named <code>Link</code>:   </p>
+
+<pre><code>Link: 
+&lt;http://host/app/cars?offset=0&amp;color=red&amp;limit=5&gt;; rel="previous",  
+&lt;http://host/app/cars?offset=10&amp;color=red&amp;limit=5&gt;; rel="next"  
+</code></pre>
+
+<h4 id="custom-link-headers">Custom Link Headers</h4>
+<p>Web Linking can be disabled in favor of the perhaps simpler option of custom headers.</p>
+
+<h4 id="custom-headers-with-the-default-prefix-example">Custom Headers with the default prefix example:</h4>
+
+<pre><code>@Paginated (webLinking = false)
+public List&lt;Car&gt; findCarsBy(PaginationInfo pinfo, String color) {
+    return getCars(paginationInfo.getOffset(), color, paginationInfo.getLimit());
+}  
+</code></pre>
+
+<p>This example would use a default prefix of <code>AG-</code> and would return two headers:  </p>
+
+<pre><code>AG-Links-Previous: http://host/app/cars?offset=0&amp;color=red&amp;limit=5
+AG-Links-Next:  http://host/app/cars?offset=10&amp;color=red&amp;limit=5
+</code></pre>
+
+<h4 id="custom-headers-with-custom-prefix-example">Custom Headers with custom prefix example:</h4>
+
+<pre><code>@Paginated (webLinking = false, customHeadersPrefix = "Test-")
+public List&lt;Car&gt; findCarsBy(PaginationInfo pinfo, String color) {
+    return getCars(paginationInfo.getOffset(), color, paginationInfo.getLimit());
+}
+</code></pre>
+
+<p>This example would use a default prefix of <code>Test-</code> and would return two headers:  </p>
+
+<pre><code>Test-Links-Previous: http://host/app/cars?offset=0&amp;color=red&amp;limit=5
+Test-Links-Next:  http://host/app/cars?offset=10&amp;color=red&amp;limit=5
+</code></pre>
+
+<h3 id="custom-paging-strategy">Custom Paging Strategy</h3>
+<p>This section describes how a custom pagination strategy can be implemented in AeroGear Controller.  </p>
+
+<p>Depending on if you need a completely different strategy, or if you simply want to modify the returned HTTP response 
+headers, you have two options:  </p>
+
+<ul>
+  <li>Extend AbstractPaginationStrategy  </li>
+  <li>Implement PaginationStrategy  </li>
+</ul>
+
+<h4 id="extend-abstractpaginationstrategy">Extend AbstractPaginationStrategy</h4>
+<p>You would extend AbstractPaginationStrategy if you simply want to change/add/rename the returned HTTP response headers, 
+for example: </p>
+
+<pre><code>public class MyStrategy extends AbstractPaginationStrategy {
+
+    @Override
+    public void setResponseHeaders(PaginationMetadata md, 
+        HttpServletResponse response, 
+        int resultSize) {
+        for (Entry&lt;String, String&gt; entry : md.getHeaders(resultSize).entrySet()) {
+            response.setHeader(entry.getKey(), entry.getValue());
+        }
+    }
+}
+</code></pre>
+
+<p>This implementation actually does exactly what the default implementation does. But you can of course modify this to suite 
+your own requirements. You have access to all the 
+<a href="http://aerogear.org/docs/specs/aerogear-controller/org/jboss/aerogear/controller/router/rest/pagination/PagingMetadata.html">metadata</a> 
+for the pagination, like the raw <a href="http://aerogear.org/docs/specs/aerogear-controller/org/jboss/aerogear/controller/router/rest/pagination/Links.html">links</a> 
+etc, so you could assemble headers in any way you see fit.</p>
+
+<h4 id="implement-paginationstrategy">Implement PaginationStrategy</h4>
+<p>This will give you more control over the pagination strategy. The interface you have to implement is 
+<a href="http://aerogear.org/docs/specs/aerogear-controller/org/jboss/aerogear/controller/router/rest/pagination/PaginationStrategy.html">PaginationStrategy</a>:</p>
+
+<pre><code>public interface PaginationStrategy {
+
+    PaginationInfo createPaginationInfo(RouteContext routeContext, Map&lt;String, Object&gt; arguments);
+
+    Object[] preInvocation(PaginationInfo pagingInfo, Map&lt;String, Object&gt; arguments); 
+
+    Object postInvocation(Object result, RouteContext routeContext, PaginationInfo pagingInfo);
+
+}
+</code></pre>
+
+<p><code>createPaginationInfo</code> is called by AeroGear Controller prior to invoking the target endpoint method. 
+The arguments extracted from the current HTTP request are made available to this method. The implementation can choose whatever 
+way it likes to match information from the request that are related to pagination. This could be using an annotation on the 
+target endpoint method (which is what the default implementation does) or it could simply pick known parameters from the request.   </p>
+
+<p><code>preInvocation</code> gives the strategy a chance to modify the actual arguments that will be used to invoke the 
+target endpoint method. Depending on the concrete implementation there might not be anything to be done here other than 
+returning the arguments map unchanged. But, for example the default strategy, an endpoint has the option to accept 
+a <em>PaginationInfo</em> type a parameter. In this case we have to add this instance to the arguments before calling the endpoint.  </p>
+
+<p><code>postInvocation</code> is called after the target endpoint method has been invoked allows the strategy to set the 
+HTTP Response headers. This method has access to the results of the invocation which it can use to decide on what links should 
+be returned. For example, one might not want to return a previous or next link header if there is no more data 
+(the number of items in the results is less than the limit).</p>
+
+<h4 id="configuring-the-strategy-to-be-used">Configuring the Strategy to be used</h4>
+<p>Simply implement the strategy as a standalone class:</p>
+
+<pre><code>public class CustomPaginationStrategy extends AbstractPaginationStrategy {
+
+    @Override
+    public void setResponseHeaders(PaginationMetadata metadata, HttpServletResponse response, int resultSize) {
+        final Map&lt;String, String&gt; headers = metadata.getHeaders(resultSize);
+        Set&lt;Entry&lt;String, String&gt;&gt; entrySet = headers.entrySet();
+        for (Entry&lt;String, String&gt; entry : entrySet) {
+            response.setHeader(entry.getKey(), entry.getValue());
+        }
+    }
+
+}
+</code></pre>
+
+
+</div>
+
+            <div class="clearfix"></div>
+      </div>
+      <footer>
+          <div class="wrapper">
+              <div class="column">
+                  <h3>News</h3>
+                  
+                  <p><a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html">AeroGear 1.0.0 is out!</a></p>
+                  
+                  <p><a href="/news/2013/03/04/aerogear-1.0.0.CR1-is-out/index.html">AeroGear 1.0.0.CR1 is out!</a></p>
+                  
+                  <p><a href="/news/2013/01/30/aerogear-1.0.0.M8-is-out/index.html">AeroGear 1.0.0.M8 is out!</a></p>
+                  
+                  <p><a href="/news/2012/12/20/aerogear-1.0.0.M7-is-out/index.html">AeroGear 1.0.0.M7 is out!</a></p>
+                  
+                  <p><a href="/news/2012/10/24/aerogear-1.0.0.M6-is-out/index.html">AeroGear 1.0.0.M6 is out!</a></p>
+                  
+              </div>
+              <div class="column">
+                  <h3>Get help</h3>
+                  <p><a href="/docs">Documentation</a></p>
+                  <p><a href="/examples">Examples</a></p>
+              </div>
+              <div class="column">
+                  <h3>Contribute</h3>
+                  <p><a href="http://github.com/aerogear" target="_blank">Source code</a></p>
+                  <p><a href="http://issues.jboss.org/browse/AEROGEAR" target="_blank">Issue tracker</a></p>
+                  <p><a href="https://lists.jboss.org/mailman/listinfo/aerogear-dev" target="_blank">Mailing list</a></p>
+                  <p><a href="irc://irc.freenode.net/aerogear" target="_blank">IRC channel</a></p>
+              </div>
+              <div class="column responsive">
+                  <h3>Social</h3>
+                  <p><a href="">Twitter</a></p>
+                  <p><a href="">Google Plus</a></p>
+                  <p><a href="">Facebook</a></p>
+              </div>
+              <div class="column">
+                  <h3><a href="http://twitter.com/AeroGears" target="_blank">@AeroGears</a></h3>
+                  <div id="aerogear-twitter">Loading tweets...</div>
+              </div>
+              <div class="logos">
+                  <p>AeroGear is a <a href="http://www.jboss.org/">JBoss Community</a> project<br class="title-break"> and its development is sponsored<br class="title-break"> by <a href="http://www.redhat.com/">Red Hat, Inc</a>.<br class="title-break"><br>Project code is released under <br class="title-break">the <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache License, v2.0</a>.</p>
+                  <p><a href="http://www.jboss.org/"><img src="/img/jboss_community.png" alt="JBoss Community"></a> <a href="http://www.redhat.com/"><img src="/img/red_hat.png" alt="Red Hat"></a></p>
+                  <p>Copyright &copy; 2012, Red Hat, Inc.</p>
+  <div class="clearfix"></div>
+              </div>
+          </div>
+      </footer>
+      <script src="/js/libs/repo-modified.js"></script>
+      <script src="/js/libs/ba-linkify.min.js"></script>
+      <script src="/js/libs/jquery.twitter.min.js"></script>
+      <script src="/js/libs/jquery.smartresize.js"></script>
+      <script src="/js/script.js"></script>
+  </body>
+</html>

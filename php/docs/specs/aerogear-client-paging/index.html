@@ -1,0 +1,217 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+      <title>AeroGear - AeroGear Client Paging</title>
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+
+      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="alternate" type="application/atom+xml" title="feed" href="/feed.atom"/>
+      <link rel="stylesheet" href="/css/font-awesome.min.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:600,300,300italic,600italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+      <script src="/js/libs/modernizr-2.6.2.min.js"></script>
+		  <script type="text/javascript">
+
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-28733717-2']);
+			  _gaq.push(['_setDomainName', 'aerogear.org']);
+			  _gaq.push(['_trackPageview']);
+
+			  (function() {
+				  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+
+		  </script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+      <script>window.jQuery || document.write( '<script src="/js/libs/jquery-1.7.2.min.js"><\/script>' )</script>
+  </head>
+  <body>
+      <header>
+          <div class="wrapper">
+              <a href="/"><div id="logo"></div></a>
+              <a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html" class="news fixed">Hey listen!<br class="title-break"> AeroGear 1.0.0 is out!</a>
+          </div>
+      </header>
+         
+      <nav>
+          <div class="wrapper">
+            <div class="links">
+                <a href="/" class="fixed">Home</a>
+                <a href="/download" class="">Get started</a>
+                <a href="/docs" class="">Documentation</a>
+                <a href="/news" class="fixed ">News</a>
+                <a href="/community" class="">Community</a>        
+            </div>
+            <a href="https://www.facebook.com/AeroGearProject"><div class="social facebook"></div></a>
+            <a href="https://plus.google.com/106588661437153585722/posts"><div class="social google-plus"></div></a>
+            <a href="https://www.twitter.com/aerogears"><div class="social twitter"></div></a>
+          </div>    
+          <div class="clearfix"></div>
+      </nav>
+
+      <div class="wrapper inner-container">
+
+          <div class="basic">
+    <h1 id="client-paging">Client Paging</h1>
+
+<p>This document describes the client side interfaces which a developer can use to Page through data obtained from remote rest services.  This document describes both how to interact with the Aerogear-Controller based paging as well how to extend the client libraries and APIs to support most other restful services.</p>
+
+<p>At a high level, Paging is supported through the Pipe’s <code>read</code> method (see the platform API doc, for specific details).</p>
+
+<h2 id="set-up-the-paging">Set up the Paging</h2>
+
+<p>In order to start a paging request, the API needs to accept a configuration setting, which sets the offset of the first element that should be included in the returned collection (<code>offset</code>) and the number of results that should be listed on a page (<code>limit</code>). The different platform SDKs may support different ways to apply the <em>paging configuration</em> (see the platform API doc, for specific details).</p>
+
+<p>The actual Pipe implementation will be responsible for processing a request along with any paging data and sending the appropriate headers, data, and query parameters to the server (see <a href="https://gist.github.com/4537431">Server API spec</a>).  Once the response has been received, the Pipe implementation will provide the result to the supplied callback (see the platform API doc, for specific details).</p>
+
+<hr />
+
+<h2 id="the-paging-configuration">The Paging configuration</h2>
+
+<p>An object to apply general information about a (paging) request.</p>
+
+<h3 id="properties">Properties</h3>
+
+<h4 id="pipe-level">Pipe level</h4>
+
+<p><em>locations</em></p>
+
+<ul>
+  <li><em>metadataLocation</em>: String, indicates whether paging information (see <code>identifiers</code>) is received from the response <code>header</code>, the response body (<code>body</code>) or via <a href="http://tools.ietf.org/html/rfc5988">RFC 5988</a> (<code>webLinking</code>), which is the <code>default</code>.</li>
+</ul>
+
+<p><em>Linking</em></p>
+
+<ul>
+  <li><em>nextIdentifier</em>: String, the <code>next</code> identifier name (default: <code>next</code>) </li>
+  <li><em>previousIdentifier</em>: String, the <code>previous</code> identifier name (default: <code>previous</code>) </li>
+</ul>
+
+<p><em>NOTE:</em> The AeroGear-Controller uses the <a href="http://tools.ietf.org/html/draft-nottingham-http-link-header-10">Web Linking</a> API for this.</p>
+
+<h4 id="request--and-pipe--level">Request- and Pipe- level</h4>
+
+<p>The <em>paging parameters</em> can be defined on the Pipe and on the <em>paging request</em>. For instance an initial default (e.g. list always 15 items per page and always start at the second page) works fine on the Pipe. The Pipe is responsible to maintain the paging requests (e.g. <code>next</code> or <code>previous</code>), by using the given <code>identifier</code>s.</p>
+
+<p>However, it should be always possible for a user to update the arguments on a <em>per request</em> base. For instance if the application needs to show for a specific reason <code>20</code> items <em>instead</em> of the 15 from the beginning. Another reason could be the server does <em>not</em> support the above discussed <code>identifier</code>s, so the application developer needs to maintain the <em>next</em> and <em>previous</em> information.</p>
+
+<h5 id="default-parameter-providers">DEFAULT parameter providers</h5>
+
+<p><em>offset</em></p>
+
+<ul>
+  <li><em>offsetValue</em>: String, the offset of the first element that should be included in the returned collection (default: <code>0</code>)</li>
+</ul>
+
+<p><em>limit</em> </p>
+
+<ul>
+  <li><em>limitValue</em>: int, the maximum number of results the server should return (default: <code>10</code>)</li>
+</ul>
+
+<h5 id="custom-parameter-providers">CUSTOM parameter providers</h5>
+
+<p>A <code>parameter provider</code> API will be provided to that the application developer can submit any (paging) parameter that the used server requires. An example would be that the used paging service supports sorting as well. </p>
+
+<hr />
+
+<h3 id="the-pagination---scrolling-through-the-result-set">The Pagination - Scrolling through the result set</h3>
+
+<p>In order to navigate through a large data set, the following methods are required. The actual implementation can be different, based on the used SDK (see the platform API doc, for specific details).</p>
+
+<h3 id="methods">Methods</h3>
+<ul>
+  <li><em>next</em>: Reads the next ‘page’ of the paging result, from the server.</li>
+  <li><em>previous</em>: Reads the previous ‘page’ of the paging result, from the server.</li>
+</ul>
+
+<p><em>NOTE:</em> When scrolling outside of the allowed range (e.g. invoking <code>next</code> on the last page), the client should be able to handle any success response, whether there is data or not, and also any error response.</p>
+
+<hr />
+
+<h2 id="use-cases---behaviour">Use cases - Behaviour</h2>
+
+<h3 id="start-the-pagination-and-next">start the pagination and next</h3>
+
+<ul>
+  <li>start a <code>paged read</code> (see concrete API docs for details)</li>
+  <li>this returns the first page</li>
+  <li>scroll to the <code>next</code> or <code>last</code> page - if possible/desired </li>
+</ul>
+
+<h3 id="jump-to-a-specific-page">Jump to a specific page</h3>
+
+<ul>
+  <li>set up the paging configuration (set the <code>offset</code> to the desired page, e.g <code>offset:3</code>)</li>
+  <li>issue a <code>read</code></li>
+  <li>This returns the desired page</li>
+  <li>For there you can scroll (<code>next</code> or <code>previous</code>, if possible…)</li>
+</ul>
+
+
+</div>
+
+            <div class="clearfix"></div>
+      </div>
+      <footer>
+          <div class="wrapper">
+              <div class="column">
+                  <h3>News</h3>
+                  
+                  <p><a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html">AeroGear 1.0.0 is out!</a></p>
+                  
+                  <p><a href="/news/2013/03/04/aerogear-1.0.0.CR1-is-out/index.html">AeroGear 1.0.0.CR1 is out!</a></p>
+                  
+                  <p><a href="/news/2013/01/30/aerogear-1.0.0.M8-is-out/index.html">AeroGear 1.0.0.M8 is out!</a></p>
+                  
+                  <p><a href="/news/2012/12/20/aerogear-1.0.0.M7-is-out/index.html">AeroGear 1.0.0.M7 is out!</a></p>
+                  
+                  <p><a href="/news/2012/10/24/aerogear-1.0.0.M6-is-out/index.html">AeroGear 1.0.0.M6 is out!</a></p>
+                  
+              </div>
+              <div class="column">
+                  <h3>Get help</h3>
+                  <p><a href="/docs">Documentation</a></p>
+                  <p><a href="/examples">Examples</a></p>
+              </div>
+              <div class="column">
+                  <h3>Contribute</h3>
+                  <p><a href="http://github.com/aerogear" target="_blank">Source code</a></p>
+                  <p><a href="http://issues.jboss.org/browse/AEROGEAR" target="_blank">Issue tracker</a></p>
+                  <p><a href="https://lists.jboss.org/mailman/listinfo/aerogear-dev" target="_blank">Mailing list</a></p>
+                  <p><a href="irc://irc.freenode.net/aerogear" target="_blank">IRC channel</a></p>
+              </div>
+              <div class="column responsive">
+                  <h3>Social</h3>
+                  <p><a href="">Twitter</a></p>
+                  <p><a href="">Google Plus</a></p>
+                  <p><a href="">Facebook</a></p>
+              </div>
+              <div class="column">
+                  <h3><a href="http://twitter.com/AeroGears" target="_blank">@AeroGears</a></h3>
+                  <div id="aerogear-twitter">Loading tweets...</div>
+              </div>
+              <div class="logos">
+                  <p>AeroGear is a <a href="http://www.jboss.org/">JBoss Community</a> project<br class="title-break"> and its development is sponsored<br class="title-break"> by <a href="http://www.redhat.com/">Red Hat, Inc</a>.<br class="title-break"><br>Project code is released under <br class="title-break">the <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache License, v2.0</a>.</p>
+                  <p><a href="http://www.jboss.org/"><img src="/img/jboss_community.png" alt="JBoss Community"></a> <a href="http://www.redhat.com/"><img src="/img/red_hat.png" alt="Red Hat"></a></p>
+                  <p>Copyright &copy; 2012, Red Hat, Inc.</p>
+  <div class="clearfix"></div>
+              </div>
+          </div>
+      </footer>
+      <script src="/js/libs/repo-modified.js"></script>
+      <script src="/js/libs/ba-linkify.min.js"></script>
+      <script src="/js/libs/jquery.twitter.min.js"></script>
+      <script src="/js/libs/jquery.smartresize.js"></script>
+      <script src="/js/script.js"></script>
+  </body>
+</html>

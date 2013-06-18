@@ -1,0 +1,357 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+      <title>AeroGear - AeroGear Security Overview</title>
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+
+      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="alternate" type="application/atom+xml" title="feed" href="/feed.atom"/>
+      <link rel="stylesheet" href="/css/font-awesome.min.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:600,300,300italic,600italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+      <script src="/js/libs/modernizr-2.6.2.min.js"></script>
+		  <script type="text/javascript">
+
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-28733717-2']);
+			  _gaq.push(['_setDomainName', 'aerogear.org']);
+			  _gaq.push(['_trackPageview']);
+
+			  (function() {
+				  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+
+		  </script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+      <script>window.jQuery || document.write( '<script src="/js/libs/jquery-1.7.2.min.js"><\/script>' )</script>
+  </head>
+  <body>
+      <header>
+          <div class="wrapper">
+              <a href="/"><div id="logo"></div></a>
+              <a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html" class="news fixed">Hey listen!<br class="title-break"> AeroGear 1.0.0 is out!</a>
+          </div>
+      </header>
+         
+      <nav>
+          <div class="wrapper">
+            <div class="links">
+                <a href="/" class="fixed">Home</a>
+                <a href="/download" class="">Get started</a>
+                <a href="/docs" class="">Documentation</a>
+                <a href="/news" class="fixed ">News</a>
+                <a href="/community" class="">Community</a>        
+            </div>
+            <a href="https://www.facebook.com/AeroGearProject"><div class="social facebook"></div></a>
+            <a href="https://plus.google.com/106588661437153585722/posts"><div class="social google-plus"></div></a>
+            <a href="https://www.twitter.com/aerogears"><div class="social twitter"></div></a>
+          </div>    
+          <div class="clearfix"></div>
+      </nav>
+
+      <div class="wrapper inner-container">
+
+          <div class="basic">
+    <h2 id="overview">Overview</h2>
+<p>AeroGear Security is <em>not</em> a framework, but just a small subset of classes to provide integration with security providers written in Java like <a href="http://www.jboss.org/picketlink">PicketLink</a>. It also includes some recommended practices against already known attacks.</p>
+
+<p>It currently depends on any JEE application server that has 
+a <em>Context and Dependency Injection</em> (<a href="http://jcp.org/en/jsr/detail?id=299">CDI</a>) and can be easily integrated with <a href="../aerogear-controller">AeroGear Controller</a></p>
+
+<h2 id="license">License</h2>
+<p>AeroGear Security is distributed under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License, Version 2.0</a>.</p>
+
+<h2 id="installation">Installation</h2>
+
+<ol>
+  <li>
+    <p>add the maven dependency</p>
+
+    <pre><code> &lt;dependency&gt;
+     &lt;groupId&gt;org.jboss.aerogear&lt;/groupId&gt;
+     &lt;artifactId&gt;aerogear-security&lt;/artifactId&gt;
+     &lt;version&gt;1.0.1&lt;/version&gt;
+     &lt;scope&gt;compile&lt;/scope&gt;
+ &lt;/dependency&gt;
+</code></pre>
+  </li>
+  <li>
+    <p>AeroGear Security doesn’t reinvent the wheel and makes use of the existing security providers. For now only PicketLink is supported:</p>
+
+    <pre><code> &lt;dependency&gt;
+      &lt;groupId&gt;org.jboss.aerogear&lt;/groupId&gt;
+      &lt;artifactId&gt;aerogear-security-picketlink&lt;/artifactId&gt;
+      &lt;version&gt;1.0.1&lt;/version&gt;
+      &lt;scope&gt;compile&lt;/scope&gt;
+ &lt;/dependency&gt;
+</code></pre>
+  </li>
+</ol>
+
+<h2 id="aerogear-controller-integration">AeroGear Controller integration</h2>
+
+<p>AeroGear Controller and Security are not tied together, but we’ve choosen to use a SPI (<em>Service Provider Interface</em>) to allow developers to easily add secured route support. For more information about how to create a simple project with AeroGear Controller, please see the <a href="../aerogear-controller">documentation</a>.</p>
+
+<p>The first thing to do is to implement a <em>SecurityProvider</em> and include role validation:</p>
+
+<pre><code>import org.jboss.aerogear.controller.spi.SecurityProvider;
+
+public class AeroGearSecurityProvider implements SecurityProvider {
+
+    @Inject
+    private IdentityManagement identityManagement;
+
+    @Override
+    public void isRouteAllowed(Route route) throws ServletException {
+
+        if (!identityManagement.hasRoles(route.getRoles())) {
+            throw new AeroGearSecurityException(HttpStatus.AUTHENTICATION_FAILED);
+        }
+    }
+} 
+</code></pre>
+
+<p>The next step is to configure role-based authorization support on Controller:</p>
+
+<pre><code>public class Routes extends AbstractRoutingModule {
+
+      /**
+       * Entry point for configuring the routes mapping http requests to the pojo controllers
+       */
+      @Override
+      public void configuration() {
+          route()
+              .from("/delorean").roles("admin", "developer")
+              .on(RequestMethod.GET)
+              .to(Home.class).anotherPage();
+      }
+}
+</code></pre>
+
+<h2 id="enabling-filters">Enabling filters</h2>
+
+<p>AeroGear Security comes with a single servlet filter which can help <em>HSTS</em> support and <em>Clickjacking</em> prevention which doesn’t mean you will have a bulletproof system. We’re just trying to do our best to make your life easy.</p>
+
+<h3 id="hsts">HSTS</h3>
+
+<p>HSTS (<em>HTTP Strict Transport Security</em>) is a security policy mechanism which enforces users to interact with SSL connections only, preventing attacks like man-in-the-middle.</p>
+
+<p>This implementation is based on <a href="http://tools.ietf.org/html/rfc6797">RFC 6797</a> and depends on web browser implementation. Currently this implementation is supported only in Firefox and Chrome, for further details, please check <a href="http://caniuse.com/#search=hsts">caniuse.com</a> or the RFC. </p>
+
+<h4 id="common-questions">Common questions?</h4>
+
+<ul>
+  <li>
+    <p>How it will work on non supported browsers?</p>
+
+    <ul>
+      <li>User will be redirected to HTTPS <em>location</em> attribute, but the browser won’t enforce HTTPS. </li>
+    </ul>
+  </li>
+  <li>
+    <p>Is it required on AeroGear Controller and Security?</p>
+
+    <ul>
+      <li>No, it’s an optional feature</li>
+    </ul>
+  </li>
+  <li>
+    <p>With HSTS my system is bulletproof? </p>
+
+    <ul>
+      <li>Only if you cut the cables and your server is hosted on an island. Security is hard.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="getting-started">Getting started</h4>
+
+<ol>
+  <li>Configuration (<em>web.xml file</em>)</li>
+</ol>
+
+<p>Basically, browsers that support this feature, are able to remember the fact that a particular website requires HTTPS only, upon the next visit to the site in question the agent will enforce HTTPS.</p>
+
+<ul>
+  <li><em>max-age</em>: set how long the agent (browser) will be remembered to force HTTPS. </li>
+  <li><em>include-subdomain</em>: this rule will be applied to all the subdomains or not. (<em>accepted values</em>: true/false).</li>
+  <li><em>location:</em> when user try to access <em>http://aerogear.org</em> for example, the default behaviour is to response with <em>HTTP 301</em> (indicating a permanent redirect)  pointing the browser to a new location.</li>
+</ul>
+
+<h4 id="jboss-configuration-file">JBoss configuration file:</h4>
+
+<p>To get started, please install and configure SSL support on JBoss <a href="http://docs.jboss.org/jbossweb/3.0.x/ssl-howto.html">http://docs.jboss.org/jbossweb/3.0.x/ssl-howto.html</a>.</p>
+
+<p>You can do it with:</p>
+
+<pre><code>$JAVA_HOME/bin/keytool -genkey -alias tomcat -keyalg RSA
+</code></pre>
+
+<p>During the process make sure to setup the default password (<em>“changeit”</em>) already on JBoss, for testing purposes.</p>
+
+<p>Copy this file <a href="https://gist.github.com/abstractj/a91c4fc960975a111803">standalone.xml</a> to <em>$JBOSS_HOME/standalone/configuration/</em> and follow these steps:</p>
+
+<ol>
+  <li>
+    <p>Specify the servlet filter into web.xml and the configuration options:</p>
+
+    <pre><code>&lt;filter&gt;
+    &lt;filter-name&gt;SecureHeadersFilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;org.jboss.aerogear.security.filter.SecureHeadersFilter&lt;/filter-class&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;max-age&lt;/param-name&gt;
+        &lt;param-value&gt;2592000&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;include-subdomains&lt;/param-name&gt;
+        &lt;param-value&gt;false&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;Location&lt;/param-name&gt;
+        &lt;param-value&gt;https://localhost:8443/aerogear-controller-demo/mycars&lt;/param-value&gt;
+     &lt;/init-param&gt;
+&lt;/filter&gt;
+</code></pre>
+  </li>
+</ol>
+
+<filter-mapping>
+    	<filter-name>SecureHeadersFilter</filter-name>
+    <url-pattern>/mycars/*</url-pattern>
+        </filter-mapping>
+
+<ol>
+  <li>
+    <p>Deploy AG Controller demo</p>
+
+    <pre><code> git@github.com:aerogear/aerogear-controller-demo.git
+ cd aerogear-controller-demo 
+ mvn clean package
+ cp target/aerogear-controller-demo.war $JBOSS_HOME/standalone/deployments
+</code></pre>
+  </li>
+  <li>
+    <p>Testing</p>
+
+    <p>Visit <a href="http://localhost:8080/aerogear-controller-demo">http://localhost:8080/aerogear-controller-demo</a> and the servlet filter will redirect you to <em>location</em> property specified into the <a href="https://github.com/aerogear/aerogear-controller-demo/blob/master/src/main/webapp/WEB-INF/web.xml">web.xml</a></p>
+  </li>
+  <li>
+    <p>Inspect HTTP headers on Chrome or Firefox.</p>
+  </li>
+</ol>
+
+<h3 id="clickjacking">Clickjacking</h3>
+
+<p><em>HTML-based web applications can embed or “frame” other web pages.  Clickjacking is a type of attack that occurs when an attacker uses multiple transparent or opaque layers in the user interface to trick a user into clicking on a button or link on another page from server B when they were intending to click on the same place of the overlaying page from server A. Thus, the attacker is “hijacking” clicks meant for their page A and routing them to another page B, possibly belonging to another domain and thereby triggering actions on the second server B without the knowledge nor intention of the user and potentially using an existing session context and login in that step.</em> - <a href="http://tools.ietf.org/html/draft-ietf-websec-x-frame-options-02">IETF</a> </p>
+
+<h4 id="configuration">Configuration</h4>
+
+<pre><code>&lt;filter&gt;
+    &lt;filter-name&gt;SecureHeadersFilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;org.jboss.aerogear.security.filter.SecureHeadersFilter&lt;/filter-class&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;x-frame-options&lt;/param-name&gt;
+        &lt;param-value&gt;SAMEORIGIN&lt;/param-value&gt;
+    &lt;/init-param&gt;
+&lt;/filter&gt;
+</code></pre>
+
+<h2 id="aerogear-otp">AeroGear OTP</h2>
+
+<p>To provide the maximum flexibility to each scenario OTP module was implemented completely decoupled from AeroGear Security but it is possible to use them together if you want to store and retrieve OTP secrets from PicketLink IDM. For example:</p>
+
+<pre><code>public class Otp {
+
+@Inject
+@Secret
+private Instance&lt;String&gt; secret;
+
+@Inject
+@LoggedUser
+private Instance&lt;String&gt; loggedInUserName;
+
+    public String secret() {
+        return new Totp(secret.get()).uri(loggedInUserName.get());
+    }
+
+    public User otp(SimpleUser user, String otp) {
+
+        Totp totp = new Totp(secret.get());
+        boolean result = totp.verify(otp);
+
+        if (!result)
+            throw new RuntimeException("Invalid OTP");
+    
+        return user;
+    }
+}
+</code></pre>
+
+<p>For a more detailed description of this implementation please refer to <a href="http://aerogear.org/docs/specs/aerogear-security-otp/">AeroGear Security OTP</a> specification. You can see the OTP API usage <a href="https://github.com/aerogear/aerogear-otp-java">here</a> or <a href="https://github.com/aerogear/aerogear-otp-ios">use it with iOS</a>.</p>
+
+</div>
+
+            <div class="clearfix"></div>
+      </div>
+      <footer>
+          <div class="wrapper">
+              <div class="column">
+                  <h3>News</h3>
+                  
+                  <p><a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html">AeroGear 1.0.0 is out!</a></p>
+                  
+                  <p><a href="/news/2013/03/04/aerogear-1.0.0.CR1-is-out/index.html">AeroGear 1.0.0.CR1 is out!</a></p>
+                  
+                  <p><a href="/news/2013/01/30/aerogear-1.0.0.M8-is-out/index.html">AeroGear 1.0.0.M8 is out!</a></p>
+                  
+                  <p><a href="/news/2012/12/20/aerogear-1.0.0.M7-is-out/index.html">AeroGear 1.0.0.M7 is out!</a></p>
+                  
+                  <p><a href="/news/2012/10/24/aerogear-1.0.0.M6-is-out/index.html">AeroGear 1.0.0.M6 is out!</a></p>
+                  
+              </div>
+              <div class="column">
+                  <h3>Get help</h3>
+                  <p><a href="/docs">Documentation</a></p>
+                  <p><a href="/examples">Examples</a></p>
+              </div>
+              <div class="column">
+                  <h3>Contribute</h3>
+                  <p><a href="http://github.com/aerogear" target="_blank">Source code</a></p>
+                  <p><a href="http://issues.jboss.org/browse/AEROGEAR" target="_blank">Issue tracker</a></p>
+                  <p><a href="https://lists.jboss.org/mailman/listinfo/aerogear-dev" target="_blank">Mailing list</a></p>
+                  <p><a href="irc://irc.freenode.net/aerogear" target="_blank">IRC channel</a></p>
+              </div>
+              <div class="column responsive">
+                  <h3>Social</h3>
+                  <p><a href="">Twitter</a></p>
+                  <p><a href="">Google Plus</a></p>
+                  <p><a href="">Facebook</a></p>
+              </div>
+              <div class="column">
+                  <h3><a href="http://twitter.com/AeroGears" target="_blank">@AeroGears</a></h3>
+                  <div id="aerogear-twitter">Loading tweets...</div>
+              </div>
+              <div class="logos">
+                  <p>AeroGear is a <a href="http://www.jboss.org/">JBoss Community</a> project<br class="title-break"> and its development is sponsored<br class="title-break"> by <a href="http://www.redhat.com/">Red Hat, Inc</a>.<br class="title-break"><br>Project code is released under <br class="title-break">the <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache License, v2.0</a>.</p>
+                  <p><a href="http://www.jboss.org/"><img src="/img/jboss_community.png" alt="JBoss Community"></a> <a href="http://www.redhat.com/"><img src="/img/red_hat.png" alt="Red Hat"></a></p>
+                  <p>Copyright &copy; 2012, Red Hat, Inc.</p>
+  <div class="clearfix"></div>
+              </div>
+          </div>
+      </footer>
+      <script src="/js/libs/repo-modified.js"></script>
+      <script src="/js/libs/ba-linkify.min.js"></script>
+      <script src="/js/libs/jquery.twitter.min.js"></script>
+      <script src="/js/libs/jquery.smartresize.js"></script>
+      <script src="/js/script.js"></script>
+  </body>
+</html>

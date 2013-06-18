@@ -1,0 +1,741 @@
+* {
+    padding: 0;
+    margin: 0;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-size: 14px;
+    font-family: "Open Sans", sans-serif;
+    color: #575653;
+}
+
+.wrapper {
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header {
+    width: 100%;
+    padding: 50px 0 25px;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+}
+
+body > .container {
+    padding: 36px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a {
+    color: #669eb2;
+}
+
+.basic a:hover {
+    opacity: 0.61;
+}
+
+h1,h2,h3,h4 {
+    color: #e25027;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+h2 {
+    font-size: 28px;
+}
+
+h3 {
+    font-size: 20px;
+    margin-top: 48px;
+}
+
+h4 {
+    font-size: 16px;
+    margin-top: 48px;
+}
+
+h2 + h3 {
+    margin-top: 14px;
+}
+
+h3 + h4 {
+    margin-top: 14px;
+}
+
+ul {
+    margin: 20px;
+    margin-bottom: 0;
+}
+
+li ul {
+    margin-top: 0;
+}
+
+li p {
+    margin: 0;
+    text-align: left;
+}
+
+li {
+    margin: 6px 12px;
+}
+
+.basic {
+    margin: 48px 0;
+}
+
+p {
+    margin: 24px 0;
+    width: 85%;
+}
+
+.basic img {
+    margin: 48px auto;
+    max-width: 100%;
+}
+
+p {
+    line-height: 25px;
+    font-size: 16px;
+    text-align: justify;
+}
+
+p code {
+    display: inline-block;
+    background-color: #f2f2f2;
+    font-size: 12px;
+    padding: 0 10px;
+}
+
+.home-content {
+    padding: 5px 10px;
+}
+
+.inner-container {
+    min-height: 275px;
+}
+
+.navbar-inner {
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    background-color: #fff;
+    background-image: none !important;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#logo {
+    height: 62px;
+    width: 199px;
+    background-image: url(/img/aerogear_logo.png);
+}
+
+.clearfix {
+    clear: both;
+}
+
+nav {
+    background-color: #f2f2f2;
+    border-top: 1px solid #dadada;
+    border-bottom: 1px solid #dadada;
+    width: 100%;
+}
+
+nav .links {
+    float: left;
+    width: 700px;
+}
+
+nav .links a {
+    color: #878787;
+    text-shadow: none;
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 28px;
+    text-align: center;
+}
+
+nav .links a:hover {
+    background-color: none;
+    text-shadow: none;
+    border-bottom: 2px solid #669eb2;
+    color: #669eb2;
+    margin-bottom: -2px;
+}
+
+a.news {
+    margin-top: -25px;
+    font-style: italic;
+    float: right;
+    color: #878787;
+    text-decoration: none;
+    margin-bottom: -20px;
+    text-align: right;
+}
+
+a.news:hover {
+    text-decoration: underline;
+}
+
+.social {
+    float: right;
+    margin-top: 6px;
+    margin-left: 8px;
+    width: 28px;
+    height: 28px;
+    border-radius: 3px;
+}
+
+.twitter {
+    background-image: url(/img/twitter_tile.png);
+}
+
+.google-plus {
+    background-image: url(/img/google_plus_tile.png);
+}
+
+.facebook {
+    background-image: url(/img/facebook_tile.png);
+}
+
+.twitter:hover {
+    background-image: url(/img/twitter_tile_hover.png);
+}
+
+.google-plus:hover {
+    background-image: url(/img/google_plus_tile_hover.png);
+}
+
+.facebook:hover {
+    background-image: url(/img/facebook_tile_hover.png);
+}
+
+.btn-primary {
+    background-color: #e25027;
+    background-image: 0;
+    background-image: 0 to(#d63a0e));
+    background-image: 0;
+    background-image: 0;
+    background-image: 0;
+    background-image: linear-gradient(top,#f27552,#d63a0e);
+    background-repeat: repeat-x;
+    border-color: #05C #05C #003580;
+    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#f27552',endColorstr='#d63a0e',GradientType=0);
+    filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+}
+
+.splash {
+    background-color: #fff;
+    max-width: 1280px;
+}
+
+.start-header {
+    margin-top: 64px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.splash .lower-image {
+    display: none;
+    margin: 0 auto;
+}
+
+.start-header .start-title {
+    color: #669eb2;
+    font-weight: 700;
+    font-size: 34px;
+    margin-bottom: 12px;
+    letter-spacing: -1px;
+}
+
+.start-header p {
+    font-size: 16px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.start-header strong {
+    font-style: italic;
+}
+
+/* Content Styles */
+.home-content a {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+.aerogear-list {
+    list-style: url(/img/aerogear_icon_16px.png);
+}
+
+.features p {
+    width: 100%;
+}
+
+.features h3 {
+    margin-top: 0;
+}
+
+.feature {
+    margin: 48px auto;
+    width: 800px;
+}
+
+.feature .description {
+    float: left;
+}
+
+.feature .description p {
+    margin: 12px 0;
+}
+
+.feature .illustration {
+    float: right;
+    width: 300px;
+    text-align: center;
+}
+
+.feature .illustration img {
+    border-left: 1px #dadada solid;
+}
+
+.feature .illustration.left {
+    float: left;
+}
+
+.feature .illustration.left img {
+    border-right: 1px #dadada solid;
+    border-left: none;
+}
+
+.modules {
+    margin-top: 28px;
+    text-align: center;
+}
+
+.modules p,.modules h3 {
+    margin: 0 auto;
+}
+
+.modules .module {
+    text-align: center;
+    float: none;
+    display: inline-block;
+    width: 140px;
+    margin-bottom: 20px;
+    text-decoration: none;
+}
+
+.module img {
+    width: 100px;
+    padding: 5px;
+}
+
+.module p {
+    color: #878787;
+    text-align: center;
+    font-size: 14px;
+}
+
+.module:hover img,.module:active img {
+    border: 5px #dadada solid;
+    padding: 0;
+    border-radius: 4px;
+}
+
+.module.ios h3 {
+    color: #214067;
+}
+
+.module.android h3 {
+    color: #718927;
+}
+
+.module.web h3 {
+    color: #be420c;
+}
+
+.module.hybrid h3 {
+    color: #60625e;
+}
+
+#repo-container {
+    position: relative;
+    display: none;
+    padding: 20px 0;
+    float: right;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#fork-link img {
+    z-index: 100;
+    position: absolute;
+    top: 20px;
+    right: 0;
+    border: 0;
+}
+
+.repo {
+    min-height: 115px;
+}
+
+.repo li > i {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 16px;
+}
+
+.repo li.dir .icon-folder-open {
+    color: #80a6cd;
+}
+
+.repo-btns {
+    margin-left: 20px;
+}
+
+pre {
+    font-size: 10px;
+}
+
+.home-content pre {
+    margin-left: -40px;
+}
+
+.download-row {
+    margin-left: 0;
+}
+
+.sectionbody img {
+    max-height: 400px;
+}
+
+.note-tip-icon {
+    font-size: 30px;
+    margin-right: 10px;
+    color: #669EB2;
+}
+
+.note-tip-block {
+    margin: 10px 0;
+}
+
+.note-tip-block td {
+    padding: 10px;
+}
+
+.note-tip-content {
+    background-color: #F8F4E1;
+    border: 1px solid #DDD;
+}
+
+.post {
+    font-size: 1em;
+    font-weight: lighter;
+    padding: 10px;
+}
+
+.post img {
+    float: left;
+    padding: 10px 10px 10px 0;
+}
+
+.post ul {
+    list-style-position: inside;
+}
+
+.title-break {
+    display: none;
+    line-height: 1em;
+}
+
+.title-line2 {
+    margin-top: -10px;
+}
+
+.accordion-group {
+    margin-top: 20px;
+    font-size: 18px;
+    border: none;
+}
+
+.accordion-group .image-container {
+    display: inline-block;
+}
+
+.accordion-group .image-container img {
+    border-left: 1px #dadada solid;
+    width: 100%;
+    max-width: 800px;
+}
+
+.nav-collapse.hidden {
+    display: inherit;
+    visibility: visible;
+}
+
+.nav-collapse.hidden .navbar {
+    display: none;
+}
+
+/* Footer Styles */
+footer.container {
+    margin-top: 20px;
+    padding: 40px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    border-top: 1px solid #CCC;
+}
+
+footer {
+    background-color: #f2f2f2;
+    border-top: 1px #dadada solid !important;
+    margin-top: 48px;
+}
+
+footer a {
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer .column {
+    float: left;
+    min-width: 150px;
+    padding-right: 18px;
+    margin-right: 18px;
+}
+
+footer .column:last-child {
+    float: left;
+    padding-right: 0;
+    margin-right: 0;
+}
+
+footer h3 {
+    margin-bottom: 15px;
+    color: #555 !important;
+}
+
+footer h3.twitter-notFound {
+    font-size: 20px;
+    text-align: left;
+}
+
+footer p,footer ul {
+    margin: 0;
+    width: 100%;
+}
+
+.logos {
+    clear: both;
+    width: 100%;
+    padding: 64px;
+}
+
+.logos p {
+    text-align: center;
+}
+
+.logos img {
+    margin: 32px 0;
+}
+
+.attribution {
+    font-size: 10px;
+    float: right;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+#aerogear-twitter {
+    height: 200px;
+    padding-right: 10px;
+    overflow: scroll;
+    overflow-x: hidden;
+    width: 300px;
+    float: left;
+}
+
+#aerogear-twitter li {
+    margin-bottom: 10px;
+    font-size: 12px;
+    clear: both;
+    list-style-type: none;
+}
+
+#aerogear-twitter li img {
+    float: left;
+    margin: 0 12px 12px 0;
+    border-radius: 4px;
+}
+
+#aerogear-twitter li a {
+    text-decoration: none;
+    color: #e25027;
+}
+
+.select-all {
+    margin: 10px;
+}
+
+.component-group {
+    list-style: none;
+}
+
+.component {
+    display: inline;
+}
+
+.desc {
+    display: block;
+    color: #777;
+    font-size: .9em;
+}
+
+.builder-alert {
+    display: none;
+}
+
+.custom-builder {
+    margin-left: 0;
+}
+
+.loading-indicator {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.topic-page-logo {
+    float: left;
+    display: inline-block;
+    margin-right: 50px;
+    margin-bottom: 30px;
+    height: 300px;
+}
+
+.topic-page-logo img {
+    width: 90%;
+    max-width: 200px;
+}
+
+.responsive {
+    display: none;
+}
+
+
+@media (max-width: 680px) {
+    .title-break {
+      display: block;
+    }
+}
+
+
+@media (max-width: 960px) {
+    .links {
+        text-align: center;
+        width: 100% !important;
+        float: none;
+    }
+
+    .links a {
+        min-width: 125px;
+        padding-left: 20px !important;
+        width: 32%;
+        padding-right: 20px !important;
+    }
+    
+    .responsive {
+        display: block;
+    }
+    
+    a.fixed {
+        display: none !important;
+    }
+
+    
+    #logo {
+        margin-left: 36px;   
+    }
+    
+    nav, header, footer, .wrapper, .feature {
+        width: 100%;
+    }
+    
+    a.news {
+        display: none;
+    }
+    
+    .social {
+        display: none;
+    }
+    
+    footer {
+        padding-left: 48px;
+        padding-right: 48px;
+    }
+    
+    footer .column {
+        clear: both;
+    }
+    
+    .feature {
+        padding-left: 48px;
+        padding-right: 48px;
+    }
+    
+    .basic {
+        padding-left: 48px;
+    }
+    
+    .feature img {
+        display: none;
+    }
+
+    #aerogear-twitter {
+        width: 100%;
+        max-width: 480px;
+        padding-right: 0;
+    }
+
+    .logos {
+        padding: 48px 0;
+    }    
+        
+    .logos p {
+        width: 100%;
+        text-align: center;
+        margin-left: 0;
+    }
+
+    footer .column {
+        margin-right: 0;
+        padding-right: 0;
+    }
+    
+    footer h3 {
+        margin-top: 34px;
+    }
+}

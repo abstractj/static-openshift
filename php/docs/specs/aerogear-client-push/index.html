@@ -1,0 +1,183 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+      <title>AeroGear - AeroGear Unified Push Server</title>
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+
+      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="alternate" type="application/atom+xml" title="feed" href="/feed.atom"/>
+      <link rel="stylesheet" href="/css/font-awesome.min.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:600,300,300italic,600italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+      <script src="/js/libs/modernizr-2.6.2.min.js"></script>
+		  <script type="text/javascript">
+
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-28733717-2']);
+			  _gaq.push(['_setDomainName', 'aerogear.org']);
+			  _gaq.push(['_trackPageview']);
+
+			  (function() {
+				  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+
+		  </script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+      <script>window.jQuery || document.write( '<script src="/js/libs/jquery-1.7.2.min.js"><\/script>' )</script>
+  </head>
+  <body>
+      <header>
+          <div class="wrapper">
+              <a href="/"><div id="logo"></div></a>
+              <a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html" class="news fixed">Hey listen!<br class="title-break"> AeroGear 1.0.0 is out!</a>
+          </div>
+      </header>
+         
+      <nav>
+          <div class="wrapper">
+            <div class="links">
+                <a href="/" class="fixed">Home</a>
+                <a href="/download" class="">Get started</a>
+                <a href="/docs" class="">Documentation</a>
+                <a href="/news" class="fixed ">News</a>
+                <a href="/community" class="">Community</a>        
+            </div>
+            <a href="https://www.facebook.com/AeroGearProject"><div class="social facebook"></div></a>
+            <a href="https://plus.google.com/106588661437153585722/posts"><div class="social google-plus"></div></a>
+            <a href="https://www.twitter.com/aerogears"><div class="social twitter"></div></a>
+          </div>    
+          <div class="clearfix"></div>
+      </nav>
+
+      <div class="wrapper inner-container">
+
+          <div class="basic">
+    <h1 id="aerogear-unifiedpush-registration-client-spec-draft-003">AeroGear UnifiedPush Registration Client Spec (DRAFT 0.0.3)</h1>
+
+<p>This document describes the functionality of a client SDK that works with the <a href="http://aerogear.org/docs/specs/aerogear-server-push/">AeroGear UnifiedPush Server</a>.</p>
+
+<h2 id="motivation--purpose">Motivation / Purpose</h2>
+
+<p>The <a href="http://aerogear.org/docs/specs/aerogear-server-push/">AeroGear UnifiedPush Server</a> is accessible via HTTP. Instead of having to manually register a device (<code>MobileVariantInstance</code>) with the HTTP interface, a client library should be offered.</p>
+
+<p><strong>Goal:</strong> A client library to register a mobile application (<code>MobileVariantInstance</code>) with the UnifiedPush Server.</p>
+
+<h4 id="background-push-network-token">Background: Push Network Token</h4>
+
+<p>To receive native push notifications from a Push Network (e.g. APNs, GCM or SimplePush), the mobile device is identified with a unique <code>device-token</code>, assigned by the actual Push Network. This <code>device-token</code> is passed, by the underlying Operating-System, to the mobile application. Details are different on each platform and  <strong>not</strong> part of this document.</p>
+
+<p>The <code>device-token</code> needs to be registered with the <em>AeroGear UnifiedPush Server</em>, to indicate there is a new <code>MobileVariantInstance</code> for a <code>MobileVariant</code>. More details about the server-side part of this can be found in the <em>AeroGear Unified Push Server</em> <a href="http://aerogear.org/docs/specs/aerogear-server-push/">spec</a>.</p>
+
+<h2 id="functionality">Functionality</h2>
+
+<p><strong>WARNING:</strong> <em>The focus of this specification is to describe the generic minimum and not any platform-specific requirements</em> </p>
+
+<p>The client SDK offers the following features:</p>
+
+<ul>
+  <li>Registration and Updating of a <code>MobileVariantInstance</code> </li>
+  <li>Unregistration of a <code>Mobile Variant Instance</code> (optional, due to platform specific restrictions)</li>
+</ul>
+
+<h3 id="registration-and-updating-of-a-mobile-variant-instance">Registration and Updating of a Mobile Variant Instance</h3>
+
+<p>Everytime when a mobile application launches it receives the above mentioned <code>device-token</code>, via a <em>platform-specific</em> method (or callback). Since the Push Network (e.g. APNs or GCM) <em>may</em> assign a <strong>new</strong> token to a device, it is <em>recommended</em> to <em>always</em> (re)register the <code>device-token</code> with the <em>AeroGear UnifiedPush Server</em>.</p>
+
+<p>Besides the <code>device-token</code> the <em>AeroGear UnifiedPush Server</em> is able to store some of the below device- or user-specific metadata:</p>
+
+<ul>
+  <li><strong>deviceToken:</strong> <em>Identifies the device/user-agent within its Push Network.</em></li>
+  <li><strong>deviceType:</strong> <em>The device type of the device or the user agent.</em></li>
+  <li><strong>mobileOperatingSystem:</strong> <em>The name of the underlying Operating System.</em></li>
+  <li><strong>osVersion:</strong> <em>The version of the used Operating System.</em></li>
+  <li><strong>alias:</strong> _ Application specific alias to identify users with the system. For instance an <code>email address</code> or a <code>username</code>._</li>
+  <li><strong>category:</strong> <em>Used tp apply a “tag”. Mainly usful for the SimplePush channel(s).</em></li>
+</ul>
+
+<p>Besides the slight chance that the ```device-token`` may change, some of the above metadata is more likely to change. Therefore another reason to always send this metadata to the <em>AeroGear UnifiedPush Server</em>.</p>
+
+<h4 id="reachability">Reachability</h4>
+
+<p>The client SDK needs to check if the device can establish a connection to the internet (PushNetwork and UnifiedPush Server). It should make use of the platform-specific APIs to check the reachablility of the services.</p>
+
+<h3 id="unregistration-of-client-device-information">Unregistration of client device information</h3>
+
+<p><em>Optional</em> method that helps to unregister the client device information with the <a href="http://aerogear.org/docs/specs/aerogear-server-push/">AeroGear Unified Push Server</a>. <strong>Note:</strong> <em>The method is optional, since not all supported Push Networks recommend having a client application actively performing an _unregister</em>. Apple for instance has a <code>Feedback Service</code>, which the <em>AeroGear Unified Push Server</em> needs to freequently query for inactive tokens. Tokens, with Apple, are <em>inactive</em> when the user:
+* Disables Push (Settings)
+* Deinstalls the app</p>
+
+<h4 id="reachability-1">Reachability</h4>
+
+<p>The client SDK needs to check if the device can establish a connection to the internet (PushNetwork and UnifiedPush Server). It should make use of the platform-specific APIs to check the reachablility of the services.</p>
+
+<h2 id="platform-specific-details">Platform specific details</h2>
+
+<p>Every client platform has it’s own base APIs, to receive Push Message from it’s Push Network. The AeroGear client SDK <em>may</em> offer utilities to even more simplify this process.
+<em>For example: In Android a custom <code>Intent</code> is required, therefore it would make sense if the “AeroGear Android Push Client Library” offers a convenience implementation for this class.</em></p>
+
+</div>
+
+            <div class="clearfix"></div>
+      </div>
+      <footer>
+          <div class="wrapper">
+              <div class="column">
+                  <h3>News</h3>
+                  
+                  <p><a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html">AeroGear 1.0.0 is out!</a></p>
+                  
+                  <p><a href="/news/2013/03/04/aerogear-1.0.0.CR1-is-out/index.html">AeroGear 1.0.0.CR1 is out!</a></p>
+                  
+                  <p><a href="/news/2013/01/30/aerogear-1.0.0.M8-is-out/index.html">AeroGear 1.0.0.M8 is out!</a></p>
+                  
+                  <p><a href="/news/2012/12/20/aerogear-1.0.0.M7-is-out/index.html">AeroGear 1.0.0.M7 is out!</a></p>
+                  
+                  <p><a href="/news/2012/10/24/aerogear-1.0.0.M6-is-out/index.html">AeroGear 1.0.0.M6 is out!</a></p>
+                  
+              </div>
+              <div class="column">
+                  <h3>Get help</h3>
+                  <p><a href="/docs">Documentation</a></p>
+                  <p><a href="/examples">Examples</a></p>
+              </div>
+              <div class="column">
+                  <h3>Contribute</h3>
+                  <p><a href="http://github.com/aerogear" target="_blank">Source code</a></p>
+                  <p><a href="http://issues.jboss.org/browse/AEROGEAR" target="_blank">Issue tracker</a></p>
+                  <p><a href="https://lists.jboss.org/mailman/listinfo/aerogear-dev" target="_blank">Mailing list</a></p>
+                  <p><a href="irc://irc.freenode.net/aerogear" target="_blank">IRC channel</a></p>
+              </div>
+              <div class="column responsive">
+                  <h3>Social</h3>
+                  <p><a href="">Twitter</a></p>
+                  <p><a href="">Google Plus</a></p>
+                  <p><a href="">Facebook</a></p>
+              </div>
+              <div class="column">
+                  <h3><a href="http://twitter.com/AeroGears" target="_blank">@AeroGears</a></h3>
+                  <div id="aerogear-twitter">Loading tweets...</div>
+              </div>
+              <div class="logos">
+                  <p>AeroGear is a <a href="http://www.jboss.org/">JBoss Community</a> project<br class="title-break"> and its development is sponsored<br class="title-break"> by <a href="http://www.redhat.com/">Red Hat, Inc</a>.<br class="title-break"><br>Project code is released under <br class="title-break">the <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache License, v2.0</a>.</p>
+                  <p><a href="http://www.jboss.org/"><img src="/img/jboss_community.png" alt="JBoss Community"></a> <a href="http://www.redhat.com/"><img src="/img/red_hat.png" alt="Red Hat"></a></p>
+                  <p>Copyright &copy; 2012, Red Hat, Inc.</p>
+  <div class="clearfix"></div>
+              </div>
+          </div>
+      </footer>
+      <script src="/js/libs/repo-modified.js"></script>
+      <script src="/js/libs/ba-linkify.min.js"></script>
+      <script src="/js/libs/jquery.twitter.min.js"></script>
+      <script src="/js/libs/jquery.smartresize.js"></script>
+      <script src="/js/script.js"></script>
+  </body>
+</html>

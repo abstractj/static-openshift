@@ -1,0 +1,720 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+      <title>AeroGear - Converting a Mobile HTML5 + REST Web App to a Hybrid App with Apache Cordova</title>
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+
+      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="alternate" type="application/atom+xml" title="feed" href="/feed.atom"/>
+      <link rel="stylesheet" href="/css/font-awesome.min.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:600,300,300italic,600italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+      <script src="/js/libs/modernizr-2.6.2.min.js"></script>
+		  <script type="text/javascript">
+
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-28733717-2']);
+			  _gaq.push(['_setDomainName', 'aerogear.org']);
+			  _gaq.push(['_trackPageview']);
+
+			  (function() {
+				  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+
+		  </script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+      <script>window.jQuery || document.write( '<script src="/js/libs/jquery-1.7.2.min.js"><\/script>' )</script>
+  </head>
+  <body>
+      <header>
+          <div class="wrapper">
+              <a href="/"><div id="logo"></div></a>
+              <a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html" class="news fixed">Hey listen!<br class="title-break"> AeroGear 1.0.0 is out!</a>
+          </div>
+      </header>
+         
+      <nav>
+          <div class="wrapper">
+            <div class="links">
+                <a href="/" class="fixed">Home</a>
+                <a href="/download" class="">Get started</a>
+                <a href="/docs" class="">Documentation</a>
+                <a href="/news" class="fixed ">News</a>
+                <a href="/community" class="">Community</a>        
+            </div>
+            <a href="https://www.facebook.com/AeroGearProject"><div class="social facebook"></div></a>
+            <a href="https://plus.google.com/106588661437153585722/posts"><div class="social google-plus"></div></a>
+            <a href="https://www.twitter.com/aerogears"><div class="social twitter"></div></a>
+          </div>    
+          <div class="clearfix"></div>
+      </nav>
+
+      <div class="wrapper inner-container">
+
+          <div class="basic">
+    
+<div class="sect1">
+  <h2 id="_converting_a_mobile_html5_rest_web_app_to_a_hybrid_app_with_apache_cordova">Converting a Mobile HTML5 + REST Web App to a Hybrid App with Apache Cordova</h2>
+  
+  <div class="sectionbody">
+<div class="paragraph">
+    
+  <p>This article will build upon the HTML5 <a href="https://github.com/jboss-jdf/jboss-as-quickstart/tree/master/kitchensink-html5-mobile">kitchensink quickstart</a>, which we have converted to an <a href="http://incubator.apache.org/cordova/">Apache Cordova</a> based hybrid application.</p>
+</div>
+<div class="paragraph">
+    
+  <p>What does all of that mean? Basically, this takes our <a href="https://community.jboss.org/docs/DOC-17326">HTML5 + REST</a> / <a href="http://www.jquerymobile.com"">jQuery Mobile</a> based web app and converts it to a native app for both iOS and Android. Currently, these apps will need to be built separately but in the future, we hope to provide a single build step for all supported mobile OS types. These concepts can be applied to the conversion of most HTML5/JS based web apps by just replacing the specific paths described in this article with paths that match your environment.</p>
+</div>
+<div class="paragraph">
+    
+  <p>Download the converted application from <a href="https://github.com/jboss-jdf/jboss-as-quickstart/tree/master/kitchensink-cordova">https://github.com/jboss-jdf/jboss-as-quickstart/tree/master/kitchensink-cordova</a>.</p>
+</div>
+
+<div class="sect2">
+  <h3 id="_repo_structure">Repo Structure</h3>
+  
+<div class="paragraph">
+    
+  <p>Before getting started, it is important to note the structure of this repo and how it may affect your environment. In order to avoid duplicating both files and effort, the web app assets (HTML, CSS, JS) files have been housed in a separate folder called <strong>shared</strong>. In there, you will find a folder called <strong>www</strong> under which are the files. In order for this structure to work during your builds, a symbolic link to the <strong>www</strong> folder from each of the app&#8217;s respective <strong>www</strong> folders must be created. In iOS, that is in the <strong>/ios/</strong> folder and in Android, the symbolic link is in the <strong>/android/assets</strong> folder.</p>
+</div>
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_system_requirements_amp_setup">System Requirements &amp; Setup</h3>
+  
+<div class="paragraph">
+    
+  <p><a href="../CordovaSetup">Cordova Setup</a> details how to set up your system to use Cordova.</p>
+</div>
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_ios">iOS</h3>
+  
+
+<div class="sect3">
+  <h4 id="_generate_the_xcode_project_using_cordova">Generate the XCode project using Cordova</h4>
+  
+<div class="paragraph">
+    
+  <p>Before we can build the app, and run it in the simulator or on a device, we need to create the project using Cordova.</p>
+</div>
+<div class="admonitionblock">
+  <table>
+    <tr>
+      <td class="icon">
+        
+        <div class="title">Note</div>
+        
+      </td>
+      <td class="content">
+        
+        <div class="paragraph">
+    
+  <p>These steps are based on the <a href="http://docs.phonegap.com/en/edge/guide_getting-started_ios_index.md.html">Getting Started with iOS</a> guide for Cordova.</p>
+</div>
+
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="paragraph">
+    
+  <p>First, we need to create a new project. In a terminal, change into the kitchensink-cordova directory. Now, run Cordova to generate a project:</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>$CORDOVA_HOME/lib/ios/bin/create ios org.jboss.as.quickstarts.kitchensinkcordova KitchensinkCordova</pre>
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>Now, we need to create the symbolic link from <tt>shared/www</tt> to <tt>ios/www</tt>. First we remove the generated <tt>www</tt> folder then we create the symbolic link:</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>cd ios
+rm -rf www
+ln -s ../../shared/www www</pre>
+  </div>
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_import_the_project_into_xcode">Import the project into XCode</h4>
+  
+<div class="paragraph">
+    
+  <p>Open Xcode, then select File -&amp;gt; Open, then browse to the <strong>&amp;lt;repo-folder&amp;gt;/ios/</strong> folder and select the <strong>KitchensinkCordova.xcodeproj</strong> file. Click Open and you should see the project in XCode.</p>
+</div>
+<div class="admonitionblock">
+  <table>
+    <tr>
+      <td class="icon">
+        
+        <div class="title">Tip</div>
+        
+      </td>
+      <td class="content">
+        
+        <div class="paragraph">
+    
+  <p>If the <strong>www</strong> folder is not visible in the project or appears broken, that means your OS was unable to create the symbolic link from the file in the repo. If it is there but XCode shows it as missing or broken, all you have to do is create the symbolic link. Now you can just open Terminal, navigate to the <strong>&amp;lt;repo-folder&amp;gt;/ios/</strong> folder and then create the link like this:</p>
+</div>
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="bash">$ rm -rf wwww
+$ ln -s &lt;full-path-to-your-repo&gt;/shared/www www</code></pre>
+    
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>This will create the symbolic link and the folder should be fixed in XCode. If the folder is missing, there is a little trick that you have to do to get XCode to see it. First in the <strong>&amp;lt;repo-folder&amp;gt;/ios/KitchensinkCordova</strong> delete the www file which came from the repo if it exists. Then create a new folder called <strong>www</strong>. Now from finder, drag that folder into XCode and drop it on the KitchensinkCordova project on the left side of the window. A dialog window should appear and you want to select the option to add the folder as a reference. You should now see that folder listed in XCode. This is where it gets tricky. Go back to Finder and delete the <strong>www</strong> folder you just created. It will now show as broken in XCode but that&#8217;s ok. In Terminal, create the symbolic link using the instructions above and you should be ready to go.</p>
+</div>
+
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="imageblock">
+  <div class="content">
+    
+    <img src="../img/folders.png" alt="Sample Folder List in XCode">
+    
+  </div>
+  
+</div>
+<div class="paragraph">
+    
+  <p>Next, open <strong>AppDelegate.m</strong> and add the following code to the beginning of the file just after the <strong>@synthesize</strong> statement to create a custom User-Agent string that we will check for in our app&#8217;s main JavaScript file:</p>
+</div>
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="objective-c">+ (void)initialize {
+    // Set user agent
+    NSDictionary *dictionnary = [[NSDictionary alloc] initWithObjectsAndKeys:@"Kitchensink Cordova Webview iOS", @"UserAgent", nil];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
+    [dictionnary release];
+}</code></pre>
+    
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>Finally, we must add an exception in Cordova to allow it to access external urls. Open <strong>Cordova.plist</strong> and add the following url to <strong>ExternalHosts</strong>:</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>html5-aerogear.rhcloud.com</pre>
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src="../img/iosCordovapList.png" alt="Cordova pList">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p>That&#8217;s it! You should now be ready to see it in action.</p>
+</div>
+<div class="paragraph">
+    
+  <p>Change the <strong>Target</strong> in the <strong>Scheme</strong> menu to <strong>KitchensinkCordova</strong> and select a device:</p>
+</div>
+<div class="imageblock">
+  <div class="content">
+    
+    <img src="../img/xcode_kitchensink_simulator.png" alt="xcode_kitchensink_simulator">
+    
+  </div>
+  
+</div>
+<div class="paragraph">
+    
+  <p>Click the Run button in the upper left corner of XCode and the iOS Simulator should start and you will see the Kitchensink app running. Going to the list page should show you the list of members from <a href="http://html5-aerogear.rhcloud.com">html5-aerogear.rhcloud.com</a>, which is the <a href="http://openshift.redhat.com">OpenShift</a> hosted version of the HTML5 kitchensink quickstart. You can also add to that member list from the add screen of the app and also on that add screen, you will see a note referring to your current network connection. That note is proof that Cordova has given you access to native APIs.</p>
+</div>
+<div class="imageblock">
+  <div class="content">
+    
+    <img src="../img/network.png" alt="iOS Simulator shoing network connection output">
+    
+  </div>
+  
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_building_the_app_for_devices">Building the App for Devices</h4>
+  
+<div class="paragraph">
+    
+  <p>After you are able to successfully test your app with the iOS Simulator, it is time to test it on a device. As stated above in the system requirements, this is going to require an Apple Developer account, an iOS development certificate (downloaded to your machine) and a provisioning profile (also downloaded and installed in XCode) for the device(s) you plan to test on. For more information about these requirements, visit the <a href="http://developer.apple.com">Apple Developer</a> site. Now, on to the steps to deploy to your device.</p>
+</div>
+<div class="paragraph">
+    
+  <p>One important note about the provisioning profile is that the when you create your App ID, it must match the App ID of the app exactly or it won&#8217;t work. For this quickstart, we have used <strong>org.jboss.as.quickstarts.kitchensinkcordova.KitchensinkCordova</strong> as the App ID so you must also create that App ID in your profile and create a provisioning profile for it if you wish to test this quickstart.</p>
+</div>
+<div class="imageblock">
+  <div class="content">
+    
+    <img src="../img/appID.png" alt="Example App ID">
+    
+  </div>
+  
+</div>
+<div class="paragraph">
+    
+  <p>Once you have your provisioning profile set up and installed, open your project in XCode again. In the center pane, on the left side under Projects, click on your project (in this case KitchensinkCordova). Now, to the right of that, at the top, click <strong>Build Settings</strong>. In the build settings, there is a section named <strong>Code Signing</strong>. Next to the <strong>Code Signing Identity</strong>, click to change the value to your certificate which should be in the list if you followed the steps from the Apple Developer site on installing your certificate. Your certificate name should look something like <strong>iPhone Developer: Kristopher Borchers (&amp;lt;some_random_string&amp;gt;)</strong>.</p>
+</div>
+<div class="paragraph">
+    
+  <p>Next, make sure your device is attached to your machine, then in XCode, near the top-left corner of the window, you will see the name of your app, followed by the device or simulator that it will run on. Click the device name and select your connected device. Click Run, and it should deploy to and run on your device. That&#8217;s it!</p>
+</div>
+
+  
+</div>
+
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_android_build">Android Build</h3>
+  
+
+<div class="sect3">
+  <h4 id="_generate_the_eclipse_project_using_cordova">Generate the Eclipse project using Cordova</h4>
+  
+<div class="paragraph">
+    
+  <p>Before we can build the app, and run it in the simulator or on a device, we need to create the project using Cordova.</p>
+</div>
+<div class="admonitionblock">
+  <table>
+    <tr>
+      <td class="icon">
+        
+        <div class="title">Note</div>
+        
+      </td>
+      <td class="content">
+        
+        <div class="paragraph">
+    
+  <p>These steps are based on the <a href="http://docs.phonegap.com/en/edge/guide_getting-started_android_index.md.html">Getting Started with Android guide for Cordova</a>.</p>
+</div>
+
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="paragraph">
+    
+  <p>First, we need to create a new project. In Eclipse, go to <strong>File &#8594; New &#8594; Other&#8230;</strong>, and select <strong>Android Application Project</strong>:</p>
+</div>
+<div class="imageblock">
+  <div class="content">
+    
+    <img src="../img/android_new_project_1.png" alt="android_new_project_1">
+    
+  </div>
+  
+</div>
+<div class="paragraph">
+    
+  <p>Enter <strong>KitchensinkCordova</strong> as the project name, and <strong>org.jboss.as.quickstarts.kitchensinkcordova</strong> as the package:</p>
+</div>
+<div class="imageblock">
+  <div class="content">
+    
+    <img src="../img/android_new_project_2.png" alt="android_new_project_2">
+    
+  </div>
+  
+</div>
+<div class="paragraph">
+    
+  <p>Click <strong>Next &gt;</strong>. You can accept the defaults on this screen, and hit <strong>Next &gt;</strong>:</p>
+</div>
+<div class="imageblock">
+  <div class="content">
+    
+    <img src="../img/android_new_project_3.png" alt="android_new_project_3">
+    
+  </div>
+  
+</div>
+<div class="paragraph">
+    
+  <p>Click <strong>Next &gt;</strong>. You can accept the defaults on this screen, and hit <strong>Next &gt;</strong>:</p>
+</div>
+<div class="imageblock">
+  <div class="content">
+    
+    <img src="../img/android_new_project_4.png" alt="android_new_project_4">
+    
+  </div>
+  
+</div>
+<div class="paragraph">
+    
+  <p>On the next screen click <strong>Next &gt;</strong> to create an activity. Call the activity <strong>KitchensinkCordova</strong>:</p>
+</div>
+<div class="imageblock">
+  <div class="content">
+    
+    <img src="../img/android_new_project_5.png" alt="android_new_project_5">
+    
+  </div>
+  
+</div>
+<div class="paragraph">
+    
+  <p>Now, hit <strong>Finish</strong>.</p>
+</div>
+<div class="admonitionblock">
+  <table>
+    <tr>
+      <td class="icon">
+        
+        <div class="title">Note</div>
+        
+      </td>
+      <td class="content">
+        
+        <div class="paragraph">
+    
+  <p>You may need to click <strong>Next</strong> after creating the activity to install the relevant Android libraries.</p>
+</div>
+
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="paragraph">
+    
+  <p>Copy <strong>&lt;CORDOVA_HOME&gt;/lib/android/cordova-2.0.0.jar</strong> to <strong>libs/</strong>.</p>
+</div>
+<div class="paragraph">
+    
+  <p>Copy <strong>&lt;CORDOVA_HOME&gt;/lib/android/xml/</strong> to <strong>res/xml/</strong>.</p>
+</div>
+<div class="paragraph">
+    
+  <p>Now, open up the <strong>KitchensinkCordova</strong> class in <tt>src</tt>, alter the class to extend <tt>DroidGap</tt>, and change the class to look like:</p>
+</div>
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="java">public class KitchensinkCordova extends DroidGap {
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Loads the URL with HTML application
+        super.loadUrl("file:///android_asset/www/index.html");
+    }
+
+    @Override
+    public void init() {
+        super.init();
+
+        WebSettings settings = this.appView.getSettings();
+        settings.setUserAgentString("Kitchensink Cordova Webview Android");
+    }
+}</code></pre>
+    
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>Edit the AndroidManifest.xml file and paste the following permissions between the <tt>&lt;uses-sdk.../&gt;</tt> and <tt>&lt;application.../&gt;</tt> tags.</p>
+</div>
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="XML">    &lt;supports-screens
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:resizeable="true"
+        android:anyDensity="true" /&gt;
+    &lt;uses-permission android:name="android.permission.VIBRATE" /&gt;
+    &lt;uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /&gt;
+    &lt;uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /&gt;
+    &lt;uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /&gt;
+    &lt;uses-permission android:name="android.permission.READ_PHONE_STATE" /&gt;
+    &lt;uses-permission android:name="android.permission.INTERNET" /&gt;
+    &lt;uses-permission android:name="android.permission.RECEIVE_SMS" /&gt;
+    &lt;uses-permission android:name="android.permission.RECORD_AUDIO" /&gt;
+    &lt;uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /&gt;
+    &lt;uses-permission android:name="android.permission.READ_CONTACTS" /&gt;
+    &lt;uses-permission android:name="android.permission.WRITE_CONTACTS" /&gt;
+    &lt;uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /&gt;
+    &lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /&gt;
+    &lt;uses-permission android:name="android.permission.GET_ACCOUNTS" /&gt;
+    &lt;uses-permission android:name="android.permission.BROADCAST_STICKY" /&gt;</code></pre>
+    
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>This gives the app all permissions, which you will want to lock down at some point. Locking down the application is out of the scope of this guide.</p>
+</div>
+<div class="paragraph">
+    
+  <p>Now, support orientation changes by pasting the folowing inside the <tt>&lt;activity&gt;</tt> tag:</p>
+</div>
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="XML">    android:configChanges="orientation|keyboardHidden|screenSize"</code></pre>
+    
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>Now, we need to create the symbolic link from <tt>shared/www</tt> to <tt>android/assets</tt>.</p>
+</div>
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="Shell">    cd assets
+    ln -s &lt;PATH_TO_KITCHENSINK_CORDOVA&gt;/shared/www www</code></pre>
+    
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>Finally, just like the iOS version, we must add an exception in Cordova to allow it to access our external url.  Open res/xml/config.xml, and add the following line:</p>
+</div>
+<div class="literalblock">
+  
+  <div class="content monospaced">
+    <pre>&lt;access origin="html5-aerogear.rhcloud.com"/&gt;</pre>
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>That&#8217;s it! You should now be ready to see it in action. Near the upper left corner of Eclipse, there is a button that looks like a little phone with a green Android on the screen, click that and it will launch the Android Virtual Device (AVD) manager.</p>
+</div>
+<div class="imageblock">
+  <div class="content">
+    
+    <img src="../img/avdbutton.png" alt="AVD Button">
+    
+  </div>
+  
+</div>
+<div class="paragraph">
+    
+  <p>If you have not yet created a virtual device, you should do so now. The <a href="../CordovaSetup">Cordova Setup</a> guide details how to do this. This sample was built for the Android 2.1 SDK for maximum compatibility with current devices but should work on any 2.x or 4.0 SDK. The sample was not tested on the 3.x series.</p>
+</div>
+<div class="imageblock">
+  <div class="content">
+    
+    <img src="../img/avd.png" alt="AVD selection window">
+    
+  </div>
+  
+</div>
+<div class="paragraph">
+    
+  <p>Now that you have a virtual device, select it and click Start. On the following screen, keep the default settings and click Launch and the simulator will start. Now that you have a running simulator, go back to Eclipse, close the AVD window, then right-click (control+click) the project in the left pane, and go to <strong>Run as -&amp;gt; Android Application</strong>. Select your simulator from the list of running devices, and click OK. This will launch the app in the simulator and you are off and running.</p>
+</div>
+<div class="imageblock">
+  <div class="content">
+    
+    <img src="../img/androidSim.png" alt="App running in Android simulator">
+    
+  </div>
+  
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_building_the_app_for_devices_2">Building the App for Devices</h4>
+  
+<div class="paragraph">
+    
+  <p>Running the app on your Android device is even easier. First, make sure your device has USB debugging enabled. This is usually done by going to <strong>Settings -&amp;gt; Applications -&amp;gt; Development -&amp;gt; USB debugging</strong>. Once you have done this, make sure there are no virtual devices running, then connect your device to your computer with your USB cable. In Eclipse, go to Run -&amp;gt; Run (or click the green "Play" button in the toolbar) and the app should start on your device. If you still have the simulator running, the app may start in the simulator. If this happens, or you would like to have both the simulator running and your device connected, you can use the method outlined in the section on running your app in the simulator. When you get to the part on selecting a running device, both your simulator and your physical device should be in the list and you can select from there.</p>
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_android_faq">Android FAQ</h4>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>When trying to run the project, I receive a message similar to "Android requires compiler compliance level 5.0 or 6.0. Found <em>1.4</em> instead." What do I do?</p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>As recommended by Eclipse, "Please use Android Tools &amp;gt; Fix Project Properties" will fix this issue</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+    <li>
+      <p>I receive the error "Unable to resolve target <em>android-7</em>", what do I do?</p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>This is due to an incorrect SDK version. This app was built for Android 2.1 and should work on any 2.x or 4.0 device. In order to build the project though, you will need to have the Android 2.1 (API 7) installed using the Android SDK Manager which can be found in the Eclipse toolbar.</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+    <li>
+      <p>Why do the transitions look so shaky or choppy?</p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>jQuery Mobile has some issues with Android and transitions. The Android browser has some issues with these transitions which causes a flicker or jump during or at the end of the animation. This is further exagerated in the emulators. You can read more about jQuery Mobile&#8217;s work with page transitions on Android here <a href="https://github.com/jquery/jquery-mobile/issues/3217">https://github.com/jquery/jquery-mobile/issues/3217</a></p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+  
+</div>
+
+
+  </div>
+  
+</div>
+
+
+
+</div>
+
+            <div class="clearfix"></div>
+      </div>
+      <footer>
+          <div class="wrapper">
+              <div class="column">
+                  <h3>News</h3>
+                  
+                  <p><a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html">AeroGear 1.0.0 is out!</a></p>
+                  
+                  <p><a href="/news/2013/03/04/aerogear-1.0.0.CR1-is-out/index.html">AeroGear 1.0.0.CR1 is out!</a></p>
+                  
+                  <p><a href="/news/2013/01/30/aerogear-1.0.0.M8-is-out/index.html">AeroGear 1.0.0.M8 is out!</a></p>
+                  
+                  <p><a href="/news/2012/12/20/aerogear-1.0.0.M7-is-out/index.html">AeroGear 1.0.0.M7 is out!</a></p>
+                  
+                  <p><a href="/news/2012/10/24/aerogear-1.0.0.M6-is-out/index.html">AeroGear 1.0.0.M6 is out!</a></p>
+                  
+              </div>
+              <div class="column">
+                  <h3>Get help</h3>
+                  <p><a href="/docs">Documentation</a></p>
+                  <p><a href="/examples">Examples</a></p>
+              </div>
+              <div class="column">
+                  <h3>Contribute</h3>
+                  <p><a href="http://github.com/aerogear" target="_blank">Source code</a></p>
+                  <p><a href="http://issues.jboss.org/browse/AEROGEAR" target="_blank">Issue tracker</a></p>
+                  <p><a href="https://lists.jboss.org/mailman/listinfo/aerogear-dev" target="_blank">Mailing list</a></p>
+                  <p><a href="irc://irc.freenode.net/aerogear" target="_blank">IRC channel</a></p>
+              </div>
+              <div class="column responsive">
+                  <h3>Social</h3>
+                  <p><a href="">Twitter</a></p>
+                  <p><a href="">Google Plus</a></p>
+                  <p><a href="">Facebook</a></p>
+              </div>
+              <div class="column">
+                  <h3><a href="http://twitter.com/AeroGears" target="_blank">@AeroGears</a></h3>
+                  <div id="aerogear-twitter">Loading tweets...</div>
+              </div>
+              <div class="logos">
+                  <p>AeroGear is a <a href="http://www.jboss.org/">JBoss Community</a> project<br class="title-break"> and its development is sponsored<br class="title-break"> by <a href="http://www.redhat.com/">Red Hat, Inc</a>.<br class="title-break"><br>Project code is released under <br class="title-break">the <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache License, v2.0</a>.</p>
+                  <p><a href="http://www.jboss.org/"><img src="/img/jboss_community.png" alt="JBoss Community"></a> <a href="http://www.redhat.com/"><img src="/img/red_hat.png" alt="Red Hat"></a></p>
+                  <p>Copyright &copy; 2012, Red Hat, Inc.</p>
+  <div class="clearfix"></div>
+              </div>
+          </div>
+      </footer>
+      <script src="/js/libs/repo-modified.js"></script>
+      <script src="/js/libs/ba-linkify.min.js"></script>
+      <script src="/js/libs/jquery.twitter.min.js"></script>
+      <script src="/js/libs/jquery.smartresize.js"></script>
+      <script src="/js/script.js"></script>
+  </body>
+</html>

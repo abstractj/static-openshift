@@ -1,0 +1,239 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+      <title>AeroGear - AeroGear Two-Factor Authentication with OTP</title>
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+
+      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="alternate" type="application/atom+xml" title="feed" href="/feed.atom"/>
+      <link rel="stylesheet" href="/css/font-awesome.min.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:600,300,300italic,600italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+      <script src="/js/libs/modernizr-2.6.2.min.js"></script>
+		  <script type="text/javascript">
+
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-28733717-2']);
+			  _gaq.push(['_setDomainName', 'aerogear.org']);
+			  _gaq.push(['_trackPageview']);
+
+			  (function() {
+				  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+
+		  </script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+      <script>window.jQuery || document.write( '<script src="/js/libs/jquery-1.7.2.min.js"><\/script>' )</script>
+  </head>
+  <body>
+      <header>
+          <div class="wrapper">
+              <a href="/"><div id="logo"></div></a>
+              <a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html" class="news fixed">Hey listen!<br class="title-break"> AeroGear 1.0.0 is out!</a>
+          </div>
+      </header>
+         
+      <nav>
+          <div class="wrapper">
+            <div class="links">
+                <a href="/" class="fixed">Home</a>
+                <a href="/download" class="">Get started</a>
+                <a href="/docs" class="">Documentation</a>
+                <a href="/news" class="fixed ">News</a>
+                <a href="/community" class="">Community</a>        
+            </div>
+            <a href="https://www.facebook.com/AeroGearProject"><div class="social facebook"></div></a>
+            <a href="https://plus.google.com/106588661437153585722/posts"><div class="social google-plus"></div></a>
+            <a href="https://www.twitter.com/aerogears"><div class="social twitter"></div></a>
+          </div>    
+          <div class="clearfix"></div>
+      </nav>
+
+      <div class="wrapper inner-container">
+
+          <div class="basic">
+    
+<div class="sect1">
+  <h2 id="_aerogear_two_factor_authentication_with_otp">AeroGear Two-Factor Authentication with OTP</h2>
+  
+  <div class="sectionbody">
+
+<div class="sect2">
+  <h3 id="_introduction">Introduction</h3>
+  
+<div class="paragraph">
+    
+  <p>If you happen to use online banking systems, certainly you will have come across small security devices that provide you with an extra password during your login process. That is, in addition to your standard username/password combination, you are asked to provide an extra password, the so called <a href="http://en.wikipedia.org/wiki/One-time_password">"One Time Password" (OTP)"</a>.  That has two effects <em>a</em>) the bank can verify that you are the actual person making the transaction because of the possession of this device that only you can have, the so called possession factor in the <a href="http://en.wikipedia.org/wiki/Two-factor_authentication">two-factor authentication</a> system and <em>b</em>) prevents <a href="http://en.wikipedia.org/wiki/Replay_attack">replay attacks</a> cause the password is only valid for a limited amount of time. This generation of the OTP password can either be done using a hardware device (hardware token) as we described earlier, or with the help of a mobile application running on a smartphone (software token).</p>
+</div>
+<div class="paragraph">
+    
+  <p>In general, there are two approaches to OTP generation, either <a href="http://tools.ietf.org/html/rfc4226">Mathematical-algorithm-based</a> or <a href="http://tools.ietf.org/html/rfc6238">Time-synchronized</a>. The former, as the name suggests uses a complex mathematical algorithm, typically a cryptographic hash function in a hash chain mode, together with a secret key to generate the password.  The latter, takes also into consideration the time, which causes the password to change constantly over a period of time e.g. once per minute, greatly enhancing security. On example of such approach is the <a href="http://tools.ietf.org/html/rfc6238">Time Based One Time Password (TOTP)</a>.</p>
+</div>
+<div class="paragraph">
+    
+  <p>So how OTP is related to the AeroGear project? Well recently, with the amazing work of my fellow developer <a href="https://github.com/abstractj">abstractj</a>, library implementations for both <a href="https://github.com/aerogear/aerogear-otp-ios">iOS</a> and <a href="https://github.com/aerogear/aerogear-otp-java">Android</a> (and soon Javascript) of the OTP standard were introduced to the project. Currently they support only TOTP with SHA1 but work is in progress to add additional support for the other standard OTP algorithm, the event-based HOTP, together with more cryptographic hash functions support SHA-256/512.</p>
+</div>
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_so_how_do_you_use_it">So how do you use it?</h3>
+  
+<div class="paragraph">
+    
+  <p>First, a shared secret needs to be obtained that will be used for the calculation of TOTP. Here we use a static string for the purpose of the tutorial and in our demo we transfer it from the network. In practice, a QRCode encoded image of the secret should be used, so the secret should not travel across the network! In the future we will use encoded images for it.</p>
+</div>
+<div class="paragraph">
+    
+  <p>Here is a snippet of code in the iOS land:</p>
+</div>
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="c"> // the secret key (statically defined here but in practice it's obtained from the network)
+ NSString *secret = @"B2374TNIQ3HKC446";
+ // initialize OTP
+ AGTotp *generator = [[AGTotp alloc] initWithSecret:[AGBase32 base32Decode:secret]];
+ // generate token
+ NSString *totp = [generator generateOTP];</code></pre>
+    
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>Here is a snippet of code in the Android land:</p>
+</div>
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="java"> // the secret key (statically defined here but in practice it's obtained from the network)
+ String secret = "B2374TNIQ3HKC446";
+ // initialize OTP
+ Totp generator = new Totp(secret);
+ // generate token
+ String totp = generator.now();</code></pre>
+    
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>In both cases variable "totp" now holds our token which can be send to the remote authentication server to validate.</p>
+</div>
+<div class="paragraph">
+    
+  <p>Worth noticing is that the Java implementation has the verifier component also implemented, so if you back-end is Java, you can also use the implementation in your server-side back-end to verify totp tokens.</p>
+</div>
+<div class="paragraph">
+    
+  <p>If you are an iOS developer, you can find the library already in the <a href="http://cocoapods.org/?q=aerogear-otp">coccoapods</a>. Further a demo application has been created that demos the library in action, so I suggest you have a look. You can find it <a href="https://github.com/aerogear/aerogear-otp-ios-demo/zipball/1.0.0">here</a>.</p>
+</div>
+<div class="paragraph">
+    
+  <p>If you are an Android developer, you can find the library already in maven. Just include it in your project.</p>
+</div>
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.jboss.aerogear&lt;/groupId&gt;
+    &lt;artifactId&gt;aerogear-otp-java&lt;/artifactId&gt;
+    &lt;version&gt;1.0.0.M1&lt;/version&gt;
+    &lt;scope&gt;compile&lt;/scope&gt;
+&lt;/dependency&gt;</code></pre>
+    
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>For more in-depth information about OTP and AeroGear, I suggest you to look at the official documentation page <a href="http://aerogear.org/docs/specs/aerogear-security-otp/">here</a>. The page includes nice diagrams showing the flow of the authentication process and will help you to better understand the concept.</p>
+</div>
+<div class="paragraph">
+    
+  <p>So go ahead and give them a try. We will love your <a href="https://issues.jboss.org/browse/AEROGEAR">feedback and suggestions</a>!</p>
+</div>
+<div class="paragraph">
+    
+  <p>Enjoy!</p>
+</div>
+
+  
+</div>
+
+
+  </div>
+  
+</div>
+
+
+
+</div>
+
+            <div class="clearfix"></div>
+      </div>
+      <footer>
+          <div class="wrapper">
+              <div class="column">
+                  <h3>News</h3>
+                  
+                  <p><a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html">AeroGear 1.0.0 is out!</a></p>
+                  
+                  <p><a href="/news/2013/03/04/aerogear-1.0.0.CR1-is-out/index.html">AeroGear 1.0.0.CR1 is out!</a></p>
+                  
+                  <p><a href="/news/2013/01/30/aerogear-1.0.0.M8-is-out/index.html">AeroGear 1.0.0.M8 is out!</a></p>
+                  
+                  <p><a href="/news/2012/12/20/aerogear-1.0.0.M7-is-out/index.html">AeroGear 1.0.0.M7 is out!</a></p>
+                  
+                  <p><a href="/news/2012/10/24/aerogear-1.0.0.M6-is-out/index.html">AeroGear 1.0.0.M6 is out!</a></p>
+                  
+              </div>
+              <div class="column">
+                  <h3>Get help</h3>
+                  <p><a href="/docs">Documentation</a></p>
+                  <p><a href="/examples">Examples</a></p>
+              </div>
+              <div class="column">
+                  <h3>Contribute</h3>
+                  <p><a href="http://github.com/aerogear" target="_blank">Source code</a></p>
+                  <p><a href="http://issues.jboss.org/browse/AEROGEAR" target="_blank">Issue tracker</a></p>
+                  <p><a href="https://lists.jboss.org/mailman/listinfo/aerogear-dev" target="_blank">Mailing list</a></p>
+                  <p><a href="irc://irc.freenode.net/aerogear" target="_blank">IRC channel</a></p>
+              </div>
+              <div class="column responsive">
+                  <h3>Social</h3>
+                  <p><a href="">Twitter</a></p>
+                  <p><a href="">Google Plus</a></p>
+                  <p><a href="">Facebook</a></p>
+              </div>
+              <div class="column">
+                  <h3><a href="http://twitter.com/AeroGears" target="_blank">@AeroGears</a></h3>
+                  <div id="aerogear-twitter">Loading tweets...</div>
+              </div>
+              <div class="logos">
+                  <p>AeroGear is a <a href="http://www.jboss.org/">JBoss Community</a> project<br class="title-break"> and its development is sponsored<br class="title-break"> by <a href="http://www.redhat.com/">Red Hat, Inc</a>.<br class="title-break"><br>Project code is released under <br class="title-break">the <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache License, v2.0</a>.</p>
+                  <p><a href="http://www.jboss.org/"><img src="/img/jboss_community.png" alt="JBoss Community"></a> <a href="http://www.redhat.com/"><img src="/img/red_hat.png" alt="Red Hat"></a></p>
+                  <p>Copyright &copy; 2012, Red Hat, Inc.</p>
+  <div class="clearfix"></div>
+              </div>
+          </div>
+      </footer>
+      <script src="/js/libs/repo-modified.js"></script>
+      <script src="/js/libs/ba-linkify.min.js"></script>
+      <script src="/js/libs/jquery.twitter.min.js"></script>
+      <script src="/js/libs/jquery.smartresize.js"></script>
+      <script src="/js/script.js"></script>
+  </body>
+</html>

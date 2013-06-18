@@ -1,0 +1,728 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+      <title>AeroGear - AeroGear JavaScript Library</title>
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+
+      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="alternate" type="application/atom+xml" title="feed" href="/feed.atom"/>
+      <link rel="stylesheet" href="/css/font-awesome.min.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:600,300,300italic,600italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+      <script src="/js/libs/modernizr-2.6.2.min.js"></script>
+		  <script type="text/javascript">
+
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-28733717-2']);
+			  _gaq.push(['_setDomainName', 'aerogear.org']);
+			  _gaq.push(['_trackPageview']);
+
+			  (function() {
+				  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+
+		  </script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+      <script>window.jQuery || document.write( '<script src="/js/libs/jquery-1.7.2.min.js"><\/script>' )</script>
+  </head>
+  <body>
+      <header>
+          <div class="wrapper">
+              <a href="/"><div id="logo"></div></a>
+              <a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html" class="news fixed">Hey listen!<br class="title-break"> AeroGear 1.0.0 is out!</a>
+          </div>
+      </header>
+         
+      <nav>
+          <div class="wrapper">
+            <div class="links">
+                <a href="/" class="fixed">Home</a>
+                <a href="/download" class="">Get started</a>
+                <a href="/docs" class="">Documentation</a>
+                <a href="/news" class="fixed ">News</a>
+                <a href="/community" class="">Community</a>        
+            </div>
+            <a href="https://www.facebook.com/AeroGearProject"><div class="social facebook"></div></a>
+            <a href="https://plus.google.com/106588661437153585722/posts"><div class="social google-plus"></div></a>
+            <a href="https://www.twitter.com/aerogears"><div class="social twitter"></div></a>
+          </div>    
+          <div class="clearfix"></div>
+      </nav>
+
+      <div class="wrapper inner-container">
+
+          <div class="basic">
+    <div id="preamble">
+  <div class="sectionbody">
+<div class="paragraph">
+    
+  <p>This document covers the requirements, use-cases and planned API&#8217;s for the AeroGear JavaScript client library.</p>
+</div>
+
+  </div>
+</div>
+
+<div class="sect1">
+  <h2 id="_external_references">External References</h2>
+  
+  <div class="sectionbody">
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p><a href="https://github.com/aerogear/aerogear-js/">Github Repo</a></p>
+      
+    </li>
+  
+    <li>
+      <p><a href="https://issues.jboss.org/browse/AGJS/">JIRA</a></p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+<div class="sect2">
+  <h3 id="_1_0_x_release_s">1.0.x Release(s)</h3>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p><strong>Bug Fixes and Minor Feature Additions</strong></p>
+      
+    </li>
+  
+    <li>
+      <p><strong>Dates</strong></p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Released as needed</p>
+      
+    </li>
+  
+    <li>
+      <p>If not critical, can be wrapped into a 1.x release</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_1_1_0_mid_june">1.1.0 (Mid June)</h3>
+  
+
+<div class="sect3">
+  <h4 id="_new_features">New Features</h4>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p><strong>Auth</strong></p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Basic/Digest Adapter</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+    <li>
+      <p><strong>Notifier</strong></p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Used for background communication in applications</p>
+      
+    </li>
+  
+    <li>
+      <p>Adapters</p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>SockJS</p>
+      
+    </li>
+  
+    <li>
+      <p>More? (STOMP and other protocols to "unify" APIs)</p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Can be moved to future releases</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_1_2_0_mid_august">1.2.0 (Mid August)</h3>
+  
+
+<div class="sect3">
+  <h4 id="_new_features_2">New Features</h4>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p><strong>SimplePush</strong></p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Base on Mozilla&#8217;s SimplePush Protocol Specification</p>
+      
+    </li>
+  
+    <li>
+      <p>WebSocket/SockJS via Notifier</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+    <li>
+      <p><strong>Unified Push Client</strong></p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Separate module for app registration/unregistration with unified push server</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+    <li>
+      <p><strong>Showcase App</strong></p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>First version featuring all features from library up to this point</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+<div class="sect3">
+  <h4 id="_new_adapters">New Adapters</h4>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p><strong>DataManager</strong></p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>IndexedDB/WebSQL Adapter</p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Feature detection to determine which is available</p>
+      
+    </li>
+  
+    <li>
+      <p>IE9 supports neither so need to also be able to fall back to localStorage but use same API</p>
+      
+    </li>
+  
+    <li>
+      <p>Probably should investigate PouchDB&#8217;s implementation</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+    <li>
+      <p><strong>Auth</strong></p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>OTP Adapter</p>
+      
+    </li>
+  
+    <li>
+      <p>OAuth2 Adapter</p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Customizable Provider</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_1_3_0_mid_october">1.3.0 (Mid October)</h3>
+  
+
+<div class="sect3">
+  <h4 id="_new_features_3">New Features</h4>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p><strong>Pipeline</strong></p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Multi-part Uploads</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+    <li>
+      <p><strong>DataManager</strong></p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Add encryption to sessionLocal adapter</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+    <li>
+      <p><strong>Data Sync</strong></p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Utility for keeping data in DataManager synchronized with a persistent server side store</p>
+      
+    </li>
+  
+    <li>
+      <p>Possibly use Notifier for communication / data transfer</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+    <li>
+      <p><strong>Showcase App</strong></p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Add latest library features</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_1_4_0_mid_january">1.4.0 (Mid January)</h3>
+  
+
+<div class="sect3">
+  <h4 id="_new_features_4">New Features</h4>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p><strong>Offline</strong></p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Support for using apps offline and detecting status</p>
+      
+    </li>
+  
+    <li>
+      <p>Simplified App Cache API</p>
+      
+    </li>
+  
+    <li>
+      <p>Scaffolding for proper App Cache setup</p>
+      
+    </li>
+  
+    <li>
+      <p>Use DataSync when returning to online status</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+    <li>
+      <p><strong>Showcase App</strong></p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Add latest library features</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_2_0_0_release">2.0.0 Release</h3>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Tie up any loose ends</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+  
+</div>
+
+
+<div class="sect2">
+  <h3 id="_2_x_release_s">2.x Release(s)</h3>
+  
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p><strong>Social</strong></p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Auth</p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Login via Facebook, G+, Twitter?</p>
+      
+    </li>
+  
+    <li>
+      <p>AeroGear.Auth adapter or separate?</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+    <li>
+      <p>Common API</p>
+      
+<div class="ulist">
+  
+  <ul>
+  
+    <li>
+      <p>Posting, Profile Info, Friend List, etc.</p>
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+  </ul>
+</div>
+
+      
+    </li>
+  
+  </ul>
+</div>
+<div class="paragraph">
+    
+  <p>And for the overall AeroGear Roadmap, see the <a href="../AeroGearRoadmap1.0.0">AeroGear Roadmap</a></p>
+</div>
+
+  
+</div>
+
+
+  </div>
+  
+</div>
+
+
+
+</div>
+
+            <div class="clearfix"></div>
+      </div>
+      <footer>
+          <div class="wrapper">
+              <div class="column">
+                  <h3>News</h3>
+                  
+                  <p><a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html">AeroGear 1.0.0 is out!</a></p>
+                  
+                  <p><a href="/news/2013/03/04/aerogear-1.0.0.CR1-is-out/index.html">AeroGear 1.0.0.CR1 is out!</a></p>
+                  
+                  <p><a href="/news/2013/01/30/aerogear-1.0.0.M8-is-out/index.html">AeroGear 1.0.0.M8 is out!</a></p>
+                  
+                  <p><a href="/news/2012/12/20/aerogear-1.0.0.M7-is-out/index.html">AeroGear 1.0.0.M7 is out!</a></p>
+                  
+                  <p><a href="/news/2012/10/24/aerogear-1.0.0.M6-is-out/index.html">AeroGear 1.0.0.M6 is out!</a></p>
+                  
+              </div>
+              <div class="column">
+                  <h3>Get help</h3>
+                  <p><a href="/docs">Documentation</a></p>
+                  <p><a href="/examples">Examples</a></p>
+              </div>
+              <div class="column">
+                  <h3>Contribute</h3>
+                  <p><a href="http://github.com/aerogear" target="_blank">Source code</a></p>
+                  <p><a href="http://issues.jboss.org/browse/AEROGEAR" target="_blank">Issue tracker</a></p>
+                  <p><a href="https://lists.jboss.org/mailman/listinfo/aerogear-dev" target="_blank">Mailing list</a></p>
+                  <p><a href="irc://irc.freenode.net/aerogear" target="_blank">IRC channel</a></p>
+              </div>
+              <div class="column responsive">
+                  <h3>Social</h3>
+                  <p><a href="">Twitter</a></p>
+                  <p><a href="">Google Plus</a></p>
+                  <p><a href="">Facebook</a></p>
+              </div>
+              <div class="column">
+                  <h3><a href="http://twitter.com/AeroGears" target="_blank">@AeroGears</a></h3>
+                  <div id="aerogear-twitter">Loading tweets...</div>
+              </div>
+              <div class="logos">
+                  <p>AeroGear is a <a href="http://www.jboss.org/">JBoss Community</a> project<br class="title-break"> and its development is sponsored<br class="title-break"> by <a href="http://www.redhat.com/">Red Hat, Inc</a>.<br class="title-break"><br>Project code is released under <br class="title-break">the <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache License, v2.0</a>.</p>
+                  <p><a href="http://www.jboss.org/"><img src="/img/jboss_community.png" alt="JBoss Community"></a> <a href="http://www.redhat.com/"><img src="/img/red_hat.png" alt="Red Hat"></a></p>
+                  <p>Copyright &copy; 2012, Red Hat, Inc.</p>
+  <div class="clearfix"></div>
+              </div>
+          </div>
+      </footer>
+      <script src="/js/libs/repo-modified.js"></script>
+      <script src="/js/libs/ba-linkify.min.js"></script>
+      <script src="/js/libs/jquery.twitter.min.js"></script>
+      <script src="/js/libs/jquery.smartresize.js"></script>
+      <script src="/js/script.js"></script>
+  </body>
+</html>

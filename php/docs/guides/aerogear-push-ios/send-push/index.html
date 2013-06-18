@@ -1,0 +1,249 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+      <title>AeroGear - Sending messages</title>
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+
+      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="alternate" type="application/atom+xml" title="feed" href="/feed.atom"/>
+      <link rel="stylesheet" href="/css/font-awesome.min.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:600,300,300italic,600italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+      <script src="/js/libs/modernizr-2.6.2.min.js"></script>
+		  <script type="text/javascript">
+
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-28733717-2']);
+			  _gaq.push(['_setDomainName', 'aerogear.org']);
+			  _gaq.push(['_trackPageview']);
+
+			  (function() {
+				  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+
+		  </script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+      <script>window.jQuery || document.write( '<script src="/js/libs/jquery-1.7.2.min.js"><\/script>' )</script>
+  </head>
+  <body>
+      <header>
+          <div class="wrapper">
+              <a href="/"><div id="logo"></div></a>
+              <a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html" class="news fixed">Hey listen!<br class="title-break"> AeroGear 1.0.0 is out!</a>
+          </div>
+      </header>
+         
+      <nav>
+          <div class="wrapper">
+            <div class="links">
+                <a href="/" class="fixed">Home</a>
+                <a href="/download" class="">Get started</a>
+                <a href="/docs" class="">Documentation</a>
+                <a href="/news" class="fixed ">News</a>
+                <a href="/community" class="">Community</a>        
+            </div>
+            <a href="https://www.facebook.com/AeroGearProject"><div class="social facebook"></div></a>
+            <a href="https://plus.google.com/106588661437153585722/posts"><div class="social google-plus"></div></a>
+            <a href="https://www.twitter.com/aerogears"><div class="social twitter"></div></a>
+          </div>    
+          <div class="clearfix"></div>
+      </nav>
+
+      <div class="wrapper inner-container">
+
+          <div class="basic">
+    <div class="paragraph">
+    
+  <p>Now you have the Sample App running on your phone, so it is time to use the <em>AeroGear Unified Push Server</em> for delivering a <em>Push Notification</em> message to your device!</p>
+</div>
+
+<div class="sect1">
+  <h2 id="_simple_sender">Simple Sender</h2>
+  
+  <div class="sectionbody">
+<div class="paragraph">
+    
+  <p>A bit earlier you received an <strong>PushApplicationID</strong> after the successful registration of the <em>Push Application</em>. This <strong>PushApplicationID</strong> is used for sending a <em>broadcast</em> message to all <em>registered</em> devices (<em>Mobile Variant instances</em>). Now, on a command line issue the following <em>CURL</em> command:</p>
+</div>
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="c">curl -v -H "Accept: application/json" -H "Content-type: application/json"
+   -X POST
+
+   -d '{"alert":"Hello AeroGear Unified Push!"}'
+
+http://localhost:8080/ag-push/rest/sender/broadcast/{PushApplicationID}</code></pre>
+    
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>The payload is simply a JSON map. You can send different key/value pairs, but be sure it is not too long, otherwise Apple does <em>NOT</em> deliver the message to your phone. The <em>alert</em> key is recoginzed by the <em>AeroGear Unified Push Server</em> and translated into an APNs specific <em>alert</em>.</p>
+</div>
+<div class="paragraph">
+    
+  <p>When the application is inactive, and a <em>Push Notification</em> containing the <em>alert</em> key is received by the device, a <em>Popup</em> will show up, which displays the value of the <em>alert</em> key:</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src=".././img/PushMessage.jpg" alt="iOS Push Notification">
+</span></p>
+</div>
+<div class="paragraph">
+    
+  <p><strong>NOTE:</strong> No custom code for this feature is required. It&#8217;s build-in to <em>iOS Platform</em>.</p>
+</div>
+
+  </div>
+  
+</div>
+
+
+<div class="sect1">
+  <h2 id="_custom_dialog">Custom Dialog</h2>
+  
+  <div class="sectionbody">
+<div class="paragraph">
+    
+  <p>While the application is running, the above described feature is <em>NOT</em> available. However, a different callback can be implemented on the <em>AppDelegate</em> class:</p>
+</div>
+<div class="listingblock">
+  
+  <div class="content monospaced">
+    
+    <pre class="highlight"><code class="c">- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+
+    // A JSON object is received, represented as a NSDictionary.
+    // use it to pick your custom key
+
+    // For demo reasons, we simply read the "alert" key, from the "aps" dictionary:
+    NSString *alertValue = [userInfo valueForKeyPath:@"aps.alert"];
+
+
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle: @"Custom Dialog, while Program is active"
+                          message: alertValue
+                          delegate: nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil];
+    [alert show];
+}</code></pre>
+    
+  </div>
+</div>
+<div class="paragraph">
+    
+  <p>The <em>application didReceiveRemoteNotification:</em> method receives a <em>NSDictionary</em> which represents a <em>JSON</em> map, of the received payload. The <em>aps</em> field of that map contains all the received attributes, like the earlier mentioned <em>alert</em> key/value pair. The show code simply reads the value of the <em>alert</em> key and explicitly displays it in a custom dialog. Of course, based on the needed functionality it would be also possible to update a view, based on the received message.</p>
+</div>
+<div class="paragraph">
+    
+  <p>The custom Dialog:</p>
+</div>
+<div class="paragraph">
+    
+  <p><span class="image">
+  <img src=".././img/CustomDialog.jpg" alt="Custom Dialog">
+</span></p>
+</div>
+
+  </div>
+  
+</div>
+
+
+<div class="sect1">
+  <h2 id="_you_are_done">You are done</h2>
+  
+  <div class="sectionbody">
+<div class="paragraph">
+    
+  <p>That&#8217;s all you need to use the <em>AeroGear</em> project for sending, and receiving <em>Push Notifications</em> for an iOS device.</p>
+</div>
+
+<div class="sect2">
+  <h3 id="_a_final_note">A final note</h3>
+  
+<div class="paragraph">
+    
+  <p>When using <em>Push Notifications</em>, have in mind that it&#8217;s more for signaling and once in a while notifying a client. The app has to, by Apple&#8217;s guidelines, function without receving <em>Push Notifications</em>. <em>Remember:</em> The user could have disagreed after installing your app!</p>
+</div>
+
+  
+</div>
+
+
+  </div>
+  
+</div>
+
+
+
+</div>
+
+            <div class="clearfix"></div>
+      </div>
+      <footer>
+          <div class="wrapper">
+              <div class="column">
+                  <h3>News</h3>
+                  
+                  <p><a href="/news/2013/03/28/aerogear-1.0.0-is-out/index.html">AeroGear 1.0.0 is out!</a></p>
+                  
+                  <p><a href="/news/2013/03/04/aerogear-1.0.0.CR1-is-out/index.html">AeroGear 1.0.0.CR1 is out!</a></p>
+                  
+                  <p><a href="/news/2013/01/30/aerogear-1.0.0.M8-is-out/index.html">AeroGear 1.0.0.M8 is out!</a></p>
+                  
+                  <p><a href="/news/2012/12/20/aerogear-1.0.0.M7-is-out/index.html">AeroGear 1.0.0.M7 is out!</a></p>
+                  
+                  <p><a href="/news/2012/10/24/aerogear-1.0.0.M6-is-out/index.html">AeroGear 1.0.0.M6 is out!</a></p>
+                  
+              </div>
+              <div class="column">
+                  <h3>Get help</h3>
+                  <p><a href="/docs">Documentation</a></p>
+                  <p><a href="/examples">Examples</a></p>
+              </div>
+              <div class="column">
+                  <h3>Contribute</h3>
+                  <p><a href="http://github.com/aerogear" target="_blank">Source code</a></p>
+                  <p><a href="http://issues.jboss.org/browse/AEROGEAR" target="_blank">Issue tracker</a></p>
+                  <p><a href="https://lists.jboss.org/mailman/listinfo/aerogear-dev" target="_blank">Mailing list</a></p>
+                  <p><a href="irc://irc.freenode.net/aerogear" target="_blank">IRC channel</a></p>
+              </div>
+              <div class="column responsive">
+                  <h3>Social</h3>
+                  <p><a href="">Twitter</a></p>
+                  <p><a href="">Google Plus</a></p>
+                  <p><a href="">Facebook</a></p>
+              </div>
+              <div class="column">
+                  <h3><a href="http://twitter.com/AeroGears" target="_blank">@AeroGears</a></h3>
+                  <div id="aerogear-twitter">Loading tweets...</div>
+              </div>
+              <div class="logos">
+                  <p>AeroGear is a <a href="http://www.jboss.org/">JBoss Community</a> project<br class="title-break"> and its development is sponsored<br class="title-break"> by <a href="http://www.redhat.com/">Red Hat, Inc</a>.<br class="title-break"><br>Project code is released under <br class="title-break">the <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache License, v2.0</a>.</p>
+                  <p><a href="http://www.jboss.org/"><img src="/img/jboss_community.png" alt="JBoss Community"></a> <a href="http://www.redhat.com/"><img src="/img/red_hat.png" alt="Red Hat"></a></p>
+                  <p>Copyright &copy; 2012, Red Hat, Inc.</p>
+  <div class="clearfix"></div>
+              </div>
+          </div>
+      </footer>
+      <script src="/js/libs/repo-modified.js"></script>
+      <script src="/js/libs/ba-linkify.min.js"></script>
+      <script src="/js/libs/jquery.twitter.min.js"></script>
+      <script src="/js/libs/jquery.smartresize.js"></script>
+      <script src="/js/script.js"></script>
+  </body>
+</html>
